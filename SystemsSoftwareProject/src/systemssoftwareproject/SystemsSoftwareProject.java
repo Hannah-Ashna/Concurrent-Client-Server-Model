@@ -81,8 +81,10 @@ public class SystemsSoftwareProject {
             String login_username = sc.nextLine();
             System.out.print("Password: "); 
             String login_password = sc.nextLine();
-             logged_in = read_account_details(login_username, login_password);
+            logged_in = read_account_details(login_username, login_password);
         }
+        System.out.println("Account authenticated");
+        // Connect the user to the server
     }
     
     public static boolean read_account_details(String username,
@@ -93,7 +95,6 @@ public class SystemsSoftwareProject {
             BufferedReader din = new BufferedReader(fin);
             //read from the file
             String line = null; // line of text
-            int numPoints = 0; // running total of points
 
             while ((line = din.readLine()) != null) {
                 // here we have read in a line of text
