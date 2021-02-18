@@ -59,7 +59,7 @@ public class SystemsSoftwareProject {
         // Stub definition (This function will write details to a text file.
         // now create the filestream and connect PrintWriter
         try {
-            FileWriter fout = new FileWriter("Account_details",false);
+            FileWriter fout = new FileWriter("Account_details",true);
             PrintWriter pout = new PrintWriter(fout,true);
             //write to the file
             pout.println(username + ", " + password);
