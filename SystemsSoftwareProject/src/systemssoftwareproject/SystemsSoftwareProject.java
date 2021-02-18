@@ -6,16 +6,16 @@ import java.util.*;
 public class SystemsSoftwareProject {
 
     public static void main(String[] args) {
+        System.out.println("Main Menu");
         boolean valid_option_chosen = false;
         while (!valid_option_chosen){
-            System.out.println("Main Menu");
             Scanner sc= new Scanner(System.in); // System.in is a standard input stream  
             System.out.print("Do you want to login or signup? ");   
-            String message = sc.nextLine();  // reads string
-            if("login".equals(message)){
+            String menu_choice = sc.nextLine();  // reads string
+            if(menu_choice.equals("login")){
                 System.out.println("U chose login");
             }
-            else if("signup".equals(message)){
+            else if(menu_choice.equals("signup")){
                 System.out.println("U chose signup");
             }
             else {
