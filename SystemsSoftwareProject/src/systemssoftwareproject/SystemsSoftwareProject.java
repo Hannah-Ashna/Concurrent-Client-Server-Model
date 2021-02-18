@@ -1,6 +1,8 @@
 package systemssoftwareproject;
 
 // import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,9 +18,11 @@ public class SystemsSoftwareProject {
             System.out.print("Do you want to login or signup? ");   
             String menu_choice = sc.nextLine();  // reads string
             if(menu_choice.equals("login")){
+                valid_option_chosen = true;
                 login();
             }
             else if(menu_choice.equals("signup")){
+                valid_option_chosen = true;
                 signup();
             }
             else {
@@ -77,6 +81,38 @@ public class SystemsSoftwareProject {
             String login_username = sc.nextLine();
             System.out.print("Password: "); 
             String login_password = sc.nextLine();
+             logged_in = read_account_details(login_username, login_password);
         }
+    }
+    
+    public static boolean read_account_details(String username,
+            String password){
+        String file_name = "Account_details";
+        try {
+            FileReader fin = new FileReader(file_name);
+            BufferedReader din = new BufferedReader(fin);
+            //read from the file
+            String line = null; // line of text
+            int numPoints = 0; // running total of points
+
+            while ((line = din.readLine()) != null) {
+                // here we have read in a line of text
+                // now parse line to extract data and print it out to the screen
+                StringTokenizer st = new StringTokenizer(line, ",");
+
+                String username_found = (st.nextToken().trim());
+                String password_found = (st.nextToken().trim());
+                
+                if (username_found.equals(username) &&
+                        (password_found.equals(password))){
+                    System.out.println("Account Match");
+                    return true;
+                }
+            }
+            din.close(); // close the stream
+        } catch (IOException e) {
+            System.err.println("Error! - " + e.getMessage());
+        }
+        return false;
     }
 }
