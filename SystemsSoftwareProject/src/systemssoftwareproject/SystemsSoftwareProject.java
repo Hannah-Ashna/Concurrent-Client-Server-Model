@@ -1,6 +1,9 @@
 package systemssoftwareproject;
 
 // import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*; 
 
 public class SystemsSoftwareProject {
@@ -38,6 +41,7 @@ public class SystemsSoftwareProject {
 
             if (username.equals(check_username)){
                 System.out.println("Usernames are equal");
+                write_account_details(username, password);
                 /* At some point we can run some checks on the password.
                 I.e. does the password contain at least 1 alpha/num character.
                 */
@@ -46,6 +50,22 @@ public class SystemsSoftwareProject {
                 System.out.println("Usernames are not equal");
                 valid_signup_details = false;
             }
+        }
+    }
+    
+    public static void write_account_details(String username,
+            String password){
+        System.out.println("Writing account details");
+        // Stub definition (This function will write details to a text file.
+        // now create the filestream and connect PrintWriter
+        try {
+            FileWriter fout = new FileWriter("Account_details",false);
+            PrintWriter pout = new PrintWriter(fout,true);
+            //write to the file
+            pout.println(username + ", " + password);
+            pout.close(); // close the stream
+        } catch (IOException e) {
+            System.err.println("Error! - " + e.getMessage());
         }
     }
 }
