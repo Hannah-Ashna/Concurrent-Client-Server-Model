@@ -70,14 +70,22 @@ public class Client {
         System.out.println("Validating");
         char[] chars = password_entered.toCharArray();
         boolean contains_digit = false;
+        boolean contains_letter = false;
         for(char c : chars){
             if(Character.isDigit(c)){
                 contains_digit = true;
+            }
+            else if(Character.isLetter(c)){
+                contains_letter = true;
+            }
+            if (contains_digit && contains_letter){
                 break;
             }
         }
         System.out.println(contains_digit);
-        return contains_digit;
+        System.out.println(contains_letter);
+        System.out.println(contains_digit && contains_letter);
+        return contains_digit && contains_letter;
     }
 
     public static void write_account_details(String username,
