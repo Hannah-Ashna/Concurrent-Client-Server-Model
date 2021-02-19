@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -52,16 +54,19 @@ public class Client {
 
             if (username.equals(check_username)){
                 System.out.println("Usernames are equal");
-                password_validation(password);
-                valid_signup_details = true;
-                write_account_details(username, password);
+                boolean valid_password = password_validation(password);
+                System.out.println("VALID? " + valid_password);
+                if (valid_password){
+                    String hashed_username = encryption(username);
+                    String hashed_password = encryption(password);
+                    write_account_details(hashed_username, hashed_password);
+                }
                 /* At some point we can run some checks on the password.
                 I.e. does the password contain at least 1 alpha/num character.
                 */
             }
             else{
                 System.out.println("Usernames are not equal");
-                valid_signup_details = false;
             }
         }
     }
@@ -91,6 +96,22 @@ public class Client {
         return contains_digit && contains_letter;
     }
 
+    public static String encryption(String string_to_encrypt){
+        //StringBuilder result = new StringBuilder();
+        String result = "";
+        for (char character : string_to_encrypt.toCharArray()) {
+            if (character != ' ') {
+                int originalAlphabetPosition = character - 'a';
+                int newAlphabetPosition = (originalAlphabetPosition + 3) % 26;
+                char newCharacter = (char) ('a' + newAlphabetPosition);
+                result += newCharacter;
+            } else {
+                result += character;
+            }
+        }
+        return result;
+    }
+    
     public static void write_account_details(String username,
             String password){
         System.out.println("Writing account details");
