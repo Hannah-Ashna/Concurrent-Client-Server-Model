@@ -52,7 +52,7 @@ public class Client {
 
             if (username.equals(check_username)){
                 System.out.println("Usernames are equal");
-                validation(password);
+                password_validation(password);
                 valid_signup_details = true;
                 write_account_details(username, password);
                 /* At some point we can run some checks on the password.
@@ -66,8 +66,14 @@ public class Client {
         }
     }
     
-    public static boolean validation(String password_entered){
-        System.out.println("Validating");
+    public static boolean password_validation(String password_entered){
+        // Length check
+        int length = password_entered.length();
+        if (length < 7){
+            return false;
+        }
+        
+        // Contains letter and number check
         char[] chars = password_entered.toCharArray();
         boolean contains_digit = false;
         boolean contains_letter = false;
@@ -82,9 +88,6 @@ public class Client {
                 break;
             }
         }
-        System.out.println(contains_digit);
-        System.out.println(contains_letter);
-        System.out.println(contains_digit && contains_letter);
         return contains_digit && contains_letter;
     }
 
