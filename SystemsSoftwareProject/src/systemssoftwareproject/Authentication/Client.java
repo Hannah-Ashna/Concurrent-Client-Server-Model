@@ -98,14 +98,13 @@ public class Client {
     }
 
     public static String encryption(String string_to_encrypt){
-        //StringBuilder result = new StringBuilder();
         String result = "";
-        for (char character : string_to_encrypt.toCharArray()) {
-            if (character != ' ') {
-                int originalAlphabetPosition = character - 'a';
-                int newAlphabetPosition = (originalAlphabetPosition + 3) % 26;
-                char newCharacter = (char) ('a' + newAlphabetPosition);
-                result += newCharacter;
+        for (char character: string_to_encrypt.toCharArray()) {
+            if (character != ' ') { // Spaces stay unchanged
+                int ascii_alpha_postion = character - 'a';
+                int new_ascii_alpha_postion = (ascii_alpha_postion + 3) % 26;
+                char encrypted_char = (char) ('a' + new_ascii_alpha_postion);
+                result += encrypted_char;
             } else {
                 result += character;
             }
