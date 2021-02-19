@@ -18,8 +18,8 @@ import java.util.StringTokenizer;
  * @author Nicholas McCaig
  */
 public class Client {
-        public static void main_menu() {
-                System.out.println("Main Menu");
+    public static void main_menu() {
+        System.out.println("Main Menu");
         boolean valid_option_chosen = false;
         while (!valid_option_chosen){
             Scanner sc= new Scanner(System.in);
@@ -52,6 +52,7 @@ public class Client {
 
             if (username.equals(check_username)){
                 System.out.println("Usernames are equal");
+                validation(password);
                 valid_signup_details = true;
                 write_account_details(username, password);
                 /* At some point we can run some checks on the password.
@@ -65,6 +66,20 @@ public class Client {
         }
     }
     
+    public static boolean validation(String password_entered){
+        System.out.println("Validating");
+        char[] chars = password_entered.toCharArray();
+        boolean contains_digit = false;
+        for(char c : chars){
+            if(Character.isDigit(c)){
+                contains_digit = true;
+                break;
+            }
+        }
+        System.out.println(contains_digit);
+        return contains_digit;
+    }
+
     public static void write_account_details(String username,
             String password){
         System.out.println("Writing account details");
