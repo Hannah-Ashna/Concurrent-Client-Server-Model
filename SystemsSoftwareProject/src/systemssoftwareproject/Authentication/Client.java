@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -21,23 +19,25 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Client {
     public static void main_menu() {
-        System.out.println("Main Menu");
-        boolean valid_option_chosen = false;
-        while (!valid_option_chosen){
-            Scanner sc= new Scanner(System.in);
-            System.out.print("Do you want to login or signup? ");   
-            String menu_choice = sc.nextLine();  // reads string
-            if(menu_choice.equals("login")){
-                valid_option_chosen = true;
-                login();
-            }
-            else if(menu_choice.equals("signup")){
-                valid_option_chosen = true;
-                signup();
-            }
-            else {
-               System.out.println("That is not a valid option"); 
-            }
+        while (true){
+            System.out.println("Main Menu");
+            boolean valid_option_chosen = false;
+            while (!valid_option_chosen){
+                Scanner sc= new Scanner(System.in);
+                System.out.print("Do you want to login or signup? ");   
+                String menu_choice = sc.nextLine();  // reads string
+                if(menu_choice.equals("login")){
+                    valid_option_chosen = true;
+                    login();
+                }
+                else if(menu_choice.equals("signup")){
+                    valid_option_chosen = true;
+                    signup();
+                }
+                else {
+                   System.out.println("That is not a valid option"); 
+                }
+            } 
         }
     }
     
@@ -60,6 +60,7 @@ public class Client {
                     String hashed_username = encryption(username);
                     String hashed_password = encryption(password);
                     write_account_details(hashed_username, hashed_password);
+                    valid_signup_details = true;
                 }
                 /* At some point we can run some checks on the password.
                 I.e. does the password contain at least 1 alpha/num character.
@@ -142,8 +143,12 @@ public class Client {
         // Connect the user to the server
     }
     
-    public static boolean read_account_details(String username,
-            String password){
+    public static boolean read_account_details(String username_entered,
+            String password_entered){
+        
+        String hashed_username_entered = encryption(username_entered);
+        String hashed_password_entered = encryption(password_entered);
+        
         String file_name = "Account_details";
         try {
             FileReader fin = new FileReader(file_name);
@@ -155,14 +160,14 @@ public class Client {
                 // here we have read in a line of text
                 // now parse line to extract data and print it out to the screen
                 StringTokenizer st = new StringTokenizer(line, ",");
-
+                
                 String username_found = (st.nextToken().trim());
                 String password_found = (st.nextToken().trim());
                 
-                if (username_found.equals(username) &&
-                        (password_found.equals(password))){
-                    System.out.println("Account Match");
-                    return true;
+                if (username_found.equals(hashed_username_entered) &&
+                    (password_found.equals(hashed_password_entered))){
+                        System.out.println("Account Match");
+                        return true;
                 }
             }
             din.close(); // close the stream
