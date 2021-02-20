@@ -6,16 +6,17 @@
 package systemssoftwareproject.DataStructures;
 
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 /**
  * This class will contain the data which will be serialized to send over TCP to be reassembled
  * @author Nicholas McCaig
  */
-public  class SampleType {
+public  class SampleType implements Serializable {
 
-    double Temprature;
+    double temprature;
 
-    double Humidity;
+    double humidity;
 
     double gpsLatitude;
 
@@ -27,13 +28,17 @@ public  class SampleType {
 
 
     public SampleType(double temp, double humid, double gpsLat, double gpsLong, double alt, LocalDateTime sampleDT) {
-    Temprature = temp;
-    Humidity = humid;
+    temprature = temp;
+    humidity = humid;
     gpsLatitude = gpsLat;
     gpsLongitude = gpsLong;
     altitude = alt;
     sampleDateTime = sampleDT;
 
+    }
+    @Override
+    public String toString(){
+        return "Sample{" + "temprature=" + temprature + ", humidity=" + humidity + ", gpsLatitude=" + gpsLatitude + ", gpsLongitdue:" + gpsLongitude + ", altitude:" + altitude + ", sampleDateTime:"+ sampleDateTime + "}";
     }
     
 

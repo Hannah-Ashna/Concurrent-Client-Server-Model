@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package systemssoftwareproject.DataStructures;
+import java.io.Serializable;
 import java.util.LinkedList;
+import java.rmi.server.UnicastRemoteObject;
+
 /**
  *
  * @author Nicholas McCaig
@@ -12,13 +15,20 @@ import java.util.LinkedList;
 interface WeatherStation{
     public String getID();
 }
-public class WeatherStationType implements WeatherStation {
-    LinkedList<SampleType> samples = new LinkedList<>();
+public class WeatherStationType implements WeatherStation,Serializable {
+    private SampleType lastSample;
     
     @Override
     public String getID(){
         //To be implemented 
         return "TestID";
+    }
+    public SampleType getLastSample(){
+        return lastSample;
+    }
+    @Override
+    public String toString(){
+        return "WeatherStation{lastSample= " + lastSample + "}";
     }
     
 }
