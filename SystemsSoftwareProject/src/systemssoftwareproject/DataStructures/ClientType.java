@@ -3,22 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package systemssoftwareproject.User;
+package systemssoftwareproject.DataStructures;
 
 /**
  *
  * @author Nicholas McCaig
  */
-public class Main {
- public void ServerConnection(){
-  //Stub   
- }
+        public  enum ClientType {
+    USER,
+    WEATHERSTATION
+  }
 
-    /**
-     * A 
-     */
-    public void DownloadStationData(){
-     
- }
- 
-}

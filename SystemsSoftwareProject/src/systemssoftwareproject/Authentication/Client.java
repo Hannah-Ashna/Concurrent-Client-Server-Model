@@ -13,10 +13,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-/**
- *
- * @author Nicholas McCaig
- */
+
 public class Client {
     public static void main_menu() {
         while (true){

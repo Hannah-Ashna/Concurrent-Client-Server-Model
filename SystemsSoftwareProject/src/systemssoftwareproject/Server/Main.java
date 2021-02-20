@@ -1,7 +1,8 @@
 package systemssoftwareproject.Server;
 import java.io.*; 
 import java.net.*; 
-public class Main {
+public class Main implements OnNewUserCreatedEventListner{
+    
    public static void main(String[] args) 
     { 
         ServerSocket server = null; 
@@ -46,5 +47,10 @@ public class Main {
                 } 
             } 
         } 
+    }
+
+    @Override
+    public void OnNewUserCreatedEvent() {
+        System.out.println("The user has been created!");
     }
 }
