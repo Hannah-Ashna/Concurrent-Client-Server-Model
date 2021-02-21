@@ -134,7 +134,13 @@ public class Client {
     public static void login() {
         boolean logged_in = false;
         while (!logged_in){
-            Scanner sc= new Scanner(System.in); 
+            System.out.print("Are you sure you would like to signup? "
+                    + "(Enter N to exit)");
+            Scanner sc= new Scanner(System.in);
+            String exit_status = sc.nextLine();
+            if (exit_status.equals("N")){
+                break;
+            } 
             System.out.print("Username: ");   
             String login_username = sc.nextLine();
             System.out.print("Password: "); 
