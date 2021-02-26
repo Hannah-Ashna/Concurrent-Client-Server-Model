@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * @author Jamie
  */
 public class login {
-        public static void login() {
+    public static boolean login() {
         boolean logged_in = false;
         while (!logged_in){
             System.out.print("Are you sure you would like to signup? "
@@ -32,7 +32,11 @@ public class login {
             String login_password = sc.nextLine();
             logged_in = read_account_details(login_username, login_password);
         }
-        System.out.println("Account authenticated");
+        if (logged_in){
+            System.out.println("Account authenticated");
+        }
+        return logged_in;
+        
         // Connect the user to the server
     }
     
