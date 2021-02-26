@@ -34,7 +34,7 @@ public class signup {
 
             if (username.equals(check_username)){
                 System.out.println("Usernames are equal");
-                boolean valid_password = password_validation(password);
+                boolean valid_password = security_encryption.password_validation(password);
                 System.out.println("VALID? " + valid_password);
                 if (valid_password){
                     String hashed_username = security_encryption.encryption(username);
@@ -50,31 +50,6 @@ public class signup {
                 System.out.println("Usernames are not equal");
             }
         }
-    }
-    
-    public static boolean password_validation(String password_entered){
-        // Length check
-        int length = password_entered.length();
-        if (length < 7){
-            return false;
-        }
-        
-        // Contains letter and number check
-        char[] chars = password_entered.toCharArray();
-        boolean contains_digit = false;
-        boolean contains_letter = false;
-        for(char c : chars){
-            if(Character.isDigit(c)){
-                contains_digit = true;
-            }
-            else if(Character.isLetter(c)){
-                contains_letter = true;
-            }
-            if (contains_digit && contains_letter){
-                break;
-            }
-        }
-        return contains_digit && contains_letter;
     }
     
     public static void write_account_details(String username,
