@@ -39,8 +39,8 @@ public class login {
     public static boolean read_account_details(String username_entered,
             String password_entered){
         
-        String hashed_username_entered = signup.encryption(username_entered);
-        String hashed_password_entered = signup.encryption(password_entered);
+        String hashed_username_entered = security_encryption.encryption(username_entered);
+        String hashed_password_entered = security_encryption.encryption(password_entered);
         
         String file_name = "Account_details";
         try {

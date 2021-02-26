@@ -37,8 +37,8 @@ public class signup {
                 boolean valid_password = password_validation(password);
                 System.out.println("VALID? " + valid_password);
                 if (valid_password){
-                    String hashed_username = encryption(username);
-                    String hashed_password = encryption(password);
+                    String hashed_username = security_encryption.encryption(username);
+                    String hashed_password = security_encryption.encryption(password);
                     write_account_details(hashed_username, hashed_password);
                     valid_signup_details = true;
                 }
@@ -75,21 +75,6 @@ public class signup {
             }
         }
         return contains_digit && contains_letter;
-    }
-
-    public static String encryption(String string_to_encrypt){
-        String result = "";
-        for (char character: string_to_encrypt.toCharArray()) {
-            if (character != ' ') { // Spaces stay unchanged
-                int ascii_alpha_postion = character - 'a';
-                int new_ascii_alpha_postion = (ascii_alpha_postion + 3) % 26;
-                char encrypted_char = (char) ('a' + new_ascii_alpha_postion);
-                result += encrypted_char;
-            } else {
-                result += character;
-            }
-        }
-        return result;
     }
     
     public static void write_account_details(String username,
