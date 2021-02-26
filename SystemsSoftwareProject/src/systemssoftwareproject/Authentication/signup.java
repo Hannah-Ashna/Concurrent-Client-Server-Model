@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Student
+ * @author Jamie
  */
 public class signup {
     public static void signup() {
