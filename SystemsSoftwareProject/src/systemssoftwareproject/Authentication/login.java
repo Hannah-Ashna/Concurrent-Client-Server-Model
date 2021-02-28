@@ -19,7 +19,7 @@ public class login {
     public static boolean login() {
         boolean logged_in = false;
         while (!logged_in){
-            System.out.print("Are you sure you would like to signup? "
+            System.out.print("Are you sure you would like to login? "
                     + "(Enter N to exit)");
             Scanner sc= new Scanner(System.in);
             String exit_status = sc.nextLine();
