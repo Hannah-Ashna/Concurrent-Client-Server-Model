@@ -9,14 +9,14 @@ public class SignupForm extends JFrame implements ActionListener {
     
     // Components
     private Container c;
-    private JLabel title;
-    private JLabel user;
-    private JTextField userInp;
-    private JLabel userChk;
-    private JTextField userChkInp;
-    private JLabel pass;
-    private JTextField passInp;
-    private JButton create;
+    private final JLabel title;
+    private final JLabel user;
+    private final JTextField userInp;
+    private final JLabel userChk;
+    private final JTextField userChkInp;
+    private final JLabel pass;
+    private final JTextField passInp;
+    private final JButton create;
     
     String signup_username = "";
     String signup_password = "";

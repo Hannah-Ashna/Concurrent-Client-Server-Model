@@ -8,14 +8,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class LoginForm extends JFrame implements ActionListener {
     
     // Components
-    private Container c;
-    private JLabel title;
-    private JLabel user;
-    private JTextField userInp;
-    private JLabel pass;
-    private JTextField passInp;
-    private JButton login_var;
-    private JButton signup;
+    private final Container c;
+    private final JLabel title;
+    private final JLabel user;
+    private final JTextField userInp;
+    private final JLabel pass;
+    private final JTextField passInp;
+    private final JButton login_var;
+    private final JButton signup;
     
     String login_username = "";
     String login_password = "";
