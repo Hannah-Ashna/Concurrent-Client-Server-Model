@@ -14,8 +14,11 @@ public class LoginForm extends JFrame implements ActionListener {
     private JTextField userInp;
     private JLabel pass;
     private JTextField passInp;
-    private JButton login;
+    private JButton login_var;
     private JButton signup;
+    
+    String login_username = "";
+    String login_password = "";
     
     public LoginForm() {
         setTitle("User Client");
@@ -56,12 +59,12 @@ public class LoginForm extends JFrame implements ActionListener {
         passInp.setLocation(150, 130); 
         c.add(passInp); 
         
-        login = new JButton("Login"); 
-        login.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        login.setSize(100, 20); 
-        login.setLocation(70, 200); 
-        login.addActionListener(this); 
-        c.add(login); 
+        login_var = new JButton("Login"); 
+        login_var.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        login_var.setSize(100, 20); 
+        login_var.setLocation(70, 200); 
+        login_var.addActionListener(this); 
+        c.add(login_var); 
   
         signup = new JButton("Signup"); 
         signup.setFont(new Font("Arial", Font.PLAIN, 15)); 
@@ -75,8 +78,11 @@ public class LoginForm extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
         // Run login authentication
-        if (e.getSource() == login){
-            
+        if (e.getSource() == login_var){
+            String username_input = userInp.getText();
+            String password_input = passInp.getText();
+            systemssoftwareproject.Authentication.login.login(username_input,
+                    password_input);
         }
         
         // Send user to SignupForm

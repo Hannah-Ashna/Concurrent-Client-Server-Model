@@ -3,24 +3,12 @@ package systemssoftwareproject.Authentication;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class login {
-    public static boolean login() {
+    public static boolean login(String login_username, String login_password) {
         boolean logged_in = false;
         while (!logged_in){
-            System.out.print("Are you sure you would like to login? "
-                    + "(Enter N to exit)");
-            Scanner sc= new Scanner(System.in);
-            String exit_status = sc.nextLine();
-            if (exit_status.equals("N")){
-                break;
-            } 
-            System.out.print("Username: ");   
-            String login_username = sc.nextLine();
-            System.out.print("Password: "); 
-            String login_password = sc.nextLine();
             logged_in = read_account_details(login_username, login_password);
         }
         if (logged_in){

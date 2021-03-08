@@ -3,26 +3,12 @@ package systemssoftwareproject.Authentication;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class signup {
-    public static void signup() {
+    public static void signup(String username, String check_username,
+            String password){
         boolean valid_signup_details = false;
         while (!valid_signup_details){
-            System.out.print("Are you sure you would like to signup? "
-                    + "(Enter N to exit)");
-            Scanner sc= new Scanner(System.in);
-            String exit_status = sc.nextLine();
-            if (exit_status.equals("N")){
-                break;
-            } 
-            System.out.print("Username: ");   
-            String username = sc.nextLine();
-            System.out.print("Confirm username: ");   
-            String check_username = sc.nextLine();
-            System.out.print("Password: "); 
-            String password = sc.nextLine();
-
             if (username.equals(check_username)){
                 System.out.println("Usernames are equal");
                 boolean valid_password = security_encryption.password_validation(password);

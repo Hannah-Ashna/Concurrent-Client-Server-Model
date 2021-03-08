@@ -13,6 +13,7 @@ public class ServerHandler {
     public static void main(String[] args){ 
         LoginForm loginForm = new LoginForm();
         
+        
         boolean account_authenticated = Client.main_menu();
         if (account_authenticated){
             // establish a connection by providing host and port 

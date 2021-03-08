@@ -18,6 +18,10 @@ public class SignupForm extends JFrame implements ActionListener {
     private JTextField passInp;
     private JButton create;
     
+    String signup_username = "";
+    String signup_password = "";
+    
+    
     public SignupForm() {
         setTitle("Create Account");
         setBounds(300, 90, 600, 400);
@@ -81,8 +85,15 @@ public class SignupForm extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
         // Store data and send user back to the login page
+        // Check if credentials are valid
         if (e.getSource() == create){
-            // Check if credentials are valid
+            String username_input = userInp.getText();
+            String password_input = passInp.getText();
+            String check_username_input = userChkInp.getText();
+            
+            systemssoftwareproject.Authentication.signup.signup(
+                    username_input, check_username_input, password_input);
+            
             this.dispose();
             new LoginForm().setVisible(true);
         }
