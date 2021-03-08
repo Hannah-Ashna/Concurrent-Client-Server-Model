@@ -3,9 +3,10 @@ import java.io.*;
 import java.net.*; 
 import java.util.ArrayList;
 import java.util.List;
-import 
+//import 
+        
 public class Main implements OnNewUserCreatedEventListner{
-    private List<WeatherStation> weatherStations =  new ArrayList<>(); 
+   //private List<WeatherStation> weatherStations =  new ArrayList<>(); 
    public static void main(String[] args) 
     { 
         ServerSocket server = null; 

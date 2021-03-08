@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package systemssoftwareproject.Authentication;
 
 import java.io.FileWriter;
@@ -10,10 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-/**
- *
- * @author Jamie
- */
 public class signup {
     public static void signup() {
         boolean valid_signup_details = false;
