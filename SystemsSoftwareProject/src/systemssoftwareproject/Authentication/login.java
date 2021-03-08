@@ -7,10 +7,7 @@ import java.util.StringTokenizer;
 
 public class login {
     public static boolean login(String login_username, String login_password) {
-        boolean logged_in = false;
-        while (!logged_in){
-            logged_in = read_account_details(login_username, login_password);
-        }
+        boolean logged_in = read_account_details(login_username, login_password);
         if (logged_in){
             System.out.println("Account authenticated");
         }
