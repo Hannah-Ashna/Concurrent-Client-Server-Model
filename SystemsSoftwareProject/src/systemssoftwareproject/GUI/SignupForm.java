@@ -12,13 +12,15 @@ public class SignupForm extends JFrame implements ActionListener {
     private JLabel title;
     private JLabel user;
     private JTextField userInp;
+    private JLabel userChk;
+    private JTextField userChkInp;
     private JLabel pass;
     private JTextField passInp;
     private JButton create;
     
     public SignupForm() {
         setTitle("Create Account");
-        setBounds(300, 90, 400, 400);
+        setBounds(300, 90, 600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         
@@ -31,7 +33,7 @@ public class SignupForm extends JFrame implements ActionListener {
         title.setLocation(25, 20);
         c.add(title);
         
-        user= new JLabel("New Username"); 
+        user= new JLabel("Username"); 
         user.setFont(new Font("Arial", Font.PLAIN, 20)); 
         user.setSize(100, 20); 
         user.setLocation(25, 80); 
@@ -42,23 +44,35 @@ public class SignupForm extends JFrame implements ActionListener {
         userInp.setSize(190, 20);
         userInp.setLocation(150, 80); 
         c.add(userInp); 
+        
+        userChk = new JLabel("Re-enter Username"); 
+        userChk.setFont(new Font("Arial", Font.PLAIN, 20)); 
+        userChk.setSize(100, 20); 
+        userChk.setLocation(25, 130); 
+        c.add(userChk); 
   
-        pass = new JLabel("New Password"); 
+        userChkInp = new JTextField(); 
+        userChkInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        userChkInp.setSize(190, 20); 
+        userChkInp.setLocation(150, 130); 
+        c.add(userChkInp); 
+        
+        pass = new JLabel("Password"); 
         pass.setFont(new Font("Arial", Font.PLAIN, 20)); 
         pass.setSize(100, 20); 
-        pass.setLocation(25, 130); 
+        pass.setLocation(25, 180); 
         c.add(pass); 
   
         passInp = new JTextField(); 
         passInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
         passInp.setSize(190, 20); 
-        passInp.setLocation(150, 130); 
+        passInp.setLocation(150, 180); 
         c.add(passInp); 
         
         create = new JButton("Create"); 
         create.setFont(new Font("Arial", Font.PLAIN, 15)); 
         create.setSize(100, 20); 
-        create.setLocation(70, 200); 
+        create.setLocation(25, 300); 
         create.addActionListener(this); 
         c.add(create); 
   
@@ -66,7 +80,9 @@ public class SignupForm extends JFrame implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e){
+        // Store data and send user back to the login page
         if (e.getSource() == create){
+            // Check if credentials are valid
             this.dispose();
             new LoginForm().setVisible(true);
         }

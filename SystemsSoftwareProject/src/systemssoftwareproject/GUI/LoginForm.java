@@ -19,7 +19,7 @@ public class LoginForm extends JFrame implements ActionListener {
     
     public LoginForm() {
         setTitle("User Client");
-        setBounds(300, 90, 400, 400);
+        setBounds(300, 90, 600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         
@@ -74,6 +74,12 @@ public class LoginForm extends JFrame implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e){
+        // Run login authentication
+        if (e.getSource() == login){
+            
+        }
+        
+        // Send user to SignupForm
         if (e.getSource() == signup){
            this.dispose();
            new SignupForm().setVisible(true);
