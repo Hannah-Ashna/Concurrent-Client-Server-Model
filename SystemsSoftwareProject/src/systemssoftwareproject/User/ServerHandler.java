@@ -7,9 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import systemssoftwareproject.Authentication.Client;
+import systemssoftwareproject.GUI.LoginForm;
 
 public class ServerHandler {
     public static void main(String[] args){ 
+        LoginForm loginForm = new LoginForm();
+        
         boolean account_authenticated = Client.main_menu();
         if (account_authenticated){
             // establish a connection by providing host and port 
