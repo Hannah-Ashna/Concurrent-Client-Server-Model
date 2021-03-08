@@ -91,11 +91,19 @@ public class SignupForm extends JFrame implements ActionListener {
             String password_input = passInp.getText();
             String check_username_input = userChkInp.getText();
             
-            systemssoftwareproject.Authentication.signup.signup(
-                    username_input, check_username_input, password_input);
+            boolean status = systemssoftwareproject.Authentication.signup.signup(username_input, check_username_input, password_input);
             
-            this.dispose();
-            new LoginForm().setVisible(true);
+            // If account creation successful - return to Login Form
+            if (status){
+                this.dispose();
+                new LoginForm().setVisible(true);
+            }
+            
+            // Else - display error
+            else{
+                JOptionPane.showMessageDialog(c, "Oops, something doesn't seem right? Try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
 }

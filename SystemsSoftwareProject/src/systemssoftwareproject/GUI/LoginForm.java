@@ -81,8 +81,17 @@ public class LoginForm extends JFrame implements ActionListener {
         if (e.getSource() == login_var){
             String username_input = userInp.getText();
             String password_input = passInp.getText();
-            systemssoftwareproject.Authentication.login.login(username_input,
-                    password_input);
+            boolean status = systemssoftwareproject.Authentication.login.login(username_input, password_input);
+            
+            // If credentials are a match - login successfully
+            if(status) {
+                System.out.println("Logged in");
+            }
+            
+            // Else - display error
+            else{
+                JOptionPane.showMessageDialog(c, "Incorrect Credentials! Try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
         // Send user to SignupForm
