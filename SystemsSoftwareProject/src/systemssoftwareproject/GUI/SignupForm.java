@@ -42,19 +42,19 @@ public class SignupForm extends JFrame implements ActionListener {
         userInp = new JTextField(); 
         userInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
         userInp.setSize(190, 20);
-        userInp.setLocation(150, 80); 
+        userInp.setLocation(210, 80); 
         c.add(userInp); 
         
         userChk = new JLabel("Re-enter Username"); 
         userChk.setFont(new Font("Arial", Font.PLAIN, 20)); 
-        userChk.setSize(100, 20); 
+        userChk.setSize(200, 20); 
         userChk.setLocation(25, 130); 
         c.add(userChk); 
   
         userChkInp = new JTextField(); 
         userChkInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
         userChkInp.setSize(190, 20); 
-        userChkInp.setLocation(150, 130); 
+        userChkInp.setLocation(210, 130); 
         c.add(userChkInp); 
         
         pass = new JLabel("Password"); 
@@ -66,7 +66,7 @@ public class SignupForm extends JFrame implements ActionListener {
         passInp = new JTextField(); 
         passInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
         passInp.setSize(190, 20); 
-        passInp.setLocation(150, 180); 
+        passInp.setLocation(210, 180); 
         c.add(passInp); 
         
         create = new JButton("Create"); 
