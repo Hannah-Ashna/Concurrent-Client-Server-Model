@@ -17,8 +17,7 @@ public class UserClient extends JFrame implements ActionListener {
     private final JTextArea display;
     private final JButton send ;
 
-    static String data = "message";
-    static boolean newData;
+    static String data = null;
     
     public UserClient() {
         setTitle("User Client");
@@ -71,7 +70,6 @@ public class UserClient extends JFrame implements ActionListener {
         if(e.getSource() == send ){
             data = userInp.getText();
             display.setText(data);
-            newData = true;
         }
     }
     
@@ -79,17 +77,9 @@ public class UserClient extends JFrame implements ActionListener {
         return data;
     }
     
-    public static boolean dataStatus(){
-        return newData;
+    public static void resetData(){
+        data = null;
     }
     
-    public static boolean formExists(){
-        return true;
-    }
     
-    public static void dataSent(){
-        newData = false;
-    }
-    
-
 }

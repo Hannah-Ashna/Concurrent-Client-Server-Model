@@ -27,7 +27,7 @@ public class ClientHandler implements Runnable {
                 }
                 
                 catch (IOException e){
-                    System.out.println("Error: Nothing from User");
+                    //System.out.println("Error: Nothing from User");
                 }
 
             }

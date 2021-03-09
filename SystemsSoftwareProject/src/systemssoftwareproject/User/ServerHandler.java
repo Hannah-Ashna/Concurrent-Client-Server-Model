@@ -21,17 +21,19 @@ public class ServerHandler {
             try (Socket socket = new Socket("localhost", 1234)) { 
                 while(true){
                     // Create IO Streams
-                    //if(UserClient.dataStatus() == true) {
-                        DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
+                    DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
+                    DataInputStream fromServer = new DataInputStream(socket.getInputStream());
+                    
+                    if (UserClient.inputData() != null){
                         System.out.println("Sending server message:");
                         toServer.writeUTF(UserClient.inputData());
 
-                        DataInputStream fromServer = new DataInputStream(socket.getInputStream());
+                        
                         String text = fromServer.readUTF();
                         System.out.println("Received server message:");
                         System.out.println(text);
-                        UserClient.dataSent();                        
-                    //}
+                        UserClient.resetData();                        
+                    }
 
                 }
 
