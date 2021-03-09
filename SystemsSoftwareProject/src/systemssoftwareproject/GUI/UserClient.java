@@ -15,6 +15,8 @@ public class UserClient extends JFrame implements ActionListener {
     private final JTextArea display;
     private final JButton send ;
 
+    static String data;
+    
     public UserClient() {
         setTitle("User Client");
         setBounds(300, 90, 800, 800);
@@ -64,13 +66,13 @@ public class UserClient extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == send ){
-            //data = userInp.getText();
-            //display.setText(data);
+            data = userInp.getText();
+            display.setText(data);
         }
     }
     
     public static String inputData(){
-        return "123";
+        return data;
     }
     
     public boolean status(){

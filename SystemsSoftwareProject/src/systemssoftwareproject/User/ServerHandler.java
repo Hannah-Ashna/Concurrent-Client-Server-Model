@@ -35,7 +35,7 @@ public class ServerHandler {
                         line = sc.nextLine();
 
                         // sending the user input to server
-                        out.println(line);
+                        out.println(UserClient.inputData());
                         out.flush();
 
                         // displaying server reply
