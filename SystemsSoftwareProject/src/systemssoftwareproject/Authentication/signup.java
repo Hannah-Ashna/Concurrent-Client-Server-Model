@@ -9,13 +9,10 @@ public class signup {
         
         if (username.equals(check_username)){
             System.out.println("Usernames are equal");
-            
-            String hashed_username = security_encryption.encryption(username);
-            boolean valid_username = security_encryption.username_validation(
-                    hashed_username);
             boolean valid_password = security_encryption.password_validation(password);
-            System.out.println("VALID? " + (valid_username && valid_password));
-            if (valid_username && valid_password){
+            System.out.println("VALID? " + valid_password);
+            if (valid_password){
+                String hashed_username = security_encryption.encryption(username);
                 String hashed_password = security_encryption.encryption(password);
                 write_account_details(hashed_username, hashed_password);
             }

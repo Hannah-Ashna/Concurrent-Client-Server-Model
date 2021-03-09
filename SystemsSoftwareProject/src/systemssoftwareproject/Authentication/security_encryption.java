@@ -1,43 +1,6 @@
 package systemssoftwareproject.Authentication;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.StringTokenizer;
-
 public class security_encryption {
-    
-    public static boolean username_validation(String username_entered){
-        String file_name = "Account_details";
-        boolean username_valid = true;
-        try {
-            FileReader fin = new FileReader(file_name);
-            BufferedReader din = new BufferedReader(fin);
-            //read from the file
-            String line = null; // line of text
-            while ((line = din.readLine()) != null) {
-                // here we have read in a line of text
-                // now parse line to extract data and print it out to the screen
-                StringTokenizer st = new StringTokenizer(line, ",");
-                
-                String username_found = (st.nextToken().trim());
-                
-                if (username_found.equals(username_entered)){
-                        System.out.println("Username already taken");
-                        username_valid = false;
-                }
-                else{
-                   System.out.println(username_found + "\n" + 
-                           username_entered);  
-                }
-            }
-            din.close(); // close the stream
-        } catch (IOException e) {
-            System.err.println("Error! - " + e.getMessage());
-            username_valid = false;
-        }
-        return username_valid;
-    }
     
     public static boolean password_validation(String password_entered){
         // Length check
