@@ -17,6 +17,7 @@ public class LoginForm extends JFrame implements ActionListener {
     private final JButton login_var;
     private final JButton signup;
     
+    boolean status = false;
     String login_username = "";
     String login_password = "";
     
@@ -82,11 +83,12 @@ public class LoginForm extends JFrame implements ActionListener {
         if (e.getSource() == login_var){
             String username_input = userInp.getText();
             String password_input = passInp.getText();
-            boolean status = systemssoftwareproject.Authentication.login.login(username_input, password_input);
+            status = systemssoftwareproject.Authentication.login.login(username_input, password_input);
             
             // If credentials are a match - login successfully
             if(status) {
-                System.out.println("Logged in");
+                this.dispose();
+                new UserClient().setVisible(true);
             }
             
             // Else - display error
@@ -100,5 +102,9 @@ public class LoginForm extends JFrame implements ActionListener {
            this.dispose();
            new SignupForm().setVisible(true);
         }
+    }
+    
+    public boolean returnStatus(){
+        return status;
     }
 }

@@ -6,16 +6,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import systemssoftwareproject.Authentication.Client;
 import systemssoftwareproject.GUI.LoginForm;
+import systemssoftwareproject.GUI.UserClient;
 
 public class ServerHandler {
     public static void main(String[] args){ 
         LoginForm loginForm = new LoginForm();
         
-        
-        boolean account_authenticated = Client.main_menu();
-        if (account_authenticated){
+        if (true){
             // establish a connection by providing host and port 
             // number 
             try (Socket socket = new Socket("localhost", 1234)) { 
@@ -28,9 +26,9 @@ public class ServerHandler {
                 BufferedReader in 
                     = new BufferedReader(new InputStreamReader( 
                         socket.getInputStream())); 
-
-                try ( // object of scanner class
-                        Scanner sc = new Scanner(System.in)) {
+                
+                // object of scanner class
+                try (Scanner sc = new Scanner(System.in)) {
                     String line = null;
                     while (!"exit".equalsIgnoreCase(line)) {
                         // reading from user
@@ -41,8 +39,7 @@ public class ServerHandler {
                         out.flush();
 
                         // displaying server reply
-                        System.out.println("Server replied "
-                                + in.readLine());
+                        System.out.println("Server replied " + in.readLine());
                     }
                     // closing the scanner object
                 } 
