@@ -31,9 +31,9 @@ public class SignupForm extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
         
-        title = new JLabel("Create a new account");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
+        title = new JLabel("User - Create Account");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setSize(400, 30);
         title.setLocation(25, 20);
         c.add(title);
         
