@@ -31,9 +31,9 @@ public class SignupForm extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
         
-        title = new JLabel("Create a new account");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
+        title = new JLabel("User - Create Account");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setSize(400, 30);
         title.setLocation(25, 20);
         c.add(title);
         
@@ -91,11 +91,19 @@ public class SignupForm extends JFrame implements ActionListener {
             String password_input = passInp.getText();
             String check_username_input = userChkInp.getText();
             
-            systemssoftwareproject.Authentication.signup.signup(
-                    username_input, check_username_input, password_input);
+            boolean status = systemssoftwareproject.Authentication.signup.signup(username_input, check_username_input, password_input);
             
-            this.dispose();
-            new LoginForm().setVisible(true);
+            // If account creation successful - return to Login Form
+            if (status){
+                this.dispose();
+                new LoginForm().setVisible(true);
+            }
+            
+            // Else - display error
+            else{
+                JOptionPane.showMessageDialog(c, "Oops, something doesn't seem right? Try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
 }

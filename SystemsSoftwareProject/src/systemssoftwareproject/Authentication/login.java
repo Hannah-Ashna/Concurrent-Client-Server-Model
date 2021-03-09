@@ -8,12 +8,7 @@ import java.util.StringTokenizer;
 public class login {
     public static boolean login(String login_username, String login_password) {
         boolean logged_in = read_account_details(login_username, login_password);
-        if (logged_in){
-            System.out.println("Account authenticated");
-        }
-        return logged_in;
-        
-        // Connect the user to the server
+        return logged_in;     
     }
     
     public static boolean read_account_details(String username_entered,

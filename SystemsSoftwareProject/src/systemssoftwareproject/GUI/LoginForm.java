@@ -13,10 +13,11 @@ public class LoginForm extends JFrame implements ActionListener {
     private final JLabel user;
     private final JTextField userInp;
     private final JLabel pass;
-    private final JTextField passInp;
+    private final JPasswordField passInp;
     private final JButton login_var;
     private final JButton signup;
     
+    boolean status = false;
     String login_username = "";
     String login_password = "";
     
@@ -29,8 +30,8 @@ public class LoginForm extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
         
-        title = new JLabel("User Client");
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title = new JLabel("User - Login");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
         title.setSize(300, 30);
         title.setLocation(25, 20);
         c.add(title);
@@ -48,13 +49,14 @@ public class LoginForm extends JFrame implements ActionListener {
         c.add(userInp); 
   
         pass = new JLabel("Password"); 
-        pass.setFont(new Font("Arial", Font.PLAIN, 20)); 
+        pass.setFont(new Font("Arial", Font.PLAIN, 20));
         pass.setSize(100, 20); 
         pass.setLocation(25, 130); 
         c.add(pass); 
   
-        passInp = new JTextField(); 
-        passInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        passInp = new JPasswordField(); 
+        passInp.setFont(new Font("Arial", Font.PLAIN, 15));
+        passInp.setEchoChar('*');
         passInp.setSize(190, 20); 
         passInp.setLocation(150, 130); 
         c.add(passInp); 
@@ -81,8 +83,18 @@ public class LoginForm extends JFrame implements ActionListener {
         if (e.getSource() == login_var){
             String username_input = userInp.getText();
             String password_input = passInp.getText();
-            systemssoftwareproject.Authentication.login.login(username_input,
-                    password_input);
+            status = systemssoftwareproject.Authentication.login.login(username_input, password_input);
+            
+            // If credentials are a match - login successfully
+            if(status) {
+                this.dispose();
+                new UserClient().setVisible(true);
+            }
+            
+            // Else - display error
+            else{
+                JOptionPane.showMessageDialog(c, "Incorrect Credentials! Try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
         // Send user to SignupForm
@@ -90,5 +102,9 @@ public class LoginForm extends JFrame implements ActionListener {
            this.dispose();
            new SignupForm().setVisible(true);
         }
+    }
+    
+    public boolean returnStatus(){
+        return status;
     }
 }
