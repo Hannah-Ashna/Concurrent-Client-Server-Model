@@ -1,6 +1,8 @@
 package systemssoftwareproject.User;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -12,37 +14,28 @@ import systemssoftwareproject.GUI.UserClient;
 public class ServerHandler {
     public static void main(String[] args){ 
         LoginForm loginForm = new LoginForm();
-        
         if (true){
+            System.out.println("Test");
             // establish a connection by providing host and port 
             // number 
             try (Socket socket = new Socket("localhost", 1234)) { 
+                while(true){
+                    // Create IO Streams
+                    //if(UserClient.dataStatus() == true) {
+                        DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
+                        System.out.println("Sending server message:");
+                        toServer.writeUTF(UserClient.inputData());
 
-                // writing to server 
-                PrintWriter out = new PrintWriter( 
-                    socket.getOutputStream(), true); 
-
-                // reading from server 
-                BufferedReader in 
-                    = new BufferedReader(new InputStreamReader( 
-                        socket.getInputStream())); 
-                
-                // object of scanner class
-                //try (Scanner sc = new Scanner(System.in)) {
-                    //String line = null;
-                   // while (!"exit".equalsIgnoreCase(line)) {
-                        // reading from user
-                        //line = sc.nextLine();
-
-                        // sending the user input to server
-                        out.println(UserClient.inputData());
-                        
-
-                        // displaying server reply
-                        System.out.println("Server replied " + in.readLine());
+                        DataInputStream fromServer = new DataInputStream(socket.getInputStream());
+                        String text = fromServer.readUTF();
+                        System.out.println("Received server message:");
+                        System.out.println(text);
+                        UserClient.dataSent();                        
                     //}
-                    // closing the scanner object
-               // } 
+
+                }
+
+
             } 
             catch (IOException e) { 
             }

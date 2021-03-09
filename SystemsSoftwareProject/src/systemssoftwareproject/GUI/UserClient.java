@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
+
+
 public class UserClient extends JFrame implements ActionListener {
     
     // Components
@@ -15,7 +17,8 @@ public class UserClient extends JFrame implements ActionListener {
     private final JTextArea display;
     private final JButton send ;
 
-    static String data;
+    static String data = "message";
+    static boolean newData;
     
     public UserClient() {
         setTitle("User Client");
@@ -68,6 +71,7 @@ public class UserClient extends JFrame implements ActionListener {
         if(e.getSource() == send ){
             data = userInp.getText();
             display.setText(data);
+            newData = true;
         }
     }
     
@@ -75,8 +79,16 @@ public class UserClient extends JFrame implements ActionListener {
         return data;
     }
     
-    public boolean status(){
+    public static boolean dataStatus(){
+        return newData;
+    }
+    
+    public static boolean formExists(){
         return true;
+    }
+    
+    public static void dataSent(){
+        newData = false;
     }
     
 
