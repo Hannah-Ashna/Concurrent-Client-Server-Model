@@ -28,21 +28,21 @@ public class ServerHandler {
                         socket.getInputStream())); 
                 
                 // object of scanner class
-                try (Scanner sc = new Scanner(System.in)) {
-                    String line = null;
-                    while (!"exit".equalsIgnoreCase(line)) {
+                //try (Scanner sc = new Scanner(System.in)) {
+                    //String line = null;
+                   // while (!"exit".equalsIgnoreCase(line)) {
                         // reading from user
-                        line = sc.nextLine();
+                        //line = sc.nextLine();
 
                         // sending the user input to server
                         out.println(UserClient.inputData());
-                        out.flush();
+                        
 
                         // displaying server reply
                         System.out.println("Server replied " + in.readLine());
-                    }
+                    //}
                     // closing the scanner object
-                } 
+               // } 
             } 
             catch (IOException e) { 
             }

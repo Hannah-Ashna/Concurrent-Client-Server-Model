@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 // Is this class redundant now because of the GUI?
 // Can this be removed? -- Hannah
+/*
 public class Client {
     public static boolean main_menu() {
         boolean login_successful = false;
@@ -30,3 +31,4 @@ public class Client {
         return login_successful;
     }
 }
+*/
