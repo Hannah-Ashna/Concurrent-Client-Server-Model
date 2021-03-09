@@ -49,19 +49,24 @@ public class security_encryption {
         // Contains letter and number check
         char[] chars = password_entered.toCharArray();
         boolean contains_digit = false;
-        boolean contains_letter = false;
+        boolean contains_uppercase = false;
+        boolean contains_lowercase = false;
         for(char c : chars){
             if(Character.isDigit(c)){
                 contains_digit = true;
             }
-            else if(Character.isLetter(c)){
-                contains_letter = true;
+            else if(Character.isUpperCase(c)){
+                contains_uppercase = true;
             }
-            if (contains_digit && contains_letter){
+            else if(Character.isLowerCase(c)){
+                contains_lowercase = true;
+            }
+            
+            if (contains_digit && contains_uppercase && contains_lowercase){
                 break;
             }
         }
-        return contains_digit && contains_letter;
+        return contains_digit && contains_uppercase && contains_lowercase;
     }
         
     public static String encryption(String string_to_encrypt){
