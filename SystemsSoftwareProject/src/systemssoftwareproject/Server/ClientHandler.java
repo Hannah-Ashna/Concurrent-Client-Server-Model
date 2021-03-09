@@ -22,15 +22,15 @@ public class ClientHandler implements Runnable {
                 try {
                     String text = fromClient.readUTF();
                     toClient.writeUTF(text.toUpperCase());
-                    System.out.println("Success: IT WORKED");
-                    //clientSocket.close();                 
+                    //clientSocket.close();
+                                     
                 }
                 
                 catch (IOException e){
-                    //System.out.println("Error: Nothing from User");
                 }
 
             }
+            
         } 
 
         catch (IOException e) { 
