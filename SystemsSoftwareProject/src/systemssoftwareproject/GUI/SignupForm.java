@@ -15,7 +15,7 @@ public class SignupForm extends JFrame implements ActionListener {
     private final JLabel userChk;
     private final JTextField userChkInp;
     private final JLabel pass;
-    private final JTextField passInp;
+    private final JPasswordField passInp;
     private final JButton create;
     private final JButton back;
     
@@ -68,7 +68,7 @@ public class SignupForm extends JFrame implements ActionListener {
         pass.setLocation(25, 180); 
         c.add(pass); 
   
-        passInp = new JTextField(); 
+        passInp = new JPasswordField(); 
         passInp.setFont(new Font("Arial", Font.PLAIN, 15)); 
         passInp.setSize(190, 20); 
         passInp.setLocation(210, 180); 
