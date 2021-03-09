@@ -1,5 +1,7 @@
 package systemssoftwareproject.WeatherStation;
 
+import systemssoftwareproject.DataStructures.SampleType;
+
 public class ServerHandler {
 
     /**
@@ -10,9 +12,10 @@ public class ServerHandler {
     }
     
     /**
-     * Will send the sample data to the database
+     *  send the sample data to the server
      */
-    public void SendSampleData(){
-        
+    public void SendNewSampleData(){
+        SampleType test = new SampleType();
+        //send the new sample to the server via the socket 
     }
 }
