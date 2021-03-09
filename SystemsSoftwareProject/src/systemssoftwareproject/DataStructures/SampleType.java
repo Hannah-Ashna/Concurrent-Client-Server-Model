@@ -27,6 +27,10 @@ public  class SampleType implements Serializable {
     sampleDateTime = sampleDT;
 
     }
+
+    public SampleType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     @Override
     public String toString(){
         return "Sample{" + "temprature=" + temprature + ", humidity=" + humidity + ", gpsLatitude=" + gpsLatitude + ", gpsLongitdue:" + gpsLongitude + ", altitude:" + altitude + ", sampleDateTime:"+ sampleDateTime + "}";
