@@ -17,6 +17,7 @@ public class SignupForm extends JFrame implements ActionListener {
     private final JLabel pass;
     private final JTextField passInp;
     private final JButton create;
+    private final JButton back;
     
     String signup_username = "";
     String signup_password = "";
@@ -78,7 +79,14 @@ public class SignupForm extends JFrame implements ActionListener {
         create.setSize(100, 20); 
         create.setLocation(25, 300); 
         create.addActionListener(this); 
-        c.add(create); 
+        c.add(create);
+        
+        back = new JButton("back"); 
+        back.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        back.setSize(100, 20); 
+        back.setLocation(440, 30); 
+        back.addActionListener(this); 
+        c.add(back); 
   
         setVisible(true);
     }
@@ -104,6 +112,10 @@ public class SignupForm extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(c, "Oops, something doesn't seem right? Try again.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
+        }
+        else if (e.getSource() == back){
+           this.dispose();
+           new LoginForm().setVisible(true);
         }
     }
 }
