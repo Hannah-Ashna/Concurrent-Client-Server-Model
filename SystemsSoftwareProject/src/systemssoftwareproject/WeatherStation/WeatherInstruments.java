@@ -4,6 +4,7 @@ package systemssoftwareproject.WeatherStation;
 
 import java.time.LocalDateTime;
 import systemssoftwareproject.DataStructures.SampleType;
+import java.util.Random;
 
 public class WeatherInstruments{
 
