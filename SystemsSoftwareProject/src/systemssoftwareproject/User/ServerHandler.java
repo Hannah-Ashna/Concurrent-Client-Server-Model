@@ -27,6 +27,7 @@ public class ServerHandler {
                         String text = fromServer.readUTF();
                         System.out.println("Received server message:");
                         UserClient.receivedData(text);
+                        
                         UserClient.resetData();                        
                     }
                 }

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
+import java.util.concurrent.TimeUnit;
 
 
 public class UserClient extends JFrame implements ActionListener {
@@ -71,19 +71,23 @@ public class UserClient extends JFrame implements ActionListener {
         refresh.setLocation(170, 300); 
         refresh.addActionListener(this); 
         c.add(refresh); 
-        
+          
         setVisible(true);
     }
     
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed (ActionEvent e){
         if(e.getSource() == send ){
             data = userInp.getText();
+            try {
+		TimeUnit.SECONDS.sleep(1);
+                display.setText("\nResponse from Server: " + receivedData);
+            } catch (InterruptedException except) {
+                System.out.println("Thread is interuppted....");
+            }
         }
         
-        if(e.getSource() == refresh){
-            display.setText("\nResponse from Server: " + receivedData);
-        }
     }
+    
     
     public static String sendData(){
         return data;
@@ -91,6 +95,7 @@ public class UserClient extends JFrame implements ActionListener {
     
     public static void receivedData(String data){
         receivedData = data;
+        
     }
     
     public static void resetData(){
