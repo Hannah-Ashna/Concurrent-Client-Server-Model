@@ -15,9 +15,11 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel user;
     private final JTextField userInp;
     private final JTextArea display;
-    private final JButton send ;
+    private final JButton send;
+    private final JButton refresh;
 
     static String data = null;
+    static String receivedData = null;
     
     public UserClient() {
         setTitle("User Client");
@@ -60,21 +62,35 @@ public class UserClient extends JFrame implements ActionListener {
         send.setFont(new Font("Arial", Font.PLAIN, 15)); 
         send.setSize(100, 20); 
         send.setLocation(25, 300); 
-        send.addActionListener(this); 
+        send.addActionListener(this);
+        c.add(send);
         
-        c.add(send); 
+        refresh = new JButton("Refresh"); 
+        refresh.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        refresh.setSize(100, 20); 
+        refresh.setLocation(170, 300); 
+        refresh.addActionListener(this); 
+        c.add(refresh); 
+        
         setVisible(true);
     }
     
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == send ){
             data = userInp.getText();
-            display.setText(data);
+        }
+        
+        if(e.getSource() == refresh){
+            display.setText("\nResponse from Server: " + receivedData);
         }
     }
     
-    public static String inputData(){
+    public static String sendData(){
         return data;
+    }
+    
+    public static void receivedData(String data){
+        receivedData = data;
     }
     
     public static void resetData(){

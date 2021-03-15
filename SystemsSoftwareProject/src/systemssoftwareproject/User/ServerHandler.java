@@ -19,14 +19,14 @@ public class ServerHandler {
                     DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
                     DataInputStream fromServer = new DataInputStream(socket.getInputStream());
                     
-                    if (UserClient.inputData() != null){
+                    if (UserClient.sendData() != null){
                         System.out.println("Sending server message:");
-                        toServer.writeUTF(UserClient.inputData());
+                        toServer.writeUTF(UserClient.sendData());
 
                         
                         String text = fromServer.readUTF();
                         System.out.println("Received server message:");
-                        System.out.println(text);
+                        UserClient.receivedData(text);
                         UserClient.resetData();                        
                     }
                 }
