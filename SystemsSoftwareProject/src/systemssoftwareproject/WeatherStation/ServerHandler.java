@@ -7,6 +7,8 @@ import java.net.Socket;
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.GUI.UserClient;
 
+import systemssoftwareproject.Server.Main;
+
 public class ServerHandler {
 
     /**
@@ -28,34 +30,30 @@ public class ServerHandler {
         //send the new sample to the server via the socket 
     }
     
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("WS-Client\n");
-        
-        
-                   try (Socket socket = new Socket("localhost", 1234)) { 
-                while(true){
-                    // Create IO Streams
-                    DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
-                    DataInputStream fromServer = new DataInputStream(socket.getInputStream());
-                    
-                    if (UserClient.sendData() != null){
-                        System.out.println("Sending server message:");
-                        toServer.writeUTF(UserClient.sendData());
+        String test_message = "message";
+        systemssoftwareproject.Server.Main.set_client_true();
+        try (Socket socket = new Socket("localhost", 1234)) { 
+            while(true){
+                // Create IO Streams
+                DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
+                DataInputStream fromServer = new DataInputStream(socket.getInputStream());
 
-                        
-                        String text = fromServer.readUTF();
-                        System.out.println("Received server message:");
-                        UserClient.receivedData(text);
-                        
-                        UserClient.resetData();                        
-                    }
-                }
-            }
-            
-            catch (IOException e) { 
+                System.out.println("Sending server message:" + 
+                        test_message);
+                toServer.writeUTF(test_message);
+
+
+                String text = fromServer.readUTF();
+                System.out.println("Received server message:" + text);
             }
         }
-    } 
+
+        catch (IOException e) { 
+        }
+    }
+}
 
     
     

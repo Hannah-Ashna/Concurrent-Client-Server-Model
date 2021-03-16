@@ -13,6 +13,7 @@ public class ServerHandler {
         
         if (true){
             // Establish a connection by providing host and port number 
+            systemssoftwareproject.Server.Main.set_client_false();
             try (Socket socket = new Socket("localhost", 1234)) { 
                 while(true){
                     // Create IO Streams
@@ -20,12 +21,13 @@ public class ServerHandler {
                     DataInputStream fromServer = new DataInputStream(socket.getInputStream());
                     
                     if (UserClient.sendData() != null){
-                        System.out.println("Sending server message:");
+                        System.out.println("Sending server message:" +
+                                UserClient.sendData());
                         toServer.writeUTF(UserClient.sendData());
 
                         
                         String text = fromServer.readUTF();
-                        System.out.println("Received server message:");
+                        System.out.println("Received server message:" + text);
                         UserClient.receivedData(text);
                         
                         UserClient.resetData();                        
