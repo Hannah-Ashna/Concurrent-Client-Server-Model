@@ -32,13 +32,14 @@ public class WeatherStationHandler implements Runnable {
                  append_file = false; //if it doesn't then writing to the file shouldn't be append mode
              } else {
                  System.out.println("File already exists.");
-                 append_file = true;  //if it does then writing to the file should be append mode
+                 append_file = true; 
+                  //if it does then writing to the file should be append mode
              }
             while(true){
                 // Create IO Streams
                 DataInputStream fromWeatherStation = new DataInputStream(weatherStationSocket.getInputStream());
                 DataOutputStream toWeatherStation = new DataOutputStream(weatherStationSocket.getOutputStream());   
-                
+                System.out.println("here");
                 try {
                      String WeatherStationID = fromWeatherStation.readUTF(); // get ID from weather station
                      
@@ -55,8 +56,10 @@ public class WeatherStationHandler implements Runnable {
 
                     while ((line = din.readLine()) != null) {
                
-                        if (line ==  WeatherStationID){ // checks if ID already exists in the file
+                        if (line.equals(WeatherStationID)){ // checks if ID already exists in the file
                             ID_exists = true; 
+                            System.out.println("ID already exists");
+                            break;
                         }
                     }
                     if (ID_exists == false){ // if the file does not exist
@@ -64,11 +67,14 @@ public class WeatherStationHandler implements Runnable {
                         FileWriter fout = new FileWriter("WeatherStationID list.txt",append_file); //append_file is just saying if the file should be append mode or not
                         PrintWriter pout = new PrintWriter(fout,true);
                         pout.println(WeatherStationID); 
+                        toWeatherStation.writeUTF("ID has been added");
+                        
                     }
                     else{
                         // if the id already exists then do this
                          toWeatherStation.writeUTF("ID already exists");
                          System.out.println("response to weatherstation is ID already exists");
+                         break;
                     }
                    
                     

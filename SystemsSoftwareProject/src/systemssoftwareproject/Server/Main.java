@@ -35,6 +35,7 @@ public class Main implements OnNewUserCreatedEventListner{
                 // requests 
                 
                 //which_client is false when client connects
+                /*
                 if (which_client == false){
                     Socket client = server.accept(); 
 
@@ -53,6 +54,7 @@ public class Main implements OnNewUserCreatedEventListner{
                     new Thread((Runnable) clientSock).start();
                 }
                 else{ //which_client is true when weather station connects
+*/
                     Socket WeatherStation = server.accept(); 
 
                     // Displaying that new client is connected 
@@ -68,7 +70,7 @@ public class Main implements OnNewUserCreatedEventListner{
                     // This thread will handle the client 
                     // separately 
                     new Thread((Runnable) weatherStationSocket).start();
-                }
+                //}
             }          } 
                 catch (IOException e) { 
                 } 
