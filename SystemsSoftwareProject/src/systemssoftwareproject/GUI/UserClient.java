@@ -20,7 +20,6 @@ public class UserClient extends JFrame implements ActionListener {
 
     static String data = null;
     static String receivedData = null;
-    
     public UserClient() {
         setTitle("User Client");
         setBounds(300, 90, 800, 800);
