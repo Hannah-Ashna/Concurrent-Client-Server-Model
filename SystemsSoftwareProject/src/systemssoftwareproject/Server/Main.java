@@ -84,6 +84,8 @@ public class Main implements OnNewUserCreatedEventListner{
         } 
     }
 
+    
+
     @Override
     public void OnNewUserCreatedEvent() {
         System.out.println("The user has been created!");

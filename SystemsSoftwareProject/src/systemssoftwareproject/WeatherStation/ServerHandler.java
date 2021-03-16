@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.UUID;
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.GUI.UserClient;
 
@@ -18,8 +19,8 @@ public class ServerHandler {
         
     }
     
-    public void SendIDNum(){
-    
+    public void CreateIDNum(){
+   
     
     }
     /**
@@ -31,9 +32,9 @@ public class ServerHandler {
     }
     
     public static void main(String[] args) {
-        System.out.println("WS-Client\n");
-        String test_message = "message";
-        systemssoftwareproject.Server.Main.set_client_true();
+        System.out.println("WS-WeatherStation\n");
+        String weatherStationID = UUID.randomUUID().toString();   
+        systemssoftwareproject.Server.Main.connection_from_weather_station();
         try (Socket socket = new Socket("localhost", 1234)) { 
             while(true){
                 // Create IO Streams
@@ -41,8 +42,8 @@ public class ServerHandler {
                 DataInputStream fromServer = new DataInputStream(socket.getInputStream());
 
                 System.out.println("Sending server message:" + 
-                        test_message);
-                toServer.writeUTF(test_message);
+                        weatherStationID);
+                toServer.writeUTF(weatherStationID);
 
 
                 String text = fromServer.readUTF();
