@@ -23,6 +23,7 @@ public class Main implements OnNewUserCreatedEventListner{
   
                 // socket object to receive incoming client 
                 // requests 
+                /*
                 Socket client = server.accept(); 
   
                 // Displaying that new client is connected 
@@ -37,17 +38,34 @@ public class Main implements OnNewUserCreatedEventListner{
   
                 // This thread will handle the client 
                 // separately 
-                new Thread((Runnable) clientSock).start(); 
-            } 
-        } 
-        catch (IOException e) { 
-        } 
-        finally { 
-            if (server != null) { 
-                try { 
-                    server.close(); 
-                } 
+                new Thread((Runnable) clientSock).start();
+*/
+                
+                 Socket WeatherStation = server.accept(); 
+  
+                // Displaying that new client is connected 
+                // to server 
+                System.out.println("New weatherstation connected "
+                                   + WeatherStation.getInetAddress() 
+                                         .getHostAddress()); 
+  
+                // create a new thread object 
+                WeatherStationHandler weatherStationSocket
+                    = new WeatherStationHandler(WeatherStation); 
+  
+                // This thread will handle the client 
+                // separately 
+                new Thread((Runnable) weatherStationSocket).start();
+            }          } 
                 catch (IOException e) { 
+                } 
+                finally { 
+                    if (server != null) { 
+                        try { 
+                            server.close(); 
+                        } 
+                        catch (IOException e) { 
+       
                 } 
             } 
         } 
