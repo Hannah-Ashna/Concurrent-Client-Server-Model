@@ -27,7 +27,7 @@ public class Main implements OnNewUserCreatedEventListner{
   
                 // Displaying that new client is connected 
                 // to server 
-                System.out.println("New client connected"
+                System.out.println("New client connected "
                                    + client.getInetAddress() 
                                          .getHostAddress()); 
   

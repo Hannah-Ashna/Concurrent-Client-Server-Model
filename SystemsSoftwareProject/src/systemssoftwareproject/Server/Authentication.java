@@ -30,7 +30,7 @@ public class Authentication {
      void CreateCredentials(String username, String password, ClientType clientType){
          //creates new user in the database
          new Thread(() -> {
-             System.out.println("Createing a new user");
+             System.out.println("Creating a new user");
              //I'll now try to add the credentatials to the database!
              if (newUserCreationListner != null) {
                  //I tell the main function that I have completed!
