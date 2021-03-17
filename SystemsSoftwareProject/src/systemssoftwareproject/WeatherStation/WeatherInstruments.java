@@ -41,7 +41,7 @@ public class WeatherInstruments{
                         hum -= 4;
                 }
             }
-        return 50.5;
+        return hum;
     }
     public double getGpsLat(){
         // will get the gps latitiude and return it
