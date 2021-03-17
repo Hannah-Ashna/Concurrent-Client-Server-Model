@@ -60,6 +60,7 @@ public class WeatherStationHandler implements Runnable {
                             ID_exists = true; 
                             System.out.println("ID already exists");
                             break;
+                           
                         }
                     }
                     if (ID_exists == false){ // if the file does not exist

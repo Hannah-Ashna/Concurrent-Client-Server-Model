@@ -37,6 +37,7 @@ public class ServerHandler {
         
         systemssoftwareproject.Server.Main.connection_from_weather_station();
         try (Socket socket = new Socket("localhost", 1234)) { 
+          while(true){
             while(ID_unique == false){
                 String weatherStationID = UUID.randomUUID().toString();   
                 // Create IO Streams
@@ -55,7 +56,7 @@ public class ServerHandler {
                     
                 }
                 
-            }
+            }  }
         }
 
         catch (IOException e) { 
