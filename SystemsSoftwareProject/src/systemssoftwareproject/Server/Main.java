@@ -9,6 +9,8 @@ public class Main implements OnNewUserCreatedEventListner{
    
     public static void main(String[] args) { 
         ServerSocket server = null; 
+        ResetIDFile();
+        
         try { 
   
             // Server is listening on port 1234 
@@ -67,5 +69,13 @@ public class Main implements OnNewUserCreatedEventListner{
     @Override
     public void OnNewUserCreatedEvent() {
         System.out.println("The user has been created!");
+    }
+    
+    public static void ResetIDFile(){
+        try { 
+            File fileName = new File("WeatherStationID list.txt");
+            fileName.delete();
+        } catch (Exception e) {
+        } 
     }
 }
