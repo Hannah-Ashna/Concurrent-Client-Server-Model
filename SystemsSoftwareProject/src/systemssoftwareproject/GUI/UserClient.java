@@ -57,7 +57,7 @@ public class UserClient extends JFrame implements ActionListener {
         display.setLocation(50, 100);
         display.setLineWrap(true);
         display.setEditable(false);
-        display.setText("\n Select a Weather Station\n to get started");
+        display.setText("\n Select a Weather Station");
         c.add(display);
         
         GPSData = new JLabel("GPS Coordinates:"); 

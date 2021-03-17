@@ -36,7 +36,7 @@ public class ServerHandler {
         System.out.println("WS-WeatherStation\n");
         
         systemssoftwareproject.Server.Main.connection_from_weather_station();
-        try (Socket socket = new Socket("localhost", 1234)) { 
+        try (Socket socket = new Socket("127.0.0.2", 1234)) { 
           while(true){
             while(ID_unique == false){
                 String weatherStationID = UUID.randomUUID().toString();   
@@ -44,8 +44,7 @@ public class ServerHandler {
                 DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
                 DataInputStream fromServer = new DataInputStream(socket.getInputStream());
 
-                System.out.println("Sending server message:" + 
-                        weatherStationID);
+                System.out.println("Sending server message:" + weatherStationID);
                 toServer.writeUTF(weatherStationID);
 
 

@@ -14,7 +14,7 @@ public class ServerHandler {
         if (true){
             // Establish a connection by providing host and port number 
             systemssoftwareproject.Server.Main.connection_from_user();
-            try (Socket socket = new Socket("localhost", 1234)) { 
+            try (Socket socket = new Socket("127.0.0.3", 1234)) { 
                 while(true){
                     // Create IO Streams
                     DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());

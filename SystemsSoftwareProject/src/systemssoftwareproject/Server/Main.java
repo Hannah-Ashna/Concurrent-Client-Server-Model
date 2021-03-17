@@ -61,9 +61,8 @@ public class Main implements OnNewUserCreatedEventListner{
 
                     // Displaying that new client is connected 
                     // to server 
-                    System.out.println("New weatherstation connected "
-                                       + WeatherStation.getInetAddress() 
-                                             .getHostAddress()); 
+                    System.out.println("Host Address - Aka SERVER: " + WeatherStation.getInetAddress().getHostAddress() 
+                                        + "\nLocal Socket Address: " + WeatherStation.getLocalSocketAddress()); 
 
                     // create a new thread object 
                     WeatherStationHandler weatherStationSocket
