@@ -2,6 +2,7 @@ package systemssoftwareproject.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -29,6 +30,7 @@ public class LoginForm extends JFrame implements ActionListener {
         
         c = getContentPane();
         c.setLayout(null);
+        c.setBackground(Color.LIGHT_GRAY);
         
         title = new JLabel("User - Login");
         title.setFont(new Font("Arial", Font.BOLD, 30));

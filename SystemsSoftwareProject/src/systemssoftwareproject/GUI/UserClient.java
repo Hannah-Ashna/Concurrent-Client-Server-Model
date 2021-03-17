@@ -2,6 +2,7 @@ package systemssoftwareproject.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ public class UserClient extends JFrame implements ActionListener {
         
         c = getContentPane();
         c.setLayout(null);
+        c.setBackground(Color.LIGHT_GRAY);
         
         title = new JLabel("Dashboard:");
         title.setFont(new Font("Arial", Font.BOLD, 30));
@@ -38,7 +40,7 @@ public class UserClient extends JFrame implements ActionListener {
         clientData.setLocation(50, 70); 
         c.add(clientData); 
         
-        String[] weatherStationIDs = { "123", "456", "789", "abc"};
+        String[] weatherStationIDs = {" - ", "123", "456", "789", "abc"};
 
         JComboBox IDList = new JComboBox(weatherStationIDs);
         IDList.setSelectedIndex(0);
@@ -53,7 +55,7 @@ public class UserClient extends JFrame implements ActionListener {
         display.setLocation(50, 100);
         display.setLineWrap(true);
         display.setEditable(false);
-        display.setText("Sample");
+        display.setText("\n Select a Weather Station to get started");
         c.add(display);
           
         setVisible(true);
@@ -65,7 +67,7 @@ public class UserClient extends JFrame implements ActionListener {
         String IDNum = (String)IDList.getSelectedItem();
         data = IDNum;
        
-        display.setText("\n Selected Client ID: " + data);
+        display.setText("\n Selected Weather Station ID: " + data);
         //try {
             // Freezes the GUI - Not what we want 
             // TimeUnit.SECONDS.sleep(1);

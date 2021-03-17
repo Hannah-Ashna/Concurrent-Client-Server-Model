@@ -2,6 +2,7 @@ package systemssoftwareproject.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -31,6 +32,7 @@ public class SignupForm extends JFrame implements ActionListener {
         
         c = getContentPane();
         c.setLayout(null);
+        c.setBackground(Color.gray);
         
         title = new JLabel("User - Create Account");
         title.setFont(new Font("Arial", Font.BOLD, 30));
