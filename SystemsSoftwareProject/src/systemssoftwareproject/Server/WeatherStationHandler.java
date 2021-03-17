@@ -39,7 +39,7 @@ public class WeatherStationHandler implements Runnable {
                 // Create IO Streams
                 DataInputStream fromWeatherStation = new DataInputStream(weatherStationSocket.getInputStream());
                 DataOutputStream toWeatherStation = new DataOutputStream(weatherStationSocket.getOutputStream());   
-                System.out.println("here");
+                
                 try {
                      String WeatherStationID = fromWeatherStation.readUTF(); // get ID from weather station
                      
@@ -68,13 +68,14 @@ public class WeatherStationHandler implements Runnable {
                         PrintWriter pout = new PrintWriter(fout,true);
                         pout.println(WeatherStationID); 
                         toWeatherStation.writeUTF("ID has been added");
+                        break;
                         
                     }
                     else{
                         // if the id already exists then do this
                          toWeatherStation.writeUTF("ID already exists");
                          System.out.println("response to weatherstation is ID already exists");
-                         break;
+                         
                     }
                    
                     

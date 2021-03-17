@@ -32,11 +32,13 @@ public class ServerHandler {
     }
     
     public static void main(String[] args) {
+        boolean ID_unique = false;
         System.out.println("WS-WeatherStation\n");
-        String weatherStationID = UUID.randomUUID().toString();   
+        
         systemssoftwareproject.Server.Main.connection_from_weather_station();
         try (Socket socket = new Socket("localhost", 1234)) { 
-            while(true){
+            while(ID_unique == false){
+                String weatherStationID = UUID.randomUUID().toString();   
                 // Create IO Streams
                 DataOutputStream toServer = new DataOutputStream(socket.getOutputStream());
                 DataInputStream fromServer = new DataInputStream(socket.getInputStream());
@@ -48,6 +50,11 @@ public class ServerHandler {
 
                 String text = fromServer.readUTF();
                 System.out.println("Received server message:" + text);
+                if (text.equals("ID has been added")){
+                    ID_unique = true;
+                    
+                }
+                
             }
         }
 
