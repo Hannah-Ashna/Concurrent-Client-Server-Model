@@ -78,12 +78,8 @@ public class WeatherStationHandler implements Runnable {
                          System.out.println("response to weatherstation is ID already exists");
                          
                     }
-                   
-                    
-                }                    
-                
-                
-                catch (IOException e){
+      
+                } catch (IOException e){
                 }
 
             }

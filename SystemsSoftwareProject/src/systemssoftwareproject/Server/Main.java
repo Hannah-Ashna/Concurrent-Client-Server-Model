@@ -19,69 +19,55 @@ public class Main implements OnNewUserCreatedEventListner{
    
    public static void main(String[] args) 
     { 
-        
-    
         ServerSocket server = null; 
-  
         try { 
   
-            // server is listening on port 1234 
+            // Server is listening on port 1234 
             server = new ServerSocket(1234); 
             server.setReuseAddress(true); 
   
-            // running infinite loop for getting 
-            // client request 
+            // Running infinite loop for getting client request 
             while (true) { 
-  
-                // socket object to receive incoming client 
-                // requests 
+                Socket socket = server.accept();
                 
-                //which_client is false when client connects
-                /*
-                if (which_client == false){
-                    Socket client = server.accept(); 
-
-                    // Displaying that new client is connected 
-                    // to server 
-                    System.out.println("New client connected "
-                                       + client.getInetAddress() 
-                                             .getHostAddress()); 
-
-                    // create a new thread object 
-                    ClientHandler clientSock 
-                        = new ClientHandler(client); 
-
-                    // This thread will handle the client 
-                    // separately 
-                    new Thread((Runnable) clientSock).start();
-                }
-                else{ //which_client is true when weather station connects
-*/
-                    Socket WeatherStation = server.accept(); 
-
-                    // Displaying that new client is connected 
-                    // to server 
+                // If Client is a Weather Station
+                if (String.valueOf(socket.getLocalSocketAddress()).equals("/127.0.0.2:1234")){
+                    Socket WeatherStation = socket;
+                    // Displaying that a new weather station client is connected to server 
                     System.out.println("Host Address - Aka SERVER: " + WeatherStation.getInetAddress().getHostAddress() 
                                         + "\nLocal Socket Address: " + WeatherStation.getLocalSocketAddress()); 
 
-                    // create a new thread object 
+                    // Create a new thread object 
                     WeatherStationHandler weatherStationSocket
                         = new WeatherStationHandler(WeatherStation); 
 
-                    // This thread will handle the client 
-                    // separately 
+                    // This thread will handle the client separately 
                     new Thread((Runnable) weatherStationSocket).start();
-                //}
-            }          } 
-                catch (IOException e) { 
-                } 
-                finally { 
-                    if (server != null) { 
-                        try { 
-                            server.close(); 
-                        } 
-                        catch (IOException e) { 
-       
+                
+                }
+                
+                // If Client is a User
+                else if (String.valueOf(socket.getLocalSocketAddress()).equals("/127.0.0.3:1234")){
+                    Socket UserClient = socket; 
+
+                    // Displaying that a new user client is connected to server 
+                    System.out.println("Host Address - Aka SERVER: " + UserClient.getInetAddress().getHostAddress() 
+                                        + "\nLocal Socket Address: " + UserClient.getLocalSocketAddress()); 
+
+                    // Create a new thread object 
+                    ClientHandler clientSock = new ClientHandler(UserClient); 
+
+                    // This thread will handle the client separately 
+                    new Thread((Runnable) clientSock).start();
+                }
+            }
+        } catch (IOException e){ 
+        } 
+        finally { 
+            if (server != null) { 
+                try { 
+                    server.close(); 
+                } catch (IOException e) { 
                 } 
             } 
         } 
