@@ -1,11 +1,10 @@
 package systemssoftwareproject.WeatherStation;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import systemssoftwareproject.GUI.UserClient;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("WS-Client\n");
-        //Attempt to connect to the server
-        //confirm sucsess
-        //thread created to handle request
-    }
-    
 }
