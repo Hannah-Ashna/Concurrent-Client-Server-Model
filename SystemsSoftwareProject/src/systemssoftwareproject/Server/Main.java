@@ -5,20 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
         
 public class Main implements OnNewUserCreatedEventListner{
-   //private List<WeatherStation> weatherStations =  new ArrayList<>(); 
-    
-   static boolean which_client = false;
+    //private List<WeatherStation> weatherStations =  new ArrayList<>(); 
    
-   public static void connection_from_user(){
-       which_client = false;
-   }
-   
-   public static void connection_from_weather_station(){
-       which_client = true;
-   }
-   
-   public static void main(String[] args) 
-    { 
+    public static void main(String[] args) { 
         ServerSocket server = null; 
         try { 
   

@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.UUID;
 import systemssoftwareproject.DataStructures.SampleType;
-import systemssoftwareproject.GUI.UserClient;
-
-import systemssoftwareproject.Server.Main;
 
 public class ServerHandler {
 
@@ -35,7 +32,6 @@ public class ServerHandler {
         boolean ID_unique = false;
         System.out.println("WS-WeatherStation\n");
         
-        systemssoftwareproject.Server.Main.connection_from_weather_station();
         try (Socket socket = new Socket("127.0.0.2", 1234)) { 
           while(true){
             while(ID_unique == false){
