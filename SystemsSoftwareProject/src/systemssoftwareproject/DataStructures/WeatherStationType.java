@@ -1,25 +1,25 @@
 package systemssoftwareproject.DataStructures;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+import java.util.Queue;
 
-interface WeatherStation{
-    public String getID();
-}
-public class WeatherStationType implements WeatherStation,Serializable {
-    private SampleType lastSample;
+
+public class WeatherStationType extends ClientType implements Serializable {
+    private Queue<SampleType> samples = new LinkedList<>();
+    public WeatherStationType(){
+    }
     
-    @Override
-    public String getID(){
-        //To be implemented 
-        return "TestID";
-    }
-    public SampleType getLastSample(){
-        return lastSample;
-    }
     @Override
     public String toString(){
-        return "WeatherStation{lastSample= " + lastSample + "}";
+        return "WeatherStation{ID= " + ID + "}";
     }
-    
+    public void addSample(SampleType sample){
+        samples.add(sample);
+    }
+    public SampleType lastSample(){
+     return samples.peek();
+    }
 }
+    
