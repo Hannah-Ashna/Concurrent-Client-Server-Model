@@ -118,13 +118,19 @@ public class UserClient extends JFrame implements ActionListener {
         data = IDNum;
         TempVal = IDNum;
         GPSVal = IDNum;
+        HumidityVal = IDNum;
+        
         
         double temp_val = systemssoftwareproject.WeatherStation.WeatherInstruments.getTemp();
         double humidity_val = systemssoftwareproject.WeatherStation.WeatherInstruments.getHumidity();
-        HumidityVal = IDNum;
+        
+        
+        double lat = systemssoftwareproject.WeatherStation.WeatherInstruments.getGpsLat();
+        double lon = systemssoftwareproject.WeatherStation.WeatherInstruments.getGpsLong();
+        double altitude = systemssoftwareproject.WeatherStation.WeatherInstruments.getGpsAltitude();
         
         display.setText("\n Selected Weather Station ID: " + data);
-        GPSDisp.setText("\n GPS Value: " + GPSVal);
+        GPSDisp.setText("\n GPS Value: " + lat + "." + lon + "." + altitude);
         TempDisp.setText("\n Temp Value: " + temp_val);
         HumidityDisp.setText("\n Humidity Value: " + humidity_val);
         

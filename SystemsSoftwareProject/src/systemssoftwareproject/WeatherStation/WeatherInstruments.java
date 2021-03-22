@@ -44,16 +44,15 @@ public class WeatherInstruments{
         }
         return humidity;
     }
-    public double getGpsLat(){
+    public static double getGpsLat(){
         // will get the gps latitiude and return it
         return 52.329250;
     }
-    public double getGpsLong(){
+    public static double getGpsLong(){
         //will get the gps longitude and return it in 
         return -0.185360;
     }
-    public double getGpsAltitude(){
-        
+    public static double getGpsAltitude(){
         return 5;
     }
 
