@@ -117,10 +117,10 @@ public class UserClient extends JFrame implements ActionListener {
         // Values should be used later on to store retrieved values
         data = IDNum; TempVal = IDNum; GPSVal = IDNum; HumidityVal = IDNum;
         
-        display.setText("\n Selected Weather Station ID: " + receivedData);
-        GPSDisp.setText("\n GPS Value: " + receivedData);
-        TempDisp.setText("\n Temp Value: " + receivedData);
-        HumidityDisp.setText("\n Humidity Value: " + receivedData);
+        display.setText("\n Selected Weather Station ID: ");
+        GPSDisp.setText("\n GPS Value: ");
+        TempDisp.setText("\n Temp Value: ");
+        HumidityDisp.setText("\n Humidity Value: ");
         
     }
     
