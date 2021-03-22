@@ -131,8 +131,8 @@ public class UserClient extends JFrame implements ActionListener {
         
         display.setText("\n Selected Weather Station ID: " + data);
         GPSDisp.setText("\n GPS Value: " + lat + "." + lon + "." + altitude);
-        TempDisp.setText("\n Temp Value: " + temp_val);
-        HumidityDisp.setText("\n Humidity Value: " + humidity_val);
+        TempDisp.setText("\n Temp Value: " + temp_val + "ºC");
+        HumidityDisp.setText("\n Humidity Value: " + humidity_val + "%");
         
     }
     
