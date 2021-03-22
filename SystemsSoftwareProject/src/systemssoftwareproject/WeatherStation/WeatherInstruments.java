@@ -11,12 +11,12 @@ public class WeatherInstruments{
     private double temp = 23.1; 
 
     public double getTemp(){
-        //Communicate with thermostat and return on request the current temperature.
+        // Communicate with thermostat and return on request the current temperature.
             Random t = new Random();
             if (temp > 35.0){
                 temp = 33.0;
-            }else{
-                //Get random number, decides if value increases or decreases.
+            } else {
+                // Get random number, decides if value increases or decreases.
                 int num = t.nextInt();
                 if (num < 0) {
                         temp += 0.5;
@@ -26,22 +26,23 @@ public class WeatherInstruments{
             }
             return temp;
     }
-    public double getHumidity(){
-        //Will request the humidity from the device and return the humidity
-        double hum = (temp - 5);
-        Random h = new Random();
-            if (hum > 35.0){
-                hum = 33.0;
-            }else{
-                //Get random number, decides if value increases or decreases.
-                int val = h.nextInt();
-                if (val < 0) {
-                        hum += 4;
-                } else {
-                        hum -= 4;
-                }
-            }
-        return hum;
+    public double getHumidity(){ //Value is a percentage(%)
+        // Will request the humidity from the device and return the humidity
+        double humidity = 80;
+        Random r = new Random();
+        // Get random number, decides if value increases or decreases.
+        int num = r.nextInt();
+        if (num < 0) {
+                humidity += 2.7;
+        } else {
+                humidity -= 5.7;
+        }
+        
+        // If value exceeds 100%  - reinitialise 
+        if( humidity >= 100 ){
+            humidity = 82;
+        }
+        return humidity;
     }
     public double getGpsLat(){
         // will get the gps latitiude and return it
