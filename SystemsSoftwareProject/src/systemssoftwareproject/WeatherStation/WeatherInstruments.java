@@ -9,7 +9,8 @@ import java.util.Random;
 public class WeatherInstruments{
 
     private static double temp = 23.1; 
-
+    static double humidity = 80;
+    
     public static double getTemp(){
         // Communicate with thermostat and return on request the current temperature.
             Random t = new Random();
@@ -26,9 +27,8 @@ public class WeatherInstruments{
             }
             return temp;
     }
-    public double getHumidity(){ //Value is a percentage(%)
+    public static double getHumidity(){ //Value is a percentage(%)
         // Will request the humidity from the device and return the humidity
-        double humidity = 80;
         Random r = new Random();
         // Get random number, decides if value increases or decreases.
         int num = r.nextInt();
