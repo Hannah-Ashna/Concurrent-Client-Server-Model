@@ -21,8 +21,9 @@ public class ClientHandler implements Runnable {
                 
                 try {
                     String text = fromClient.readUTF();
+                    System.out.println("Received from Client: " + text);
                     toClient.writeUTF(text.toUpperCase());
-                    //clientSocket.close();
+                    System.out.println("Sending to Client: " + text.toUpperCase());
                                      
                 }
                 
@@ -34,7 +35,7 @@ public class ClientHandler implements Runnable {
         } 
 
         catch (IOException e) { 
-             System.out.println("ahhh");
+             System.out.println("Error");
         } 
     } 
 } 

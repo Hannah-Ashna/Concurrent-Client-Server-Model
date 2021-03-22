@@ -19,7 +19,7 @@ public class UserClient extends JFrame implements ActionListener {
     static String data = null;
     static String receivedData = null;
     String GPSVal, TempVal, HumidityVal;
-    String[] weatherStationIDs = {"", "123", "456", "789", "abc"};
+    String[] weatherStationIDs = {"", "xyz", "qrs", "efg", "abc"};
     
     
     public UserClient() {
@@ -117,10 +117,10 @@ public class UserClient extends JFrame implements ActionListener {
         // Values should be used later on to store retrieved values
         data = IDNum; TempVal = IDNum; GPSVal = IDNum; HumidityVal = IDNum;
         
-        display.setText("\n Selected Weather Station ID: " + data);
-        GPSDisp.setText("\n GPS Value: " + data);
-        TempDisp.setText("\n Temp Value: " + data);
-        HumidityDisp.setText("\n Humidity Value: " + data);
+        display.setText("\n Selected Weather Station ID: " + receivedData);
+        GPSDisp.setText("\n GPS Value: " + receivedData);
+        TempDisp.setText("\n Temp Value: " + receivedData);
+        HumidityDisp.setText("\n Humidity Value: " + receivedData);
         
     }
     

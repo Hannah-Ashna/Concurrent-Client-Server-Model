@@ -31,7 +31,7 @@ public class WeatherStationHandler implements Runnable {
                 System.out.println("File created: " + myObj.getName());
                 append_file = false; //if it doesn't then writing to the file shouldn't be append mode
             } else {
-                 System.out.println("File already exists.");
+                 System.out.println("File already exists");
                  append_file = true; 
                   //if it does then writing to the file should be append mode
             }
@@ -64,13 +64,14 @@ public class WeatherStationHandler implements Runnable {
                         PrintWriter pout = new PrintWriter(fout,true);
                         pout.println(WeatherStationID); 
                         toWeatherStation.writeUTF("ID has been added");
+                        System.out.println("Inform WS Client -> ID has been added");
                         break;
                         
                     }
                     else{
                         // if the id already exists then do this
                          toWeatherStation.writeUTF("ID already exists");
-                         System.out.println("response to weatherstation is ID already exists");
+                         System.out.println("Inform WS Client -> ID already exists");
                          
                     }
       
