@@ -14,5 +14,6 @@ public class usercom {
     public static String STATIONLIST = "STATIONS";
     public static String USERLIST = "USERS";
     public static String UPDATE = "GETUPDATE";
+    public static String AUTHENTICATE = "AUTHENTICATIONPACKAGE";
     
 }
