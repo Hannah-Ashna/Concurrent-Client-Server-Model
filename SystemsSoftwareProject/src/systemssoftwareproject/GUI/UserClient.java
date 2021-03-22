@@ -115,11 +115,17 @@ public class UserClient extends JFrame implements ActionListener {
         
         // This is temporary just to set data and test the dropdown menu
         // Values should be used later on to store retrieved values
-        data = IDNum; TempVal = IDNum; GPSVal = IDNum; HumidityVal = IDNum;
+        data = IDNum;
+        TempVal = IDNum;
+        GPSVal = IDNum;
+        
+        double temp_val = systemssoftwareproject.WeatherStation.WeatherInstruments.getTemp();
+        
+        HumidityVal = IDNum;
         
         display.setText("\n Selected Weather Station ID: " + data);
         GPSDisp.setText("\n GPS Value: " + GPSVal);
-        TempDisp.setText("\n Temp Value: " + TempVal);
+        TempDisp.setText("\n Temp Value: " + temp_val);
         HumidityDisp.setText("\n Humidity Value: " + HumidityVal);
         
     }

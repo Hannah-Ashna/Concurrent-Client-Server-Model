@@ -8,9 +8,9 @@ import java.util.Random;
 
 public class WeatherInstruments{
 
-    private double temp = 23.1; 
+    private static double temp = 23.1; 
 
-    public double getTemp(){
+    public static double getTemp(){
         // Communicate with thermostat and return on request the current temperature.
             Random t = new Random();
             if (temp > 35.0){
