@@ -58,11 +58,5 @@ public class WeatherStation extends WeatherInstruments {
             }
     }
     
-    /**
-     *  send the sample data to the server
-     */
-    public void SendNewSampleData(){
-        //send the new sample to the server via the socket 
-    }
     
 }

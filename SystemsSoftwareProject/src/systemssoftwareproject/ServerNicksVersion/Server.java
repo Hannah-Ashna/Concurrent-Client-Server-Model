@@ -9,6 +9,8 @@ import systemssoftwareproject.WeatherStation.WeatherStation;
         
 public class Server implements OnNewUserCreatedEventListner{
    public List<WeatherStation> weatherStations =  Collections.synchronizedList(new ArrayList<>()); 
+   public List<WeatherStation> activeUsers =  Collections.synchronizedList(new ArrayList<>()); 
+
    public static void main(String[] args) 
     { 
         Server server = new Server();
@@ -43,8 +45,8 @@ public class Server implements OnNewUserCreatedEventListner{
                                          .getHostAddress()); 
   
                 // create a new thread object 
-                ClientHandler clientSock 
-                    = new ClientHandler(client, this); 
+                WeaterStationHandler clientSock 
+                    = new WeaterStationHandler(client, this); 
   
                 // This thread will handle the client 
                 // separately 
