@@ -1,14 +1,18 @@
-package systemssoftwareproject.WeatherStation;
+package systemssoftwareproject.clientOOP;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.wscom;
+import systemssoftwareproject.WeatherStation.WeatherInstruments;
+import systemssoftwareproject.WeatherStation.WeatherStation;
 
-public class WeatherStation extends WeatherInstruments {
-    
+public class client extends WeatherInstruments {
         private Scanner in;
         private ObjectOutputStream  out;
         private WeatherStationType ws;
@@ -56,5 +60,11 @@ public class WeatherStation extends WeatherInstruments {
             }
     }
     
+    /**
+     *  send the sample data to the server
+     */
+    public void SendNewSampleData(){
+        //send the new sample to the server via the socket 
+    }
     
 }

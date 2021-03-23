@@ -11,12 +11,12 @@ import systemssoftwareproject.DataStructures.wscom;
 import systemssoftwareproject.WeatherStation.WeatherStation;
 
 
-public class ClientHandler implements Runnable { 
+public class WeaterStationHandler implements Runnable { 
     private final Socket clientSocket; 
     private WeatherStation weatherStation;
     private Server server;
     // Constructor 
-    public ClientHandler(Socket socket, Server server){ 
+    public WeaterStationHandler(Socket socket, Server server){ 
         this.clientSocket = socket; 
         this.weatherStation = new WeatherStation();
         this.server = server;
@@ -38,18 +38,23 @@ public class ClientHandler implements Runnable {
                 //Will then request a sample
                  while (true) {
                         int type  = inFromStation.readInt();
-                        if(type == 0){
-                        SampleType sample = (SampleType)inFromStation.readObject();
-                        System.out.println(sample.getHumid());
-                        outToStation.println(wscom.SAMPLECONFIRM);
-                        System.out.println("Waiting 20 seconds to continue");
-                        TimeUnit.SECONDS.sleep(20);// replace with constant
-                        outToStation.println(wscom.SEND);
-                        }else{
+                    switch (type) {
+                        case 0: //Sample type
+                            SampleType sample = (SampleType)inFromStation.readObject();
+                            System.out.println(sample.getHumid());
+                            outToStation.println(wscom.SAMPLECONFIRM);
+                            System.out.println("Waiting 20 seconds to continue");
+                            TimeUnit.SECONDS.sleep(20);// replace with constant
+                            outToStation.println(wscom.SEND);
+                            break;
+                        case 1: //WeatherStation type
                             WeatherStationType station = (WeatherStationType)inFromStation.readObject();
                             System.out.println(station.getID());
-
-                        }
+                            break;
+                            
+                        default:
+                            break;
+                    }
                 }
                 
 
@@ -60,9 +65,9 @@ public class ClientHandler implements Runnable {
         catch (IOException e) { 
              System.out.println("ahhh");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WeaterStationHandler.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
-            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WeaterStationHandler.class.getName()).log(Level.SEVERE, null, ex);
         } 
     } 
 } 
