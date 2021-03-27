@@ -30,10 +30,6 @@ public  class SampleType implements Serializable {
 
     public SampleType() {
     }
-
-    public SampleType(double Temprature, double Humidity, double gpsLatitude, double gpsLongitude, double altitude, LocalDateTime sampleDateTime, double Rain) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     public double getHumid(){
         return humidity;
     }

@@ -1,20 +1,19 @@
 package systemssoftwareproject.WeatherStation;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.wscom;
 
 public class WeatherStation extends WeatherInstruments {
-    
         private Scanner in;
         private ObjectOutputStream  out;
-        private WeatherStationType ws;
-        public WeatherStation(){
-            this.ws = new WeatherStationType();
-            
+        public WeatherStation(){ 
 }
         public static void main(String[] args) throws IOException {
         System.out.println("WS-Client\n");
@@ -46,9 +45,8 @@ public class WeatherStation extends WeatherInstruments {
                System.out.println("SAMPLE has been sent");
             }else if(line.startsWith(wscom.SAMPLECONFIRM)){
                 System.out.println("Samplewas reviced");
-            }else if(line.startsWith(wscom.DATA)){ 
-                out.writeInt(1);
-                out.writeObject(ws);
+            
+               
             }
             else{
                 System.out.println(line);
@@ -56,5 +54,11 @@ public class WeatherStation extends WeatherInstruments {
             }
     }
     
+    /**
+     *  send the sample data to the server
+     */
+    public void SendNewSampleData(){
+        //send the new sample to the server via the socket 
+    }
     
 }

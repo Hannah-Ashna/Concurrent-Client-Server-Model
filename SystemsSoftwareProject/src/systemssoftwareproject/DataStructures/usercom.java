@@ -10,10 +10,5 @@ package systemssoftwareproject.DataStructures;
  * @author Nicholas McCaig
  */
 public class usercom {
-    public static String REQUEST = "REQUESTSAMPLE";
-    public static String STATIONLIST = "STATIONS";
-    public static String USERLIST = "USERS";
-    public static String UPDATE = "GETUPDATE";
-    public static String AUTHENTICATE = "AUTHENTICATIONPACKAGE";
     
 }

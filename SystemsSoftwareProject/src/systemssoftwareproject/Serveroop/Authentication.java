@@ -1,4 +1,4 @@
-package systemssoftwareproject.ServerNicksVersion;
+package systemssoftwareproject.Serveroop;
 import systemssoftwareproject.DataStructures.*;
 
 interface OnNewUserCreatedEventListner {
