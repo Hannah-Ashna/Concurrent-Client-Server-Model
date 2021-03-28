@@ -30,8 +30,7 @@ public class ClientHandler implements Runnable {
                server.weatherStations.add(weatherStation);
                 // Create IO Streams
                             //System.out.println("testing");
-                ObjectInputStream inFromStation = new 
-            ObjectInputStream(clientSocket.getInputStream());
+                ObjectInputStream inFromStation = new ObjectInputStream(clientSocket.getInputStream());
                 var outToStation = new PrintWriter(clientSocket.getOutputStream(), true);
                 //Will Request then print the Stations ID
                 //Will then request a sample every 20 seconds forever unless the client disconnects!
@@ -63,5 +62,7 @@ public class ClientHandler implements Runnable {
         } catch (ClassNotFoundException | InterruptedException ex) {
             Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
         } 
-    } 
+    }
+
+    
 } 

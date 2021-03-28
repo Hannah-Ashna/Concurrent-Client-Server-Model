@@ -5,11 +5,15 @@
  */
 package systemssoftwareproject.DataStructures;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author Nicholas McCaig
  */
-public class usercom {
-        public static String REQUESTSTATIONS = "REQUESTSTATIONS";
-        public static int WSSTYPE = 0;
+public class WSSTYPE implements Serializable{
+    public List<WeatherStationType> weatherStations =  Collections.synchronizedList(new ArrayList<>()); 
 }
