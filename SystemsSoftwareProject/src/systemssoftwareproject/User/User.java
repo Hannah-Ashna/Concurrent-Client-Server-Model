@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package systemssoftwareproject.WeatherStation.User;
+package systemssoftwareproject.User;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,7 +21,8 @@ import systemssoftwareproject.WeatherStation.WeatherStation;
  * @author Nicholas McCaig
  */
 public class User {
-    public static void main(String[] args) throws IOException {
+    
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         System.out.println("User!\n");
         User user = new User();
         user.run();

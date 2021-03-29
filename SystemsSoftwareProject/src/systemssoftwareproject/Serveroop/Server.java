@@ -4,6 +4,10 @@ import java.net.*;
 
         
 public class Server extends ServerFunctions  {
+       private UserConnection usert;
+       private wsConnection wst;
+     ServerSocket ws = null; 
+                ServerSocket user = null;
    public static void main(String[] args) 
     { 
         Server server = new Server();
@@ -12,8 +16,7 @@ public class Server extends ServerFunctions  {
 
 
     public void start(){
-                ServerSocket ws = null; 
-                ServerSocket user = null;
+               
         try { 
   
             // server is listening on port 1234 
@@ -26,40 +29,14 @@ public class Server extends ServerFunctions  {
             // running infinite loop for getting 
             // client request 
             while (true) { 
-  
-                // socket object to receive incoming client 
-                // requests 
-                Socket wsclient = ws.accept(); 
-  
-                // Displaying that new client is connected 
-                // to server 
-                System.out.println("New weatherStation connected "
-                                   + wsclient.getInetAddress() 
-                                         .getHostAddress()); 
-  
-                // create a new thread object 
-                ClientHandler clientSock 
-                    = new ClientHandler(wsclient, this); 
-  
-                // This thread will handle the client 
-                // separately 
-                new Thread((Runnable) clientSock).start(); 
-                
-                Socket userclient = user.accept(); 
-  
-                // Displaying that new client is connected 
-                // to server 
-                System.out.println("New user connected "
-                                   + userclient.getInetAddress() 
-                                         .getHostAddress()); 
-  
-                // create a new thread object 
-                UserHandler userSock 
-                    = new UserHandler(userclient, this); 
-  
-                // This thread will handle the client 
-                // separately 
-                new Thread((Runnable) userSock).start(); 
+                if(usert == null){
+                    usert = new UserConnection(this);
+                    usert.run();
+                }
+                if(wst == null){
+                    wst = new wsConnection(this);
+                    wst.run();
+                }
             }
         } 
         catch (IOException e) { 
@@ -82,4 +59,5 @@ public class Server extends ServerFunctions  {
             } 
         }
     }
+ 
 }
