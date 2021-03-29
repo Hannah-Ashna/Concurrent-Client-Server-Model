@@ -23,25 +23,31 @@ public class wsConnection implements Runnable {
     } 
     @Override
     public void run() {
+        while(true){
         try {
-                   Socket wsclient = server.ws.accept(); 
-  
-                // Displaying that new client is connected 
-                // to server 
-                System.out.println("New weatherStation connected "
-                                   + wsclient.getInetAddress() 
-                                         .getHostAddress()); 
-  
-                // create a new thread object 
-                ClientHandler clientSock 
-                    = new ClientHandler(wsclient, server); 
-  
-                // This thread will handle the client 
-                // separately 
-                new Thread((Runnable) clientSock).start(); 
+            Socket wsclient = server.ws.accept();
+            
+            // Displaying that new client is connected
+            // to server
+            System.out.println("New ws connected "
+                    + wsclient.getInetAddress()
+                            .getHostAddress());
+            
+            // create a new thread object
+            WsHandler wsSock
+                    = new WsHandler(wsclient, server);
+            
+            // This thread will handle the client
+            // separately
+            new Thread((Runnable) wsSock).start();
+            
         } catch (IOException ex) {
             Logger.getLogger(wsConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
+    }
+    
+    //}
     }
     
 }

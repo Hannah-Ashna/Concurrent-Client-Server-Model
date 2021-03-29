@@ -23,6 +23,7 @@ public class UserConnection implements Runnable {
     } 
     @Override
     public void run() {
+        while(true){
         try {
             Socket userclient = server.user.accept();
             
@@ -39,9 +40,12 @@ public class UserConnection implements Runnable {
             // This thread will handle the client
             // separately
             new Thread((Runnable) userSock).start();
+            
         } catch (IOException ex) {
             Logger.getLogger(UserConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
+    }
     }
     
 }

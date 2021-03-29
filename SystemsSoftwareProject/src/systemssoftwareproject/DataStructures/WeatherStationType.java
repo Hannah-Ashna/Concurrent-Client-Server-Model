@@ -11,7 +11,7 @@ public class WeatherStationType extends ClientType implements Serializable {
     
     @Override
     public String toString(){
-        return "WeatherStation{ID= " + ID + "}";
+        return "WeatherStation{ID= " + ID + "I have samples need to be implimented!"+"}";
     }
     public void addSample(SampleType sample){
         if(sampleCount() == 30){

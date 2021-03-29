@@ -4,10 +4,10 @@ import java.net.*;
 
         
 public class Server extends ServerFunctions  {
-       private UserConnection usert;
-       private wsConnection wst;
-     ServerSocket ws = null; 
-                ServerSocket user = null;
+       protected UserConnection usert;
+       protected wsConnection wst;
+     public ServerSocket ws = null; 
+     public ServerSocket user = null;
    public static void main(String[] args) 
     { 
         Server server = new Server();
@@ -20,44 +20,23 @@ public class Server extends ServerFunctions  {
         try { 
   
             // server is listening on port 1234 
-            ws = new ServerSocket(1234); 
-            ws.setReuseAddress(true);
             user = new ServerSocket(1233);
-            user.setReuseAddress(true);
-
-  
+            ws = new ServerSocket(1234); 
             // running infinite loop for getting 
             // client request 
-            while (true) { 
-                if(usert == null){
                     usert = new UserConnection(this);
-                    usert.run();
-                }
-                if(wst == null){
+                    new Thread((Runnable) usert).start();
+                    
                     wst = new wsConnection(this);
-                    wst.run();
-                }
-            }
+                    new Thread((Runnable) wst).start();
+            
         } 
         catch (IOException e) { 
         } 
         finally { 
-            if (ws != null ) { 
-                try { 
-                    ws.close(); 
-                    
-                } 
-                catch (IOException e) { 
-                } 
-            }else if(user != null){
-                try { 
-                    user.close(); 
-                    
-                } 
-                catch (IOException e) { 
-                }
+           
             } 
         }
     }
  
-}
+

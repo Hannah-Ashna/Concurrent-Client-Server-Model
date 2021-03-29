@@ -16,4 +16,7 @@ import java.util.List;
  */
 public class WSSTYPE implements Serializable{
     public List<WeatherStationType> weatherStations =  Collections.synchronizedList(new ArrayList<>()); 
+    public int wsCount(){
+        return weatherStations.size();
+    }
 }

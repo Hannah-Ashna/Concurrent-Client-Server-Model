@@ -11,13 +11,13 @@ import systemssoftwareproject.DataStructures.wscom;
 import systemssoftwareproject.WeatherStation.WeatherStation;
 
 
-public class ClientHandler implements Runnable {
+public class WsHandler implements Runnable {
     private final int waitTime = 1;
     private final Socket clientSocket; 
     private WeatherStationType weatherStation;
     private Server server;
     // Constructor 
-    public ClientHandler(Socket socket, Server server){ 
+    public WsHandler(Socket socket, Server server){ 
         this.clientSocket = socket; 
         this.weatherStation = new WeatherStationType();
         this.server = server;
@@ -60,7 +60,7 @@ public class ClientHandler implements Runnable {
              System.out.println("WeatherStation has disconnected.");
              server.weatherStations.remove(weatherStation);
         } catch (ClassNotFoundException | InterruptedException ex) {
-            Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WsHandler.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 
