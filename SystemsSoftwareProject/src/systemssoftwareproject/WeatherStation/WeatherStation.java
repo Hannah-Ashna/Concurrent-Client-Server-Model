@@ -24,7 +24,7 @@ public class WeatherStation extends WeatherInstruments {
 
         // Make connection and initialize streams
         String serverAddress = "localhost";
-        Socket socket = new Socket(serverAddress, 1234);
+        Socket socket = new Socket(serverAddress, 9091);
         
         //var scanner = new Scanner(System.in);
         in =  new Scanner(socket.getInputStream());

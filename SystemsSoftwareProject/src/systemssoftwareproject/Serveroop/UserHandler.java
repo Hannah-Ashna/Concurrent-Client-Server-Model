@@ -19,6 +19,7 @@ public class UserHandler implements Runnable {
     private Server server;
     private Scanner in;
     private ObjectOutputStream  out;
+    
     // Constructor 
     public UserHandler(Socket socket, Server server){ 
         this.clientSocket = socket; 
@@ -42,7 +43,7 @@ public class UserHandler implements Runnable {
             Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-        }
+    }
         
         
      
@@ -55,6 +56,5 @@ public class UserHandler implements Runnable {
             wss.weatherStations = server.weatherStations;
             out.writeObject(wss);
         }
-
     }
 } 

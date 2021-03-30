@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import systemssoftwareproject.DataStructures.WSSTYPE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.usercom;
+import systemssoftwareproject.GUI.LoginForm;
 
 /**
  *
@@ -27,14 +28,20 @@ public class User {
     private PrintWriter outToStation;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         System.out.println("User!");
-        User user = new User();
-        user.run();
+        LoginForm loginForm = new LoginForm();
+        System.out.println(loginForm.returnStatus());
+        if (loginForm.returnStatus()){
+            System.out.println("User is running");
+            User user = new User();
+            user.run();
+        }
     }
+    
     public void run() throws IOException, ClassNotFoundException, InterruptedException {
 
         // Make connection and initialize streams
         String serverAddress = "localhost";
-        Socket socket = new Socket(serverAddress, 1233);
+        Socket socket = new Socket(serverAddress, 9090);
         
         //var scanner = new Scanner(System.in);
         inFromStation = new ObjectInputStream(socket.getInputStream());

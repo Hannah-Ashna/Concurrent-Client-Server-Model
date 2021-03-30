@@ -20,8 +20,8 @@ public class Server extends ServerFunctions  {
         try { 
   
             // server is listening on port 1234 
-            user = new ServerSocket(1233);
-            ws = new ServerSocket(1234); 
+            user = new ServerSocket(9090);
+            ws = new ServerSocket(9091); 
             // running infinite loop for getting 
             // client request 
                     usert = new UserConnection(this);
