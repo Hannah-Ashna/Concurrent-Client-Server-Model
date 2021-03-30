@@ -26,7 +26,7 @@ public class User {
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        System.out.println("User!\n");
+        System.out.println("User!");
         User user = new User();
         user.run();
     }
@@ -44,6 +44,8 @@ public class User {
             try{
             if(inFromStation.readInt() == 0){
                 System.out.println("Test<3");
+                wss = (WSSTYPE)inFromStation.readObject();
+                System.out.println(wss.wsCount());
             }  
         }catch(IOException e){
         }

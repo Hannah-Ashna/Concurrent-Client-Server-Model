@@ -51,7 +51,9 @@ public class UserHandler implements Runnable {
         System.out.println(line);
         if(line.startsWith(usercom.REQUESTSTATIONS)){
             out.writeInt(usercom.WSSTYPE);
-            
+            WSSTYPE wss = new WSSTYPE();
+            wss.weatherStations = server.weatherStations;
+            out.writeObject(wss);
         }
 
     }
