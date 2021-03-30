@@ -29,12 +29,15 @@ public class User {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         System.out.println("User!");
         LoginForm loginForm = new LoginForm();
-        System.out.println(loginForm.returnStatus());
+
+        while (loginForm.returnStatus() == false){
+            // Waits for user to finish logging in
+        }
         if (loginForm.returnStatus()){
-            System.out.println("User is running");
             User user = new User();
             user.run();
         }
+        
     }
     
     public void run() throws IOException, ClassNotFoundException, InterruptedException {
