@@ -24,6 +24,7 @@ import systemssoftwareproject.DataStructures.usercom;
 public class User {
     private WSSTYPE wss;
     private ObjectInputStream inFromStation;
+    private PrintWriter outToStation;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         System.out.println("User!\n");
         User user = new User();
@@ -37,21 +38,15 @@ public class User {
         
         //var scanner = new Scanner(System.in);
         inFromStation = new ObjectInputStream(socket.getInputStream());
-        var outToStation = new PrintWriter(socket.getOutputStream(), true);
+        outToStation = new PrintWriter(socket.getOutputStream(), true);
         outToStation.println(usercom.REQUESTSTATIONS);
         while(true){
-        int type  = inFromStation.readInt();
-            if(type == usercom.WSSTYPE){
-                wss = (WSSTYPE)inFromStation.readObject();
-                Iterator<WeatherStationType> it = wss.weatherStations.iterator();
-                while(it.hasNext()){
-                    System.out.println(it.next().toString());
-
-                }
-                TimeUnit.SECONDS.sleep(10);// replace with constant
-
-
-            }
+            try{
+            if(inFromStation.readInt() == 0){
+                System.out.println("Test<3");
+            }  
+        }catch(IOException e){
         }
+    }
     }
 }

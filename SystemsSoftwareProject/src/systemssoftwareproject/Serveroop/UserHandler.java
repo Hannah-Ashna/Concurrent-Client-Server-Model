@@ -7,7 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.UserType;
+import systemssoftwareproject.DataStructures.WSSTYPE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
+import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.DataStructures.wscom;
 
 
@@ -24,24 +26,33 @@ public class UserHandler implements Runnable {
         this.server = server;
     } 
 
+    
     @Override
-    public void run(){ 
-        try {   
+    public void run() { 
+        try {
             server.users.add(userType);
             in =  new Scanner(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             while(true){
-               RecieveRequest();
+                while (in.hasNextLine()) {
+                    RecieveRequest();
+                }
             }
+        } catch (IOException ex) {
+            Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
-        } 
-        catch (IOException e) { 
-             System.out.println("User has disconnected.");
-             server.users.remove(userType);
-        } 
+        }
         
-    } 
+        
+     
     private void RecieveRequest() throws IOException{
         String line = in.nextLine();
+        System.out.println(line);
+        if(line.startsWith(usercom.REQUESTSTATIONS)){
+            out.writeInt(usercom.WSSTYPE);
+            
+        }
+
     }
 } 
