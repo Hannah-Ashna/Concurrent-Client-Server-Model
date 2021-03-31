@@ -23,12 +23,14 @@ public class Server extends ServerFunctions  {
             user = new ServerSocket(9090);
             ws = new ServerSocket(9091); 
             // running infinite loop for getting 
-            // client request 
+            // client requests
                     usert = new UserConnection(this);
                     new Thread((Runnable) usert).start();
                     
                     wst = new wsConnection(this);
                     new Thread((Runnable) wst).start();
+                    GUI gui = new GUI(this);
+                    new Thread((Runnable)gui).start();
             
         } 
         catch (IOException e) { 

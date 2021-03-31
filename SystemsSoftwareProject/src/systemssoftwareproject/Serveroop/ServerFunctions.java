@@ -21,5 +21,6 @@ public class ServerFunctions {
        public int wsCount() {
     return weatherStations.size();
 }
+       
 
 }
