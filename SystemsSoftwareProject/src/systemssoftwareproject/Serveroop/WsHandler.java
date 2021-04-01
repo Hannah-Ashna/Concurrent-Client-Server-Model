@@ -68,7 +68,7 @@ public class WsHandler implements Runnable {
                                   //if it does then writing to the file should be append mode
                             }
                             
-                            while (true){
+                           
                                 String weatherstationID = (String)inFromStation.readObject();
 
                                 FileReader fin = new FileReader("WeatherStationID list.txt"); // read from the file
@@ -95,7 +95,7 @@ public class WsHandler implements Runnable {
                                     outToStation.println(wscom.IDCONFIRMED);
                                     System.out.println("Inform WS Client -> ID has been added");
                                     ID_found = true;
-                                    break;
+                                    
 
                                 }
                                 else{
@@ -103,13 +103,13 @@ public class WsHandler implements Runnable {
                                      //toWeatherStation.writeUTF("ID already exists");
                                      outToStation.println(wscom.SENDID);
                                      System.out.println("Inform WS Client -> ID already exists");
-                                     break;
+                                     
 
                                 }
 
 
 
-                            }
+                            
 
                         }
                         else{
