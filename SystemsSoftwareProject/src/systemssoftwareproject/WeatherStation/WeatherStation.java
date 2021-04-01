@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.UUID;
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.wscom;
@@ -30,15 +31,32 @@ public class WeatherStation extends WeatherInstruments {
         in =  new Scanner(socket.getInputStream());
         out = new ObjectOutputStream(socket.getOutputStream());
         while(true){
+           
+        
         while (in.hasNextLine()) {
+            
             RecieveRequest();
             }
         // Process all messages from server, according to the protocol. 
         }
     }
+    private void SendID() throws IOException{
+                          
+                String weatherStationID = UUID.randomUUID().toString(); 
+                System.out.println("WeatherStationID = " + weatherStationID);
+                out.writeInt(1);
+                out.writeObject(weatherStationID);
+            
+            
+            
+            
+        
+    }
+    
 
     private void RecieveRequest() throws IOException{
         String line = in.nextLine();
+        
             if(line.startsWith(wscom.SEND)){
                     out.writeInt(0);
                 out.writeObject(getSample());
@@ -46,8 +64,16 @@ public class WeatherStation extends WeatherInstruments {
             }else if(line.startsWith(wscom.SAMPLECONFIRM)){
                 System.out.println("Samplewas reviced");
             
-               
+                
             }
+            else if (line.startsWith(wscom.SENDID)){
+                SendID();
+            }
+            else if ((line.startsWith(wscom.IDCONFIRMED))){
+                System.out.println("ID had been accepted");
+            }
+         
+              
             else{
                 System.out.println(line);
                 System.out.println("The client recived an invalid command!");

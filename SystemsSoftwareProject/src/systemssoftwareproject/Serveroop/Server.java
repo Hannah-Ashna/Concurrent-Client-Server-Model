@@ -16,7 +16,7 @@ public class Server extends ServerFunctions  {
 
 
     public void start(){
-               
+        ResetIDFile();       
         try { 
   
             // server is listening on port 1234 
@@ -39,6 +39,14 @@ public class Server extends ServerFunctions  {
            
             } 
         }
+    
+    
+    public static void ResetIDFile(){
+        try { 
+            File fileName = new File("WeatherStationID list.txt");
+            fileName.delete();
+        } catch (Exception e) {
+        } 
+    }
     }
  
-
