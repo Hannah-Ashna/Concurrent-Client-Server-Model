@@ -103,6 +103,7 @@ public class WsHandler implements Runnable {
                                      //toWeatherStation.writeUTF("ID already exists");
                                      outToStation.println(wscom.SENDID);
                                      System.out.println("Inform WS Client -> ID already exists");
+                                     break;
 
                                 }
 
