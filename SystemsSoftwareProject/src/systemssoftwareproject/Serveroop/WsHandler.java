@@ -68,7 +68,7 @@ public class WsHandler implements Runnable {
                                   //if it does then writing to the file should be append mode
                             }
                             
-                            while (ID_found == false){
+                            while (true){
                                 String weatherstationID = (String)inFromStation.readObject();
 
                                 FileReader fin = new FileReader("WeatherStationID list.txt"); // read from the file
