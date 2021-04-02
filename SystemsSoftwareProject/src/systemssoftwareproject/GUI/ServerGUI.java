@@ -6,11 +6,15 @@ import java.awt.Color;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
+
 public class ServerGUI extends JFrame implements ActionListener {
    // Components
     private final Container c;
     private final JLabel users, ws;
     private final JTextArea userDisp, wsDisp;
+    
+    // Variables
+    int WSCount = 420;
     
     public ServerGUI() {
         setTitle("Server");
@@ -49,13 +53,35 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLocation(400, 70);
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
-        wsDisp.setText(" ");
+        wsDisp.setText(String.valueOf(WSCount));
         c.add(wsDisp);
         
         setVisible(true);
     }
     
-   
-    public void actionPerformed(ActionEvent e){
+    
+    public void getWSClients(int Count){
+        WSCount = Count;
+        c.remove(wsDisp);
+        c.remove(userDisp);
+        
+        userDisp.setFont(new Font("Arial", Font.PLAIN, 15));
+        userDisp.setSize(300, 400);
+        userDisp.setLocation(50, 70);
+        userDisp.setLineWrap(true);
+        userDisp.setEditable(false);
+        userDisp.setText(" ");
+        c.add(userDisp);
+        
+        wsDisp.setFont(new Font("Arial", Font.PLAIN, 15));
+        wsDisp.setSize(300, 400);
+        wsDisp.setLocation(400, 70);
+        wsDisp.setLineWrap(true);
+        wsDisp.setEditable(false);
+        wsDisp.setText(String.valueOf(WSCount));
+        c.add(wsDisp);
+        
+        c.revalidate();
+        c.repaint();
     }
 }
