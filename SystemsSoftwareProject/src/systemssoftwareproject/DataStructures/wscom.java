@@ -1,12 +1,12 @@
 package systemssoftwareproject.DataStructures;
 
 public final class wscom {
-    public static String SENDID = "SENDwsID";
-    public static String IDCONFIRMED = "IDCONFIRMED";
+    public static String SENDID = "SEND WS ID";
+    public static String IDCONFIRMED = "ID CONFIRMED";
     
-    public static String SEND = "SENDSAMPLE";
-    public static String SAMPLECONFIRM = "SAMPLECONFIRM";
-    public static String INFO = "WEATHERSTATIONINFO";
-    public static String DATA = "WEATHERSTATIONDATA";
+    public static String SEND = "SEND SAMPLE";
+    public static String SAMPLECONFIRM = "SAMPLE CONFIRM";
+    public static String INFO = "WEATHER STATION INFO";
+    public static String DATA = "WEATHER STATION DATA";
            
 }

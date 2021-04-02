@@ -17,19 +17,21 @@ public class Server extends ServerFunctions  {
 
 
     public void start(){
-        ResetIDFile();       
+        ResetIDFile();
+        
         try { 
   
-            // Server is listening on port 1234 
+            // Server is listening 
             user = new ServerSocket(9090);
-            ws = new ServerSocket(9091); 
-            // Running infinite loop for getting 
-            // Client requests
+            ws = new ServerSocket(9091);
+            
+            // Running infinite loop for getting client requests
             usert = new UserConnection(this);
             new Thread((Runnable) usert).start();
                     
             wst = new wsConnection(this);
             new Thread((Runnable) wst).start();
+            
             GUI gui = new GUI(this);
             new Thread((Runnable)gui).start();
             
@@ -45,7 +47,7 @@ public class Server extends ServerFunctions  {
     
     public static void ResetIDFile(){
         try { 
-            File fileName = new File("WeatherStationID list.txt");
+            File fileName = new File("WeatherStationID_List.txt");
             fileName.delete();
         } catch (Exception e) {
         } 

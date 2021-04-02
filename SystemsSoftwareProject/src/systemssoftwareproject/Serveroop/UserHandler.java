@@ -36,7 +36,7 @@ public class UserHandler implements Runnable {
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             while(true){
                 while (in.hasNextLine()) {
-                    RecieveRequest();
+                    ReceiveRequest();
                 }
             }
         } catch (IOException ex) {
@@ -46,7 +46,7 @@ public class UserHandler implements Runnable {
         
         
      
-    private void RecieveRequest() throws IOException{
+    private void ReceiveRequest() throws IOException{
         String line = in.nextLine();
         System.out.println(line);
         if(line.startsWith(usercom.REQUESTSTATIONS)){

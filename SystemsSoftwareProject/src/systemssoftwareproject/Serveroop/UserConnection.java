@@ -22,13 +22,12 @@ public class UserConnection implements Runnable {
                 Socket userclient = server.user.accept();
 
                 // Displaying that new client is connected to server
-                System.out.println("New user connected "
+                System.out.println("New user connected: "
                         + userclient.getInetAddress()
                                 .getHostAddress());
 
                 // Create a new thread object
-                UserHandler userSock
-                        = new UserHandler(userclient, server);
+                UserHandler userSock = new UserHandler(userclient, server);
 
                 // This thread will handle the client separately
                 new Thread((Runnable) userSock).start();

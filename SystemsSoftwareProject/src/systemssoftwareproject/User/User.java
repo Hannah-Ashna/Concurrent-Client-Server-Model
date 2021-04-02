@@ -18,15 +18,16 @@ public class User {
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        System.out.println("User!");
+        System.out.println("User - Attempting to Login");
         LoginForm loginForm = new LoginForm();
-
         while (loginForm.returnStatus() == false){
             // Waits for user to finish logging in
+            System.out.println("User - Logging in ...");
         }
         if (loginForm.returnStatus()){
             User user = new User();
             user.run();
+            System.out.println("User - Login Successful");
         }
         
     }
@@ -44,7 +45,7 @@ public class User {
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
-                    System.out.println("Test<3");
+                    System.out.println("Testing User Client <-> Server Communication:");
                     wss = (WSSTYPE)inFromStation.readObject();
                     System.out.println(wss.wsCount());
                 }  

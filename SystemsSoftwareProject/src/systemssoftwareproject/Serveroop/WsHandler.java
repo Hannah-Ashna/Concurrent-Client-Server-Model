@@ -60,7 +60,7 @@ public class WsHandler implements Runnable {
                     boolean ID_exists = false;
                     boolean append_file = false;
 
-                    File myObj = new File("WeatherStationID list.txt");
+                    File myObj = new File("WeatherStationID_List.txt");
                     if (myObj.createNewFile()) {
                         System.out.println("File created: " + myObj.getName());
                         append_file = false; //if it doesn't then writing to the file shouldn't be append mode
@@ -71,7 +71,7 @@ public class WsHandler implements Runnable {
                     }
                     String weatherstationID = (String)inFromStation.readObject();
 
-                    FileReader fin = new FileReader("WeatherStationID list.txt"); // read from the file
+                    FileReader fin = new FileReader("WeatherStationID_List.txt"); // read from the file
                     BufferedReader din = new BufferedReader(fin);
 
                     String line = null; // line of text
@@ -87,7 +87,7 @@ public class WsHandler implements Runnable {
 
                     if (ID_exists == false){ // if the file does not exist
                         // what this should do is then add the ID to the file 
-                        FileWriter fout = new FileWriter("WeatherStationID list.txt",append_file); //append_file is just saying if the file should be append mode or not
+                        FileWriter fout = new FileWriter("WeatherStationID_List.txt",append_file); //append_file is just saying if the file should be append mode or not
                         PrintWriter pout = new PrintWriter(fout,true);
                         pout.println(weatherstationID); 
                         //toWeatherStation.writeUTF("ID has been added");

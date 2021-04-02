@@ -10,7 +10,7 @@ public class GUI implements Runnable {
     public void run() {
         Scanner userInput = new Scanner(System.in);
         while(true){
-            System.out.println("Command:");
+            System.out.println("Command: ");
             String command = userInput.nextLine().toUpperCase();
             if(command.startsWith("Currently Active WS Count:")){
                 System.out.println(server.wsCount());

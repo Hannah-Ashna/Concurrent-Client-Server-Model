@@ -33,21 +33,21 @@ public class WeatherStation extends WeatherInstruments {
         out = new ObjectOutputStream(socket.getOutputStream());
         while(true){
             while (in.hasNextLine()) {
-                RecieveRequest();
+                ReceiveRequest();
             }
         }
         // Process all messages from server, according to the protocol. 
     }
     
     private void SendID() throws IOException{
-        String weatherStationID = "test";//UUID.randomUUID().toString(); 
+        String weatherStationID = "Test WS ID";//UUID.randomUUID().toString(); 
         System.out.println("WeatherStationID = " + weatherStationID);
         out.writeInt(1);
         out.writeObject(weatherStationID);
     }
     
 
-    private void RecieveRequest() throws IOException{
+    private void ReceiveRequest() throws IOException{
         String line = in.nextLine();
         if(line.startsWith(wscom.SEND)){
             out.writeInt(0);

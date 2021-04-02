@@ -19,7 +19,7 @@ public class wsConnection implements Runnable {
                 Socket wsclient = server.ws.accept();
 
                 // Displaying that new client is connected to server
-                System.out.println("New ws connected "
+                System.out.println("New WS connected: "
                         + wsclient.getInetAddress()
                                 .getHostAddress());
 
