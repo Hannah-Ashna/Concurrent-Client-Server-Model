@@ -1,7 +1,6 @@
 package systemssoftwareproject.WeatherStation;
 
 //These functions are syncronus we assume that the data will be immidatly returned.
-
 import java.time.LocalDateTime;
 import systemssoftwareproject.DataStructures.SampleType;
 import java.util.Random;
@@ -15,7 +14,7 @@ public class WeatherInstruments{
         Random t = new Random();
         if (temp > 35.0){
             temp = 33.0;
-        }else{
+        } else {
             //Get random number, decides if value increases or decreases.
             int num = t.nextInt();
             if (num < 0) {
@@ -33,7 +32,7 @@ public class WeatherInstruments{
         Random h = new Random();
         if (hum > 35.0){
             hum = 33.0;
-        }else{
+        } else {
             //Get random number, decides if value increases or decreases.
             int val = h.nextInt();
             if (val < 0) {
@@ -44,14 +43,17 @@ public class WeatherInstruments{
         }
         return hum;
     }
+    
     public double getGpsLat(){
         // will get the gps latitiude and return it
         return 52.329250;
     }
+    
     public double getGpsLong(){
         //will get the gps longitude and return it in 
         return -0.185360;
     }
+    
     public double getGpsAltitude(){
         
         return 5;
@@ -79,5 +81,4 @@ public class WeatherInstruments{
         sample = new SampleType(Temprature,Humidity,gpsLatitude,gpsLongitude,altitude,sampleDateTime);
         return sample;
     }
-
 }

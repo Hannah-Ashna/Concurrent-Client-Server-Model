@@ -30,14 +30,17 @@ public  class SampleType implements Serializable {
 
     public SampleType() {
     }
+    
     public double getHumid(){
         return humidity;
     }
+    
     @Override
     public String toString(){
         return "Sample{" + "temprature=" + temperature + ", humidity=" + humidity + ", gpsLatitude=" + gpsLatitude + ", gpsLongitdue:" + gpsLongitude + ", altitude:" + altitude + ", sampleDateTime:"+ sampleDateTime + "}";
     }
-        @Override
+    
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 71 * hash + (int) (Double.doubleToLongBits(this.temperature) ^ (Double.doubleToLongBits(this.temperature) >>> 32));
@@ -48,7 +51,8 @@ public  class SampleType implements Serializable {
 
         return hash;
     }
-     @Override
+    
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

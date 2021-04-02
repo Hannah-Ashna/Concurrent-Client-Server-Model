@@ -13,11 +13,12 @@ public class security_encryption {
         try {
             FileReader fin = new FileReader(file_name);
             BufferedReader din = new BufferedReader(fin);
-            //read from the file
+            
+            // Read from the file
             String line = null; // line of text
             while ((line = din.readLine()) != null) {
-                // here we have read in a line of text
-                // now parse line to extract data and print it out to the screen
+                // Here we have read in a line of text
+                // Now parse line to extract data and print it out to the screen
                 StringTokenizer st = new StringTokenizer(line, ",");
                 
                 String username_found = (st.nextToken().trim());
@@ -31,7 +32,8 @@ public class security_encryption {
                            username_entered);  
                 }
             }
-            din.close(); // close the stream
+            // Close the stream
+            din.close(); 
         } catch (IOException e) {
             System.err.println("Error! - " + e.getMessage());
             username_valid = false;

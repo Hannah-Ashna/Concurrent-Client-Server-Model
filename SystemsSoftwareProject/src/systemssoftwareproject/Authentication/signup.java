@@ -31,7 +31,7 @@ public class signup {
     
     public static void write_account_details(String username,String password){
         System.out.println("Writing account details");
-        // now create the filestream and connect PrintWriter
+        // Now create the filestream and connect PrintWriter
         try {
             FileWriter fout = new FileWriter("Account_details",true);
             PrintWriter pout = new PrintWriter(fout,true);

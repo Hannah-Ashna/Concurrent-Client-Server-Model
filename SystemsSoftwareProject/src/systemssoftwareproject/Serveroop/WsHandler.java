@@ -26,32 +26,36 @@ public class WsHandler implements Runnable {
 
     @Override
     public void run(){ 
-       boolean ID_found = false;
+        boolean ID_found = false;
         try {    
             server.weatherStations.add(weatherStation);
             // Create IO Streams
-            //System.out.println("testing");
+            // System.out.println("testing");
             ObjectInputStream inFromStation = new ObjectInputStream(clientSocket.getInputStream());
             var outToStation = new PrintWriter(clientSocket.getOutputStream(), true);
-            //Will Request then print the Stations ID
-            //Will then request a sample every 20 seconds forever unless the client disconnects!
+            // Will Request then print the Stations ID
+            // Will then request a sample every 20 seconds forever unless the client disconnects!
 
             while (true) {
                 if (ID_found == false){
                     outToStation.println(wscom.SENDID);
                 }
+                
                 outToStation.println(wscom.SEND);
                 int type  = inFromStation.readInt();
+                
                 if(type == 0){
-                SampleType sample = (SampleType)inFromStation.readObject();
-                weatherStation.addSample(sample);
-                //These are commented out as they are for testing!
-                //System.out.println(weatherStation.sampleCount());
-                //System.out.println(sample.getHumid());
-                outToStation.println(wscom.SAMPLECONFIRM);
-                //System.out.println("Waiting 20 seconds to continue");
-                TimeUnit.SECONDS.sleep(waitTime);// replace with constant
+                    SampleType sample = (SampleType)inFromStation.readObject();
+                    weatherStation.addSample(sample);
+
+                    // These are commented out as they are for testing!
+                    // System.out.println(weatherStation.sampleCount());
+                    // System.out.println(sample.getHumid());
+                    outToStation.println(wscom.SAMPLECONFIRM);
+                    //S ystem.out.println("Waiting 20 seconds to continue");
+                    TimeUnit.SECONDS.sleep(waitTime);// replace with constant
                 }
+                
                 else if (type ==  1){
                     boolean ID_exists = false;
                     boolean append_file = false;
@@ -101,15 +105,11 @@ public class WsHandler implements Runnable {
                     }
                 }
             }
-        }
-
-        catch (IOException e) { 
-             System.out.println("WeatherStation has disconnected.");
-             server.weatherStations.remove(weatherStation);
+        } catch (IOException e) { 
+            System.out.println("WeatherStation has disconnected.");
+            server.weatherStations.remove(weatherStation);
         } catch (ClassNotFoundException | InterruptedException ex) {
             Logger.getLogger(WsHandler.class.getName()).log(Level.SEVERE, null, ex);
         } 
-    }
-
-    
+    }   
 } 

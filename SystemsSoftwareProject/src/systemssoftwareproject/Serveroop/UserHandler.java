@@ -41,8 +41,7 @@ public class UserHandler implements Runnable {
             }
         } catch (IOException ex) {
             Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
+        }      
     }
         
         

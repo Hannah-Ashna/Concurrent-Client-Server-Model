@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package systemssoftwareproject.User;
 
 import java.io.IOException;
@@ -18,10 +13,6 @@ import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.GUI.LoginForm;
 
-/**
- *
- * @author Nicholas McCaig
- */
 public class User {
     private WSSTYPE wss;
     private ObjectInputStream inFromStation;
@@ -52,13 +43,13 @@ public class User {
         outToStation.println(usercom.REQUESTSTATIONS);
         while(true){
             try{
-            if(inFromStation.readInt() == 0){
-                System.out.println("Test<3");
-                wss = (WSSTYPE)inFromStation.readObject();
-                System.out.println(wss.wsCount());
-            }  
-        }catch(IOException e){
+                if(inFromStation.readInt() == 0){
+                    System.out.println("Test<3");
+                    wss = (WSSTYPE)inFromStation.readObject();
+                    System.out.println(wss.wsCount());
+                }  
+            }catch(IOException e){
+            }
         }
-    }
     }
 }

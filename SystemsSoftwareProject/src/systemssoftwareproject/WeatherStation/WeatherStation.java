@@ -22,6 +22,7 @@ public class WeatherStation extends WeatherInstruments {
         WeatherStation weatherStation = new WeatherStation();
         weatherStation.run();
     }
+    
     public void run() throws IOException {
         // Make connection and initialize streams
         String serverAddress = "localhost";
@@ -37,6 +38,7 @@ public class WeatherStation extends WeatherInstruments {
         }
         // Process all messages from server, according to the protocol. 
     }
+    
     private void SendID() throws IOException{
         String weatherStationID = "test";//UUID.randomUUID().toString(); 
         System.out.println("WeatherStationID = " + weatherStationID);
@@ -73,6 +75,5 @@ public class WeatherStation extends WeatherInstruments {
      */
     public void SendNewSampleData(){
         //send the new sample to the server via the socket 
-    }
-    
+    }  
 }
