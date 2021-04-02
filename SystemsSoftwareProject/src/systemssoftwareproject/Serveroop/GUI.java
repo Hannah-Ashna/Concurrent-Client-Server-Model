@@ -1,6 +1,7 @@
 package systemssoftwareproject.Serveroop;
-
+import systemssoftwareproject.GUI.ServerGUI;
 import java.util.Scanner;
+
 
 public class GUI implements Runnable {
     private boolean exit = false;
@@ -9,6 +10,7 @@ public class GUI implements Runnable {
     @Override
     public void run() {
         Scanner userInput = new Scanner(System.in);
+        
         while(true){
             System.out.println("Command: ");
             String command = userInput.nextLine().toUpperCase();
@@ -20,7 +22,7 @@ public class GUI implements Runnable {
     }
     public GUI(Server server){
         this.server = server;
-        
+        ServerGUI serverGUI = new ServerGUI();
     }
     
 }
