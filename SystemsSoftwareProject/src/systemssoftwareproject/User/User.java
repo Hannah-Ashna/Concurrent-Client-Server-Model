@@ -40,7 +40,8 @@ public class User {
         //var scanner = new Scanner(System.in);
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
-        outToStation.println(usercom.REQUESTSTATIONS);
+        //Test to request stations at the beginning of the program
+        //outToStation.println(usercom.REQUESTSTATIONS);
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
@@ -51,5 +52,8 @@ public class User {
             }catch(IOException e){
             }
         }
+    }
+    public void requestStations(){
+       outToStation.println(usercom.REQUESTSTATIONS);
     }
 }
