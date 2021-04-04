@@ -45,9 +45,9 @@ public class User {
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
-                    System.out.println("Test<3");
+                    //System.out.println("Test<3");
                     wss = (WSSTYPE)inFromStation.readObject();
-                    System.out.println(wss.wsCount());
+                    //System.out.println(wss.wsCount());
                 }  
             }catch(IOException e){
             }
@@ -56,4 +56,5 @@ public class User {
     public void requestStations(){
        outToStation.println(usercom.REQUESTSTATIONS);
     }
+    
 }
