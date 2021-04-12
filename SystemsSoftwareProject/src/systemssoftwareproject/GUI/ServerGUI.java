@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
@@ -85,9 +89,29 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLocation(400, 70);
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
-        for (int j = 0; j < WSCount; j++){
-            wsDispData += "Weather Station " + (j+1) + "\n";
+        
+        String file_name = "WeatherStationID_List.txt"; 
+        try {
+            FileReader fin = new FileReader(file_name);
+            BufferedReader din = new BufferedReader(fin);
+            
+            // Read from the file
+            String line = null; // line of text
+            while ((line = din.readLine()) != null) {
+                // Here we have read in a line of text
+                StringTokenizer st = new StringTokenizer(line);
+                String weather_station_ID = (st.nextToken().trim());
+                wsDispData += "Weather Station " + line + "\n";
+            }
+            // Close the stream
+            din.close(); 
+        } catch (IOException e) {
+            System.err.println("Error! - " + e.getMessage());
         }
+        
+        //for (int j = 0; j < WSCount; j++){
+        //    wsDispData += "Weather Station " + (j+1) + "\n";
+        //}
         wsDisp.setText(wsDispData);
         c.add(wsDisp);
         
