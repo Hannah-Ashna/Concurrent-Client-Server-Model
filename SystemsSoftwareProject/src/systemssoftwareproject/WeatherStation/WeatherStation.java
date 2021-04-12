@@ -40,7 +40,7 @@ public class WeatherStation extends WeatherInstruments {
     }
     
     private void SendID() throws IOException{
-        String weatherStationID = "Test WS ID";//UUID.randomUUID().toString(); 
+        String weatherStationID = UUID.randomUUID().toString(); 
         System.out.println("WeatherStationID = " + weatherStationID);
         out.writeInt(1);
         out.writeObject(weatherStationID);
