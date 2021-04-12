@@ -13,7 +13,7 @@ public class GUI implements Runnable {
         Scanner userInput = new Scanner(System.in);
         ServerGUI serverGUI = new ServerGUI();
         while(true){
-            if (server.wsCount() > wsTotal){
+            if (server.wsCount() != wsTotal){
                 serverGUI.getWSClients(server.wsCount());
                 wsTotal = server.wsCount();
             }
