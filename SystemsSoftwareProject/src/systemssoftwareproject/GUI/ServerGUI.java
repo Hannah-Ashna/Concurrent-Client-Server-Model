@@ -14,7 +14,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     private final JTextArea userDisp, wsDisp;
     
     // Variables
-    int WSCount = 420;
+    int WSCount = 0;
     
     public ServerGUI() {
         setTitle("Server");
@@ -53,7 +53,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLocation(400, 70);
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
-        wsDisp.setText(String.valueOf(WSCount));
+        wsDisp.setText("No WS-Clients Connected");
         c.add(wsDisp);
         
         setVisible(true);
@@ -62,6 +62,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     
     public void getWSClients(int Count){
         WSCount = Count;
+        String wsDispData = "";
         c.remove(wsDisp);
         c.remove(userDisp);
         
@@ -78,10 +79,18 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLocation(400, 70);
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
-        wsDisp.setText(String.valueOf(WSCount));
+        for (int i = 0; i < WSCount; i++){
+            wsDispData += "Weather Station " + (i+1) + "\n";
+        }
+        wsDisp.setText(wsDispData);
         c.add(wsDisp);
         
         c.revalidate();
         c.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

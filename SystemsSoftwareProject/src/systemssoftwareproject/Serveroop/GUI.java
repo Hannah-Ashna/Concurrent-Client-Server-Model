@@ -6,18 +6,16 @@ import java.util.Scanner;
 public class GUI implements Runnable {
     private boolean exit = false;
     private Server server;
+    private int wsTotal = 0;
     
     @Override
     public void run() {
         Scanner userInput = new Scanner(System.in);
         ServerGUI serverGUI = new ServerGUI();
         while(true){
-            System.out.println("Command: ");
-            String command = userInput.nextLine().toUpperCase();
-            if(command.startsWith("WSCOUNT")){
-                System.out.println(server.wsCount());
+            if (server.wsCount() > wsTotal){
                 serverGUI.getWSClients(server.wsCount());
-                
+                wsTotal = server.wsCount();
             }
         }   
     }
