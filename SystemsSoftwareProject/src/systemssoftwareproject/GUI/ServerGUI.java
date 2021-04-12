@@ -15,6 +15,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     
     // Variables
     int WSCount = 0;
+    int UserCount = 0;
     
     public ServerGUI() {
         setTitle("Server");
@@ -29,7 +30,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         users = new JLabel("Connected User Clients:"); 
         users.setFont(new Font("Arial", Font.PLAIN, 20)); 
         users.setSize(400, 100); 
-        users.setLocation(50, 0); 
+        users.setLocation(50, 0);
         c.add(users);
         
         userDisp = new JTextArea();
@@ -38,7 +39,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         userDisp.setLocation(50, 70);
         userDisp.setLineWrap(true);
         userDisp.setEditable(false);
-        userDisp.setText(" ");
+        userDisp.setText("No User-Clients Connected");
         c.add(userDisp);
         
         ws = new JLabel("Connected Weather Clients:"); 
@@ -60,9 +61,11 @@ public class ServerGUI extends JFrame implements ActionListener {
     }
     
     
-    public void getWSClients(int Count){
-        WSCount = Count;
+    public void getClients(int wsCount, int userCount){
+        WSCount = wsCount;
+        UserCount = userCount;
         String wsDispData = "";
+        String userDispData = "";
         c.remove(wsDisp);
         c.remove(userDisp);
         
@@ -71,7 +74,10 @@ public class ServerGUI extends JFrame implements ActionListener {
         userDisp.setLocation(50, 70);
         userDisp.setLineWrap(true);
         userDisp.setEditable(false);
-        userDisp.setText(" ");
+        for (int i = 0; i < UserCount; i++){
+            userDispData += "User Client " + (i+1) + "\n";
+        }
+        userDisp.setText(userDispData);
         c.add(userDisp);
         
         wsDisp.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -79,8 +85,8 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLocation(400, 70);
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
-        for (int i = 0; i < WSCount; i++){
-            wsDispData += "Weather Station " + (i+1) + "\n";
+        for (int j = 0; j < WSCount; j++){
+            wsDispData += "Weather Station " + (j+1) + "\n";
         }
         wsDisp.setText(wsDispData);
         c.add(wsDisp);
@@ -88,7 +94,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         c.revalidate();
         c.repaint();
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

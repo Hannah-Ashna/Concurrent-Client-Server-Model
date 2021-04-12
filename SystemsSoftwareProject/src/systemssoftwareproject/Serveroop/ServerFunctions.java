@@ -13,4 +13,16 @@ public class ServerFunctions {
     public int wsCount() {
         return weatherStations.size();
     }
+    
+    public List wsStationsArray(){
+        return weatherStations;
+    }
+    
+    public int userCount() {
+        return users.size();
+    }
+    
+    public List usersArray(){
+        return users;
+    }
 }
