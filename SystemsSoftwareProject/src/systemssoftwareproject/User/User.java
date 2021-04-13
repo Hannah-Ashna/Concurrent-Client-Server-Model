@@ -14,7 +14,7 @@ import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.GUI.LoginForm;
 
 public class User {
-    public WSSTYPE wss;
+    public WSSTYPE weatherStationList;
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
@@ -47,9 +47,9 @@ public class User {
             try{
                 if(inFromStation.readInt() == 0){
                     System.out.println("Testing User Client <-> Server Communication:");
-
-                    wss = (WSSTYPE)inFromStation.readObject();
-                    //System.out.println(wss.wsCount());
+                    //updates the list of weaterstations
+                    weatherStationList = (WSSTYPE)inFromStation.readObject();
+                    //System.out.println(weatherStationList.wsCount());
                     
                 }  
             }catch(IOException e){
