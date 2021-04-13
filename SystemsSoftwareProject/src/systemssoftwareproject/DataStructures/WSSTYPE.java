@@ -11,4 +11,5 @@ public class WSSTYPE implements Serializable{
     public int wsCount(){
         return weatherStations.size();
     }
+    
 }

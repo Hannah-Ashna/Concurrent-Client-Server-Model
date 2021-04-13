@@ -14,7 +14,7 @@ import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.GUI.LoginForm;
 
 public class User {
-    private WSSTYPE wss;
+    public WSSTYPE wss;
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
@@ -50,6 +50,7 @@ public class User {
 
                     wss = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(wss.wsCount());
+                    
                 }  
             }catch(IOException e){
             }

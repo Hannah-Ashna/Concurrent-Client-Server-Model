@@ -1,6 +1,8 @@
 package systemssoftwareproject.Serveroop;
 import systemssoftwareproject.GUI.ServerGUI;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class GUI implements Runnable {
@@ -15,7 +17,11 @@ public class GUI implements Runnable {
         ServerGUI serverGUI = new ServerGUI();
         while(true){
             if (server.wsCount() != wsTotal || server.userCount() != userTotal){
-                serverGUI.getClients(server.wsCount(), server.userCount());
+                try {
+                    serverGUI.getClients(server.wsCount(), server.userCount());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 wsTotal = server.wsCount();
                 userTotal = server.userCount();
             }
