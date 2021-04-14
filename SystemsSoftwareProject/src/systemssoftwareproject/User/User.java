@@ -51,7 +51,6 @@ public class User {
          //   new Thread((Runnable) wst).start();
          gui = new UserClient(this);
          gui.setVisible(true);
-        
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
@@ -77,7 +76,7 @@ public class User {
         });
         } catch(Exception e){
             List<String> weatherStationfail = new LinkedList<>();
-            weatherStationfail.add("Please Refresh me!");
+            weatherStationfail.add("Refresh GUI");
             return  weatherStationfail;
         }
         return weatherStationIDs;

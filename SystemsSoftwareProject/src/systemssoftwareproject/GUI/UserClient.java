@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.User.User;
 
@@ -22,7 +23,7 @@ public class UserClient extends JFrame implements ActionListener {
     String GPSVal, TempVal, HumidityVal;
     
     
-    public UserClient(User user) {
+    public UserClient(User user) throws InterruptedException {
         setTitle("User Client");
         setBounds(300, 90, 800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -37,7 +38,6 @@ public class UserClient extends JFrame implements ActionListener {
         title.setSize(300, 30);
         title.setLocation(50, 20);
         c.add(title);
-        
         JComboBox IDList = new JComboBox(user.getIds().toArray());
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
