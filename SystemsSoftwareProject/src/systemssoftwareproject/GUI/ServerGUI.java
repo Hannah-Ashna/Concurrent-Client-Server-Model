@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import systemssoftwareproject.DataStructures.WSSTYPE;
+import systemssoftwareproject.DataStructures.WeatherStationType;
 
 
 public class ServerGUI extends JFrame implements ActionListener {
@@ -17,6 +19,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     private final Container c;
     private final JLabel users, ws;
     private final JTextArea userDisp, wsDisp;
+    private WSSTYPE WeatherStationList;
     
     // Variables
     int WSCount = 0;
@@ -91,6 +94,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
         
+        /*
         TimeUnit.SECONDS.sleep(1);// wait 1 second for the file to be updated
         String file_name = "WeatherStationID_List.txt"; 
         try {
@@ -107,10 +111,13 @@ public class ServerGUI extends JFrame implements ActionListener {
         } catch (IOException e) {
             System.err.println("Error! - " + e.getMessage());
         }
-        
-        //for (int j = 0; j < WSCount; j++){
-        //    wsDispData += "Weather Station " + (j+1) + "\n";
-        //}
+        */
+        for (int j = 0; j < WSCount; j++){
+            WeatherStationType ws =  WeatherStationList.weatherStations.get(j);
+            String ID_found = ws.getID();
+            System.out.println("ID found: " + ID_found);
+            wsDispData += "Weather Station " + ws.getID() + "\n";
+        }
         
         wsDisp.setText(wsDispData);
         c.add(wsDisp);

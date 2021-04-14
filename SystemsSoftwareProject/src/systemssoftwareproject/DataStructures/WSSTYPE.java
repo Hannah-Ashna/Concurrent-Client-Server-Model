@@ -12,4 +12,8 @@ public class WSSTYPE implements Serializable{
         return weatherStations.size();
     }
     
+    public List wsStationsArray(){
+        return weatherStations;
+    }
+    
 }

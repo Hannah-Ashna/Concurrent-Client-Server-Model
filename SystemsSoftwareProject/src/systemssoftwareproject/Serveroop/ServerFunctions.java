@@ -9,9 +9,14 @@ import systemssoftwareproject.DataStructures.WeatherStationType;
 public class ServerFunctions {
     public List<WeatherStationType> weatherStations =  Collections.synchronizedList(new ArrayList<>()); 
     public List<UserType> users =  Collections.synchronizedList(new ArrayList<>()); 
+    public String ID = "TestID";
     
     public int wsCount() {
         return weatherStations.size();
+    }
+    
+    public String getID(){
+        return ID;
     }
     
     public List wsStationsArray(){

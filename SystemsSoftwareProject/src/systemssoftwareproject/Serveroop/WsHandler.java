@@ -40,8 +40,10 @@ public class WsHandler implements Runnable {
                 if (ID_found == false){
                     outToStation.println(wscom.SENDID);
                 }
-                
-                outToStation.println(wscom.SEND);
+                else{
+                    System.out.println("ID found in array");
+                    outToStation.println(wscom.SEND);
+                }
                 int type  = inFromStation.readInt();
                 
                 if(type == 0){
@@ -57,46 +59,17 @@ public class WsHandler implements Runnable {
                 }
                 
                 else if (type ==  1){
-                    boolean ID_exists = false;
-                    boolean append_file = false;
-
-                    File myObj = new File("WeatherStationID_List.txt");
-                    if (myObj.createNewFile()) {
-                        System.out.println("File created: " + myObj.getName());
-                        append_file = false; //if it doesn't then writing to the file shouldn't be append mode
-                    } else {
-                         System.out.println("File already exists");
-                         append_file = true; 
-                          //if it does then writing to the file should be append mode
-                    }
                     String weatherstationID = (String)inFromStation.readObject();
-
-                    FileReader fin = new FileReader("WeatherStationID_List.txt"); // read from the file
-                    BufferedReader din = new BufferedReader(fin);
-
-                    String line = null; // line of text
-
-                    while ((line = din.readLine()) != null) {
-
-                        if (line.equals( weatherstationID )){ // checks if ID already exists in the file
-                            ID_exists = true; 
-                            System.out.println("ID already exists");
-                            break;   
-                        }
-                    }
-
-                    if (ID_exists == false){ // if the file does not exist
-                        // what this should do is then add the ID to the file 
-                        FileWriter fout = new FileWriter("WeatherStationID_List.txt",append_file); //append_file is just saying if the file should be append mode or not
-                        PrintWriter pout = new PrintWriter(fout,true);
-                        pout.println(weatherstationID); 
-                        //toWeatherStation.writeUTF("ID has been added");
+                    boolean ID_unique = weatherStation.IDUnique(weatherstationID);
+ 
+                    if (ID_unique == true){ // if the ID does not exist
+                        ID_found = true;
                         outToStation.println(wscom.IDCONFIRMED);
                         System.out.println("Inform WS Client -> ID has been added");
-                        ID_found = true;
-
-
+                        weatherStation.setID(weatherstationID);
                     }
+                    
+                    
                     else{
                         // if the id already exists then do this
                          //toWeatherStation.writeUTF("ID already exists");

@@ -111,7 +111,6 @@ public class UserClient extends JFrame implements ActionListener {
 
     
     public void actionPerformed (ActionEvent e){
-        
         JComboBox IDList = (JComboBox)e.getSource();
         WeatherStationType ws =  WeatherStationList.weatherStations.get(0);
         display.setText("\n Selected Weather Station ID: " + ws.getID());
