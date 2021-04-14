@@ -15,6 +15,7 @@ import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.GUI.LoginForm;
 import systemssoftwareproject.GUI.UserClient;
+import systemssoftwareproject.WeatherStation.WeatherStation;
 
 public class User {
     public WSSTYPE weatherStationList;
@@ -46,11 +47,12 @@ public class User {
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
         //Test to request stations at the beginning of the program
-        outToStation.println(usercom.REQUESTSTATIONS);
          //wst = new wsConnection(this);
          //   new Thread((Runnable) wst).start();
          gui = new UserClient(this);
          gui.setVisible(true);
+         requestStations();
+         requestStations();
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
@@ -59,14 +61,15 @@ public class User {
                     weatherStationList = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(weatherStationList.wsCount());
                     System.out.println(this.getIds());
+                    gui.updateWSList(this);
+
                 }  
             }catch(IOException e){
             }
         }
     }
-    public void requestStations(){
+    public void requestStations() throws InterruptedException{
        outToStation.println(usercom.REQUESTSTATIONS);
-       user.updateWSList();
     }
     
     public List<String> getIds(){
@@ -83,5 +86,7 @@ public class User {
         }
         return weatherStationIDs;
     }
+
+    
     
 }

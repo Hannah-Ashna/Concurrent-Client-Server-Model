@@ -5,8 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class WeatherStationType extends ClientType implements Serializable {
-    private final LinkedList<SampleType> samples = new LinkedList<>();
+public class WeatherStationType implements Serializable {
+    public final LinkedList<SampleType> samples = new LinkedList<>();
+     public String ID = "TestID";
+    
+    public String getID(){
+        return ID;
+    }
+    
+    protected void setID(String id){
+        this.ID = id;
+    }  
     public WeatherStationType(){
     }
     

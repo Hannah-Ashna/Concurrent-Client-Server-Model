@@ -21,7 +21,8 @@ public class UserClient extends JFrame implements ActionListener {
     static String data = null;
     static String receivedData = null;
     String GPSVal, TempVal, HumidityVal;
-    
+    private JComboBox IDList;
+    String country[]={"India","Aus","U.S.A","England","Newzealand"};
     
     public UserClient(User user) throws InterruptedException {
         setTitle("User Client");
@@ -39,7 +40,7 @@ public class UserClient extends JFrame implements ActionListener {
         title.setLocation(50, 20);
         c.add(title);
         
-        JComboBox IDList = new JComboBox(user.getIds().toArray());
+        IDList = new JComboBox(country);
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
         IDList.setSize(100,30);
@@ -152,7 +153,7 @@ public class UserClient extends JFrame implements ActionListener {
         data = null;
     }
     
-    public void updateWSList() throws InterruptedException{
+    public void updateWSList(User user) throws InterruptedException{
         c.remove(IDList);
         
         JComboBox IDList = new JComboBox(user.getIds().toArray());

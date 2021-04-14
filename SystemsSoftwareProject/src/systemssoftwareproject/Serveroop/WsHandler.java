@@ -12,7 +12,7 @@ import systemssoftwareproject.WeatherStation.WeatherStation;
 
 
 public class WsHandler implements Runnable {
-    private final int waitTime = 5;
+    private final int waitTime = 30;
     private final Socket clientSocket; 
     private WeatherStationType weatherStation;
     private Server server;
