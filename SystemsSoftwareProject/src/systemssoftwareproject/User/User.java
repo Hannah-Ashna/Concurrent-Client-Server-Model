@@ -62,6 +62,7 @@ public class User {
                     //System.out.println(weatherStationList.wsCount());
                     System.out.println(this.getIds());
                     gui.updateWSList(this);
+                    gui.getWSList(weatherStationList);
 
                 }  
             }catch(IOException e){
@@ -86,6 +87,8 @@ public class User {
         }
         return weatherStationIDs;
     }
+    
+    
 
     
     

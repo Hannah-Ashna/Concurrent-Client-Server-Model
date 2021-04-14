@@ -35,6 +35,22 @@ public  class SampleType implements Serializable {
         return humidity;
     }
     
+    public double getTemp(){
+        return temperature;
+    }
+    
+    public double getGPSLat(){
+        return gpsLatitude;
+    }
+    
+    public double getGPSLong(){
+        return gpsLongitude;
+    }
+    
+    public double getAltitude(){
+        return altitude;
+    }
+    
     @Override
     public String toString(){
         return "Sample{" + "temprature=" + temperature + ", humidity=" + humidity + ", gpsLatitude=" + gpsLatitude + ", gpsLongitdue:" + gpsLongitude + ", altitude:" + altitude + ", sampleDateTime:"+ sampleDateTime + "}";

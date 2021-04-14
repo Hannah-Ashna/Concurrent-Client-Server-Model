@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
-import java.util.concurrent.TimeUnit;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import systemssoftwareproject.DataStructures.WSSTYPE;
+import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.User.User;
 
 public class UserClient extends JFrame implements ActionListener {
@@ -15,14 +16,12 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel title;
     private final JLabel WSData, GPSData, TempData, HumidityData;
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp;
-    
+    private final JComboBox IDList;
+    private WSSTYPE WeatherStationList;
     
     // Other Variables
-    static String data = null;
-    static String receivedData = null;
     String GPSVal, TempVal, HumidityVal;
-    private JComboBox IDList;
-    String country[]={"India","Aus","U.S.A","England","Newzealand"};
+    String wsIDs[]={"None Connected"};
     
     public UserClient(User user) throws InterruptedException {
         setTitle("User Client");
@@ -40,7 +39,7 @@ public class UserClient extends JFrame implements ActionListener {
         title.setLocation(50, 20);
         c.add(title);
         
-        IDList = new JComboBox(country);
+        IDList = new JComboBox(wsIDs);
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
         IDList.setSize(100,30);
@@ -114,43 +113,16 @@ public class UserClient extends JFrame implements ActionListener {
     public void actionPerformed (ActionEvent e){
         
         JComboBox IDList = (JComboBox)e.getSource();
-        String IDNum = (String)IDList.getSelectedItem();
-        
-        // This is temporary just to set data and test the dropdown menu
-        // Values should be used later on to store retrieved values
-        data = IDNum; // This the variable that gets sent to the server
-        
-        TempVal = IDNum;
-        GPSVal = IDNum;
-        HumidityVal = IDNum;
-        
-        
-        //double temp_val = systemssoftwareproject.WeatherStation.WeatherInstruments.getTemp();
-        //double humidity_val = systemssoftwareproject.WeatherStation.WeatherInstruments.getHumidity();
-        
-        //double lat = systemssoftwareproject.WeatherStation.WeatherInstruments.getGpsLat();
-        //double lon = systemssoftwareproject.WeatherStation.WeatherInstruments.getGpsLong();
-        //double altitude = systemssoftwareproject.WeatherStation.WeatherInstruments.getGpsAltitude();
-        
-        //display.setText("\n Selected Weather Station ID: " + data);
-        //GPSDisp.setText("\n GPS Value: " + lat + "." + lon + "." + altitude);
-        //TempDisp.setText("\n Temp Value: " + temp_val + "ºC");
-        //HumidityDisp.setText("\n Humidity Value: " + humidity_val + "%");
-        
+        WeatherStationType ws =  WeatherStationList.weatherStations.get(0);
+        display.setText("\n Selected Weather Station ID: " + ws.getID());
+        HumidityDisp.setText(" " + String.valueOf(ws.samples.getFirst().getHumid()));
+        TempDisp.setText(" " + String.valueOf(ws.samples.getFirst().getTemp()));
+        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getFirst().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getFirst().getGPSLong()));
     }
     
     
-    public static String sendData(){
-        return data;
-    }
-    
-    public static void receivedData(String data){
-        receivedData = data;
-        
-    }
-    
-    public static void resetData(){
-        data = null;
+    public void getWSList(WSSTYPE wslist){
+        WeatherStationList = wslist;
     }
     
     public void updateWSList(User user) throws InterruptedException{
