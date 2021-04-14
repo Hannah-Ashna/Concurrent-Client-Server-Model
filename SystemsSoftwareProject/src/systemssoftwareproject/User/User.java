@@ -66,7 +66,9 @@ public class User {
     }
     public void requestStations(){
        outToStation.println(usercom.REQUESTSTATIONS);
+       user.updateWSList();
     }
+    
     public List<String> getIds(){
         List<String> weatherStationIDs;
         weatherStationIDs = new LinkedList<>();

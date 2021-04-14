@@ -38,6 +38,7 @@ public class UserClient extends JFrame implements ActionListener {
         title.setSize(300, 30);
         title.setLocation(50, 20);
         c.add(title);
+        
         JComboBox IDList = new JComboBox(user.getIds().toArray());
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
@@ -151,5 +152,17 @@ public class UserClient extends JFrame implements ActionListener {
         data = null;
     }
     
-    
+    public void updateWSList() throws InterruptedException{
+        c.remove(IDList);
+        
+        JComboBox IDList = new JComboBox(user.getIds().toArray());
+        IDList.setSelectedIndex(0);
+        IDList.addActionListener(this);
+        IDList.setSize(100,30);
+        IDList.setLocation(650, 20);
+        c.add(IDList);
+        
+        c.revalidate();
+        c.repaint();
+    }
 }
