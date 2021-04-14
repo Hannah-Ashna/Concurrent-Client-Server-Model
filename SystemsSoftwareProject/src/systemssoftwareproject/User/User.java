@@ -6,17 +6,21 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import systemssoftwareproject.DataStructures.WSSTYPE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.GUI.LoginForm;
+import systemssoftwareproject.GUI.UserClient;
 
 public class User {
     public WSSTYPE weatherStationList;
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
+    private UserClient gui;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         System.out.println("User - Attempting to Login");
         LoginForm loginForm = new LoginForm();
@@ -42,15 +46,20 @@ public class User {
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
         //Test to request stations at the beginning of the program
-        //outToStation.println(usercom.REQUESTSTATIONS);
+        outToStation.println(usercom.REQUESTSTATIONS);
+         //wst = new wsConnection(this);
+         //   new Thread((Runnable) wst).start();
+         gui = new UserClient(this);
+         gui.setVisible(true);
+        
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
                     System.out.println("Testing User Client <-> Server Communication:");
-                    //updates the list of weaterstations
+                    //updates the list of weaterstations when it recives new data.
                     weatherStationList = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(weatherStationList.wsCount());
-                    
+                    System.out.println(this.getIds());
                 }  
             }catch(IOException e){
             }
@@ -58,6 +67,20 @@ public class User {
     }
     public void requestStations(){
        outToStation.println(usercom.REQUESTSTATIONS);
+    }
+    public List<String> getIds(){
+        List<String> weatherStationIDs;
+        weatherStationIDs = new LinkedList<>();
+        try{
+        weatherStationList.weatherStations.forEach((WeatherStationType _item) -> {
+            weatherStationIDs.add(_item.getID());
+        });
+        } catch(Exception e){
+            List<String> weatherStationfail = new LinkedList<>();
+            weatherStationfail.add("Please Refresh me!");
+            return  weatherStationfail;
+        }
+        return weatherStationIDs;
     }
     
 }

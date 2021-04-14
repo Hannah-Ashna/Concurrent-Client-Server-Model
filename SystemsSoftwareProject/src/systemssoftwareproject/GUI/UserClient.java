@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import systemssoftwareproject.User.User;
 
 public class UserClient extends JFrame implements ActionListener {
     
@@ -19,10 +20,9 @@ public class UserClient extends JFrame implements ActionListener {
     static String data = null;
     static String receivedData = null;
     String GPSVal, TempVal, HumidityVal;
-    String[] weatherStationIDs = {"", "xyz", "qrs", "efg", "abc"};
     
     
-    public UserClient() {
+    public UserClient(User user) {
         setTitle("User Client");
         setBounds(300, 90, 800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,7 +38,7 @@ public class UserClient extends JFrame implements ActionListener {
         title.setLocation(50, 20);
         c.add(title);
         
-        JComboBox IDList = new JComboBox(weatherStationIDs);
+        JComboBox IDList = new JComboBox(user.getIds().toArray());
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
         IDList.setSize(100,30);
@@ -107,6 +107,7 @@ public class UserClient extends JFrame implements ActionListener {
         
         setVisible(true);
     }
+
     
     public void actionPerformed (ActionEvent e){
         

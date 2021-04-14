@@ -90,7 +90,7 @@ public class LoginForm extends JFrame implements ActionListener {
             // If credentials are a match - login successfully
             if(status) {
                 setVisible(false);
-                new UserClient().setVisible(true);
+                //new UserClient().setVisible(true);
             }
             
             // Else - display error
