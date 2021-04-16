@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
 
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.DataStructures.UserType;
 import systemssoftwareproject.DataStructures.WSSTYPE;
@@ -18,6 +22,8 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp, AltDisp;
     private final JComboBox IDList;
+    private final JButton graph;
+    
     private WSSTYPE WeatherStationList;
     private User user;
     // Other Variables
@@ -122,37 +128,38 @@ public class UserClient extends JFrame implements ActionListener {
         AltDisp.setText(" ");
         c.add(AltDisp);
         
+        graph = new JButton("Graph"); 
+        graph.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        graph.setSize(100, 20); 
+        graph.setLocation(350, 470); 
+        graph.addActionListener(this); 
+        c.add(graph);
+        
         setVisible(true);
         
         addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosing(WindowEvent we) {
-             user.closeProgram();
-             System.exit(0);
+            @Override
+            public void windowClosing(WindowEvent we) {
+                user.closeProgram();
+                System.exit(0);
+            }
+        });
+    }
+    
+    public void actionPerformed (ActionEvent e){        
+        try {
+            drawGraph();
+        } catch (Exception except){
+            System.out.println(except);
         }
-});
-    }
-
-    
-    public void actionPerformed (ActionEvent e){
+        
        
-        JComboBox IDList = (JComboBox)e.getSource();
-        String ID = IDList.getSelectedItem().toString();
-        WeatherStationType ws =  WeatherStationList.getByID(ID);
-        display.setText("\n Selected Weather Station ID: " + ws.getID());
-        HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
-        TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
-        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-        AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
     }
-    
     
     public void getWSList(WSSTYPE wslist){
         WeatherStationList = wslist;
     }
-    public void closeProgram(User user){
-        
-    }
+
     public void updateWSList(User user) throws InterruptedException{
         c.remove(IDList);
         JComboBox IDList = new JComboBox(user.getIds().toArray());
@@ -164,6 +171,44 @@ public class UserClient extends JFrame implements ActionListener {
         c.revalidate();
         c.repaint();
     }
-
     
-}
+    
+    public static void drawGraph () throws Exception{
+        
+        double phase = 0;
+        double[][] initdata = getSineData(phase);
+
+        // Create Chart
+        final XYChart chart = QuickChart.getChart("Simple XChart Real-time Demo", "Radians", "Sine", "sine", initdata[0], initdata[1]);
+
+        // Show it
+        final SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
+        sw.displayChart();
+
+        while (true) {
+
+          phase += 2 * Math.PI * 2 / 20.0;
+
+          Thread.sleep(100);
+
+          final double[][] data = getSineData(phase);
+
+          chart.updateXYSeries("sine", data[0], data[1], null);
+          sw.repaintChart();
+        }
+
+    }
+    
+    
+    private static double[][] getSineData(double phase) {
+
+        double[] xData = new double[100];
+        double[] yData = new double[100];
+        for (int i = 0; i < xData.length; i++) {
+            double radians = phase + (2 * Math.PI / xData.length * i);
+            xData[i] = radians;
+            yData[i] = Math.sin(radians);
+        }
+        return new double[][] { xData, yData };
+    }
+ }
