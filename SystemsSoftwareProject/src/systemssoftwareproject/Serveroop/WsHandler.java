@@ -46,19 +46,17 @@ public class WsHandler implements Runnable {
                 if(type == 0){
                     SampleType sample = (SampleType)inFromStation.readObject();
                     weatherStation.addSample(sample);
-
                     // These are commented out as they are for testing!
                     // System.out.println(weatherStation.sampleCount());
                     // System.out.println(sample.getHumid());
                     outToStation.println(wscom.SAMPLECONFIRM);
                     //S ystem.out.println("Waiting 20 seconds to continue");
-                    TimeUnit.SECONDS.sleep(waitTime);// replace with constant
+                    //TimeUnit.SECONDS.sleep(waitTime);// replace with constant
                 }
                 
                 else if (type ==  1){
                     boolean ID_exists = false;
                     boolean append_file = false;
-
                     File myObj = new File("WeatherStationID_List.txt");
                     if (myObj.createNewFile()) {
                         System.out.println("File created: " + myObj.getName());
@@ -72,7 +70,6 @@ public class WsHandler implements Runnable {
 
                     FileReader fin = new FileReader("WeatherStationID_List.txt"); // read from the file
                     BufferedReader din = new BufferedReader(fin);
-
                     String line = null; // line of text
 
                     while ((line = din.readLine()) != null) {
@@ -89,6 +86,7 @@ public class WsHandler implements Runnable {
                         FileWriter fout = new FileWriter("WeatherStationID_List.txt",append_file); //append_file is just saying if the file should be append mode or not
                         PrintWriter pout = new PrintWriter(fout,true);
                         pout.println(weatherstationID); 
+                        weatherStation.setID(weatherstationID);
                         //toWeatherStation.writeUTF("ID has been added");
                         outToStation.println(wscom.IDCONFIRMED);
                         System.out.println("Inform WS Client -> ID has been added");
@@ -107,7 +105,7 @@ public class WsHandler implements Runnable {
         } catch (IOException e) { 
             System.out.println("WeatherStation has disconnected.");
             server.weatherStations.remove(weatherStation);
-        } catch (ClassNotFoundException | InterruptedException ex) {
+        } catch (ClassNotFoundException ex) {
         } 
     }   
 } 

@@ -13,7 +13,7 @@ public class WeatherStationType implements Serializable {
         return ID;
     }
     
-    protected void setID(String id){
+    public void setID(String id){
         this.ID = id;
     }  
     public WeatherStationType(){

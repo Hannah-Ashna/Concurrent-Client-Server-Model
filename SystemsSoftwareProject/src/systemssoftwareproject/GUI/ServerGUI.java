@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import systemssoftwareproject.DataStructures.UserType;
+import systemssoftwareproject.DataStructures.WeatherStationType;
+import systemssoftwareproject.Serveroop.Server;
 
 
 public class ServerGUI extends JFrame implements ActionListener {
@@ -22,7 +25,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     int WSCount = 0;
     int UserCount = 0;
     
-    public ServerGUI() {
+    public ServerGUI(Server server) {
         setTitle("Server");
         setBounds(300, 90, 800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -66,9 +69,9 @@ public class ServerGUI extends JFrame implements ActionListener {
     }
     
     
-    public void getClients(int wsCount, int userCount) throws InterruptedException{
-        WSCount = wsCount;
-        UserCount = userCount;
+    public void getClients(Server server) throws InterruptedException{
+        WSCount = server.wsCount();
+        UserCount = server.userCount();
         String wsDispData = "";
         String userDispData = "";
         c.remove(wsDisp);
@@ -79,9 +82,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         userDisp.setLocation(50, 70);
         userDisp.setLineWrap(true);
         userDisp.setEditable(false);
-        for (int i = 0; i < UserCount; i++){
-            userDispData += "User Client " + (i+1) + "\n";
-        }
+        userDispData = "User Clients "+ UserCount + "\n";
         userDisp.setText(userDispData);
         c.add(userDisp);
         
@@ -91,36 +92,19 @@ public class ServerGUI extends JFrame implements ActionListener {
         wsDisp.setLineWrap(true);
         wsDisp.setEditable(false);
         
-        TimeUnit.SECONDS.sleep(1);// wait 1 second for the file to be updated
-        String file_name = "WeatherStationID_List.txt"; 
-        try {
-            FileReader fin = new FileReader(file_name);
-            BufferedReader din = new BufferedReader(fin);
+        for (WeatherStationType currentws : server.weatherStations) {
+            wsDispData += "Weather Station " + currentws.getID() + "\n";
+        }   
+            wsDisp.setText(wsDispData);
+            c.add(wsDisp);
             
-            // Read from the file
-            String line = null; // line of text
-            while ((line = din.readLine()) != null) {
-                wsDispData += "Weather Station " + line + "\n";
-            }
-            // Close the stream
-            din.close(); 
-        } catch (IOException e) {
-            System.err.println("Error! - " + e.getMessage());
+            c.revalidate();
+            c.repaint();
         }
-        
-        //for (int j = 0; j < WSCount; j++){
-        //    wsDispData += "Weather Station " + (j+1) + "\n";
-        //}
-        
-        wsDisp.setText(wsDispData);
-        c.add(wsDisp);
-        
-        c.revalidate();
-        c.repaint();
-    }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

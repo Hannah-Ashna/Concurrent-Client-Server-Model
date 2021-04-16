@@ -14,11 +14,11 @@ public class GUI implements Runnable {
     @Override
     public void run() {
         Scanner userInput = new Scanner(System.in);
-        ServerGUI serverGUI = new ServerGUI();
+        ServerGUI serverGUI = new ServerGUI(server);
         while(true){
             if (server.wsCount() != wsTotal || server.userCount() != userTotal){
                 try {
-                    serverGUI.getClients(server.wsCount(), server.userCount());
+                    serverGUI.getClients(server);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
