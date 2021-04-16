@@ -3,8 +3,7 @@ import java.net.Socket;
 import java.io.*; 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.wscom;
@@ -32,7 +31,7 @@ public class WsHandler implements Runnable {
             // Create IO Streams
             // System.out.println("testing");
             ObjectInputStream inFromStation = new ObjectInputStream(clientSocket.getInputStream());
-            var outToStation = new PrintWriter(clientSocket.getOutputStream(), true);
+            PrintWriter outToStation = new PrintWriter(clientSocket.getOutputStream(), true);
             // Will Request then print the Stations ID
             // Will then request a sample every 20 seconds forever unless the client disconnects!
 
@@ -109,7 +108,6 @@ public class WsHandler implements Runnable {
             System.out.println("WeatherStation has disconnected.");
             server.weatherStations.remove(weatherStation);
         } catch (ClassNotFoundException | InterruptedException ex) {
-            Logger.getLogger(WsHandler.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }   
 } 

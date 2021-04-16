@@ -3,8 +3,7 @@ import java.net.Socket;
 import java.io.*; 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.UserType;
 import systemssoftwareproject.DataStructures.WSSTYPE;
@@ -40,7 +39,6 @@ public class UserHandler implements Runnable {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
         }      
     }
         

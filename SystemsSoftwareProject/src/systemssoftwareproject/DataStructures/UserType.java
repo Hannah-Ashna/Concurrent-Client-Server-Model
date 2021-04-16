@@ -8,7 +8,7 @@ public class UserType extends ClientType implements Serializable {
     
     @Override
     public String toString(){
-        return "User{ID= " + ID + "}";
+        return "###";
     }
     
 }
