@@ -8,6 +8,7 @@ public class Server extends ServerFunctions  {
     protected wsConnection wst;
     public ServerSocket ws = null; 
     public ServerSocket user = null;
+    public GUI gui;
     
     public static void main(String[] args) 
     { 
@@ -32,7 +33,7 @@ public class Server extends ServerFunctions  {
             wst = new wsConnection(this);
             new Thread((Runnable) wst).start();
             
-            GUI gui = new GUI(this);
+            gui = new GUI(this);
             new Thread((Runnable)gui).start();
             
         }

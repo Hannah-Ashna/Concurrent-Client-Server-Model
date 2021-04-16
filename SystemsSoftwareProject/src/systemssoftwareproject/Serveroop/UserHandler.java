@@ -39,6 +39,8 @@ public class UserHandler implements Runnable {
                 }
             }
         } catch (IOException ex) {
+            System.out.println("User Disconnected");
+            server.users.remove(userType);
         }      
     }
         

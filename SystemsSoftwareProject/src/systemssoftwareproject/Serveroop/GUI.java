@@ -10,11 +10,12 @@ public class GUI implements Runnable {
     private Server server;
     private int wsTotal = 0;
     private int userTotal = 0;
+    protected Scanner userInput = new Scanner(System.in);
+    protected ServerGUI serverGUI = new ServerGUI(server);
     
     @Override
     public void run() {
-        Scanner userInput = new Scanner(System.in);
-        ServerGUI serverGUI = new ServerGUI(server);
+        
         while(true){
             if (server.wsCount() != wsTotal || server.userCount() != userTotal){
                 try {
@@ -30,6 +31,9 @@ public class GUI implements Runnable {
     
     public GUI(Server server){
         this.server = server;
+    }
+    public void updateGUI() throws InterruptedException{
+        serverGUI.getClients(server);
     }
     
 }

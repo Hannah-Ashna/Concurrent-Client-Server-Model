@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.wscom;
@@ -18,13 +19,13 @@ public class WeatherStation extends WeatherInstruments {
         super("Loc in radius");
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("WS-Client\n");
         WeatherStation weatherStation = new WeatherStation();
         weatherStation.run();
     }
     
-    public void run() throws IOException {
+    public void run() throws IOException, InterruptedException {
         // Make connection and initialize streams
         String serverAddress = "localhost";
         Socket socket = new Socket(serverAddress, 9091);
@@ -37,18 +38,19 @@ public class WeatherStation extends WeatherInstruments {
                 ReceiveRequest();
             }
         }
-        // Process all messages from server, according to the protocol. 
+        // Process all messages from server, according to the protocol.
     }
     
-    private void SendID() throws IOException{
+    private void SendID() throws IOException, InterruptedException{
         String weatherStationID = UUID.randomUUID().toString(); 
         System.out.println("WeatherStationID = " + weatherStationID);
         out.writeInt(1);
         out.writeObject(weatherStationID);
+        
     }
     
 
-    private void ReceiveRequest() throws IOException{
+    private void ReceiveRequest() throws IOException, InterruptedException{
         String line = in.nextLine();
         if(line.startsWith(wscom.SEND)){
             out.writeInt(0);
@@ -56,6 +58,7 @@ public class WeatherStation extends WeatherInstruments {
             System.out.println("SAMPLE has been sent");
             }else if(line.startsWith(wscom.SAMPLECONFIRM)){
                 System.out.println("Sample was received\n");
+                TimeUnit.SECONDS.sleep(20);
         }
         else if (line.startsWith(wscom.SENDID)){
             SendID();

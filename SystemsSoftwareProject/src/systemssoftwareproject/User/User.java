@@ -47,8 +47,9 @@ public class User {
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
         //Test to request stations at the beginning of the program
-         //wst = new wsConnection(this);
-         //   new Thread((Runnable) wst).start();
+        //Runs automatic download of latest data from the server.
+         DataUpdater dataUpdater = new DataUpdater(this);
+         new Thread((Runnable) dataUpdater).start();
          gui = new UserClient(this);
          gui.setVisible(true);
          requestStations();

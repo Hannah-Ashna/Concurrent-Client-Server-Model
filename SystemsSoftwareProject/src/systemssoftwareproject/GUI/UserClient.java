@@ -111,13 +111,13 @@ public class UserClient extends JFrame implements ActionListener {
 
     
     public void actionPerformed (ActionEvent e){
-        
         JComboBox IDList = (JComboBox)e.getSource();
-        WeatherStationType ws =  WeatherStationList.weatherStations.get(0);
+        String ID = IDList.getSelectedItem().toString();
+        WeatherStationType ws =  WeatherStationList.getByID(ID);
         display.setText("\n Selected Weather Station ID: " + ws.getID());
-        HumidityDisp.setText(" " + String.valueOf(ws.samples.getFirst().getHumid()));
-        TempDisp.setText(" " + String.valueOf(ws.samples.getFirst().getTemp()));
-        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getFirst().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getFirst().getGPSLong()));
+        HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+        TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
     }
     
     

@@ -3,6 +3,8 @@ import java.net.Socket;
 import java.io.*; 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
@@ -87,6 +89,12 @@ public class WsHandler implements Runnable {
                         PrintWriter pout = new PrintWriter(fout,true);
                         pout.println(weatherstationID); 
                         weatherStation.setID(weatherstationID);
+                        try {
+                            server.gui.updateGUI();
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(WsHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                     
                         //toWeatherStation.writeUTF("ID has been added");
                         outToStation.println(wscom.IDCONFIRMED);
                         System.out.println("Inform WS Client -> ID has been added");
