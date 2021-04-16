@@ -15,6 +15,7 @@ public class WeatherStation extends WeatherInstruments {
     private Scanner in;
     private ObjectOutputStream  out;
     public WeatherStation(){ 
+        super("Loc in radius");
     }
 
     public static void main(String[] args) throws IOException {
