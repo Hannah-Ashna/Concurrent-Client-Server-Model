@@ -12,7 +12,7 @@ import java.util.Random;
  * @author ryan
  */
 public class Location {
-        
+    
     public static double getGpsLat(){
         // will get the gps latitiude and return it
         return 52.329250;
@@ -22,7 +22,7 @@ public class Location {
         //will get the gps longitude and return it in 
         return -0.185360;
     }
-    
+ 
     public static double getGpsAltitude(){
         double start = 10;
         double end = 50;

@@ -1,12 +1,9 @@
 package systemssoftwareproject.WeatherStation;
 
 import systemssoftwareproject.DataStructures.SampleType;
-import systemssoftwareproject.WeatherStation.Location;
 
-//These functions are syncronus we assume that the data will be immidatly returned.
+// These functions are syncronus we assume that the data will be immidatly returned.
 import java.time.LocalDateTime;
-import java.util.Random;
-
 
 public class WeatherInstruments{
 
