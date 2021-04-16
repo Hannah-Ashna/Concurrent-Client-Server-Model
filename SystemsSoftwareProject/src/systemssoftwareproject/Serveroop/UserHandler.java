@@ -18,6 +18,7 @@ public class UserHandler implements Runnable {
     private Server server;
     private Scanner in;
     private ObjectOutputStream  out;
+    private boolean running = true;
     
     // Constructor 
     public UserHandler(Socket socket, Server server){ 
@@ -28,7 +29,8 @@ public class UserHandler implements Runnable {
 
     
     @Override
-    public void run() { 
+    public void run() {
+        while(running){
         try {
             server.users.add(userType);
             in =  new Scanner(clientSocket.getInputStream());
@@ -41,7 +43,8 @@ public class UserHandler implements Runnable {
         } catch (IOException ex) {
             System.out.println("User Disconnected");
             server.users.remove(userType);
-        }      
+        }    
+        }
     }
         
         
@@ -57,6 +60,7 @@ public class UserHandler implements Runnable {
         } else if(line.startsWith("CLOSE")){
             System.out.println("User Disconnected");
             server.users.remove(userType);
+            running = false;
         }
     }
 } 
