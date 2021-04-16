@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import systemssoftwareproject.DataStructures.UserType;
 import systemssoftwareproject.DataStructures.WSSTYPE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.User.User;
-
 public class UserClient extends JFrame implements ActionListener {
     
     // Components
@@ -18,12 +18,13 @@ public class UserClient extends JFrame implements ActionListener {
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp;
     private final JComboBox IDList;
     private WSSTYPE WeatherStationList;
-    
+    private User user;
     // Other Variables
     String GPSVal, TempVal, HumidityVal;
     String wsIDs[]={"None Connected"};
     
     public UserClient(User user) throws InterruptedException {
+        this.user = user;
         setTitle("User Client");
         setBounds(300, 90, 800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -32,7 +33,6 @@ public class UserClient extends JFrame implements ActionListener {
         c = getContentPane();
         c.setLayout(null);
         c.setBackground(Color.LIGHT_GRAY);
-        
         title = new JLabel("Dashboard:");
         title.setFont(new Font("Arial", Font.BOLD, 30));
         title.setSize(300, 30);
@@ -107,10 +107,19 @@ public class UserClient extends JFrame implements ActionListener {
         c.add(HumidityDisp);
         
         setVisible(true);
+        
+        addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent we) {
+             user.closeProgram();
+             System.exit(0);
+        }
+});
     }
 
     
     public void actionPerformed (ActionEvent e){
+       
         JComboBox IDList = (JComboBox)e.getSource();
         String ID = IDList.getSelectedItem().toString();
         WeatherStationType ws =  WeatherStationList.getByID(ID);
@@ -124,18 +133,20 @@ public class UserClient extends JFrame implements ActionListener {
     public void getWSList(WSSTYPE wslist){
         WeatherStationList = wslist;
     }
-    
+    public void closeProgram(User user){
+        
+    }
     public void updateWSList(User user) throws InterruptedException{
         c.remove(IDList);
-        
         JComboBox IDList = new JComboBox(user.getIds().toArray());
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
         IDList.setSize(100,30);
         IDList.setLocation(650, 20);
         c.add(IDList);
-        
         c.revalidate();
         c.repaint();
     }
+
+    
 }

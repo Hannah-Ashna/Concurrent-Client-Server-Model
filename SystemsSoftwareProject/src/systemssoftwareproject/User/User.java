@@ -53,7 +53,6 @@ public class User {
          gui = new UserClient(this);
          gui.setVisible(true);
          requestStations();
-         requestStations();
         while(true){
             try{
                 if(inFromStation.readInt() == 0){
@@ -72,6 +71,9 @@ public class User {
     }
     public void requestStations() throws InterruptedException{
        outToStation.println(usercom.REQUESTSTATIONS);
+    }
+    public void closeProgram(){
+        outToStation.println("CLOSE");
     }
     
     public List<String> getIds(){
