@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
-
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.DataStructures.UserType;
 import systemssoftwareproject.DataStructures.WSSTYPE;
@@ -15,8 +14,8 @@ public class UserClient extends JFrame implements ActionListener {
     // Components
     private final Container c;
     private final JLabel title;
-    private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
-    private final JTextArea display, GPSDisp, TempDisp, HumidityDisp, AltDisp;
+    private final JLabel WSData, GPSData, TempData, HumidityData;
+    private final JTextArea display, GPSDisp, TempDisp, HumidityDisp;
     private final JComboBox IDList;
     private WSSTYPE WeatherStationList;
     private User user;
@@ -107,21 +106,6 @@ public class UserClient extends JFrame implements ActionListener {
         HumidityDisp.setText(" ");
         c.add(HumidityDisp);
         
-        AltData = new JLabel("Altitude:"); 
-        AltData.setFont(new Font("Arial", Font.PLAIN, 20)); 
-        AltData.setSize(200, 20); 
-        AltData.setLocation(350, 370); 
-        c.add(AltData);
-        
-        AltDisp = new JTextArea();
-        AltDisp.setFont(new Font("Arial", Font.PLAIN, 15));
-        AltDisp.setSize(250, 50);
-        AltDisp.setLocation(350, 400);
-        AltDisp.setLineWrap(true);
-        AltDisp.setEditable(false);
-        AltDisp.setText(" ");
-        c.add(AltDisp);
-        
         setVisible(true);
         
         addWindowListener(new WindowAdapter() {
@@ -143,7 +127,6 @@ public class UserClient extends JFrame implements ActionListener {
         HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
         GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-        AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
     }
     
     
