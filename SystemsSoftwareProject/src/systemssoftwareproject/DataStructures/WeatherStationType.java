@@ -34,6 +34,6 @@ public class WeatherStationType implements Serializable {
     public int sampleCount(){
         return samples.size();
     }
-
+   
 }
     
