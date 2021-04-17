@@ -35,8 +35,7 @@ public class ServerFunctions {
             if (ID_entered.equals(ID_found)){
                 ID_unique = false;
                 break;
-        }
-        break;
+            }
         }
         return ID_unique;
         }
