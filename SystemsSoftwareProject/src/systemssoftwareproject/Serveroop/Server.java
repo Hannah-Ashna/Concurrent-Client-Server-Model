@@ -18,7 +18,7 @@ public class Server extends ServerFunctions  {
 
 
     public void start(){
-        
+        ResetIDFile();
         
         try { 
   
@@ -46,6 +46,12 @@ public class Server extends ServerFunctions  {
     }
     
     
-  
+    public static void ResetIDFile(){
+        try { 
+            File fileName = new File("WeatherStationID_List.txt");
+            fileName.delete();
+        } catch (Exception e) {
+        } 
+    }
 }
  

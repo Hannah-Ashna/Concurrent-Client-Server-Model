@@ -25,20 +25,4 @@ public class ServerFunctions {
     public List usersArray(){
         return users;
     }
-    public boolean IDUnique(String ID){
-        String ID_entered = ID;
-        int amount_of_weatherstations = weatherStations.size();
-        boolean ID_unique = true;
-        for (int i = 0; i < amount_of_weatherstations; i++){
-            WeatherStationType ws = weatherStations.get(i);
-            String ID_found = ws.getID();
-            if (ID_entered.equals(ID_found)){
-                ID_unique = false;
-                break;
-        }
-        break;
-        }
-        return ID_unique;
-        }
-
 }
