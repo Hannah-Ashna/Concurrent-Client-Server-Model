@@ -77,22 +77,15 @@ public class ServerGUI extends JFrame implements ActionListener {
         c.remove(wsDisp);
         c.remove(userDisp);
         
-        // Displays users
         userDisp.setFont(new Font("Arial", Font.PLAIN, 15));
         userDisp.setSize(300, 400);
         userDisp.setLocation(50, 70);
         userDisp.setLineWrap(true);
         userDisp.setEditable(false);
-        
-        // userDispData = "User Clients "+ UserCount + "\n";
-        for (UserType current_users : server.users) {
-            userDispData += "User client " + current_users.getUsername() + "\n";
-        }
-        
+        userDispData = "User Clients "+ UserCount + "\n";
         userDisp.setText(userDispData);
         c.add(userDisp);
         
-        // Displays weather stations
         wsDisp.setFont(new Font("Arial", Font.PLAIN, 15));
         wsDisp.setSize(300, 400);
         wsDisp.setLocation(400, 70);
@@ -102,12 +95,11 @@ public class ServerGUI extends JFrame implements ActionListener {
         for (WeatherStationType currentws : server.weatherStations) {
             wsDispData += "Weather Station " + currentws.getID() + "\n";
         }   
-        
-        wsDisp.setText(wsDispData);
-        c.add(wsDisp);
+            wsDisp.setText(wsDispData);
+            c.add(wsDisp);
             
-        c.revalidate();
-        c.repaint();
+            c.revalidate();
+            c.repaint();
         }
 
     @Override
