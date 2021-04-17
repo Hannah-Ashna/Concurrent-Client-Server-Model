@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WeatherStationType implements Serializable {
     public final LinkedList<SampleType> samples = new LinkedList<>();
-    public String ID = "ID is being Configured";
+     public String ID = "ID is being Configured";
     
     public String getID(){
         return ID;

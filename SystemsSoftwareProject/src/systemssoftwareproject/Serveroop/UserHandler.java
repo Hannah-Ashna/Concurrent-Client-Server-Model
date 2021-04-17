@@ -33,7 +33,6 @@ public class UserHandler implements Runnable {
         while(running){
         try {
             server.users.add(userType);
-            userType.setUsername("test");
             in =  new Scanner(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             while(true){
