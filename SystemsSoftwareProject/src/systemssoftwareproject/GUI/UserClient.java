@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.IOException;
 
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;

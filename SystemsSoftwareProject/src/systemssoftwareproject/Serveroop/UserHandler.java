@@ -1,6 +1,7 @@
 package systemssoftwareproject.Serveroop;
 import java.net.Socket;
 import java.io.*; 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -70,12 +71,17 @@ public class UserHandler implements Runnable {
             out.flush();
             out.reset();
         }else if(line.startsWith(usercom.REQUESTSTATIONLIST)){
-            out.writeInt(usercom.WEATHERSTATIONLISTINT);
-            List<String> ids = null;
-            for (WeatherStationType weatherStation : server.weatherStations) {
+            
+            List<String> ids =  new LinkedList<>();
+            server.weatherStations.forEach(weatherStation -> {
                 ids.add(weatherStation.getID());
-            }
+            });
+            System.out.println(ids + "list");
+            out.flush();
+            out.writeInt(2);
             out.writeObject(ids);
+            //out.flush();
+            //out.reset();
         }else if(line.startsWith(usercom.CLOSE)){
             System.out.println("User Disconnected");
             server.users.remove(userType);
