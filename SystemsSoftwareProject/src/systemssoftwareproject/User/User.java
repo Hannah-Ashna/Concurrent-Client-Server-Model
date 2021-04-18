@@ -60,6 +60,7 @@ public class User {
                     //updates the list of weaterstations when it recives new data.
                     weatherStationList = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(weatherStationList.wsCount());
+                    //System.out.println(this.weatherStationList.weatherStations.get(0).samples.getLast().getTemp());
                     System.out.println(this.getIds());
                     gui.updateWSList(this);
                     gui.getWSList(weatherStationList);

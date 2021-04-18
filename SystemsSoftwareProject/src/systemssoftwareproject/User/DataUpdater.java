@@ -22,8 +22,10 @@ public class DataUpdater implements Runnable{
     @Override
     public void run() {
         try {
+            while(true){
             user.requestStations();
-            TimeUnit.SECONDS.sleep(30);
+            TimeUnit.SECONDS.sleep(10);
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }

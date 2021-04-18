@@ -58,6 +58,8 @@ public class UserHandler implements Runnable {
             WSSTYPE wss = new WSSTYPE();
             wss.weatherStations = server.weatherStations;
             out.writeObject(wss);
+            out.flush();
+            out.reset();
         } else if(line.startsWith("CLOSE")){
             System.out.println("User Disconnected");
             server.users.remove(userType);
