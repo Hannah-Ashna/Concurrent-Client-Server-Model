@@ -21,7 +21,7 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel title;
     private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp, AltDisp;
-    private final JComboBox IDList;
+    private JComboBox IDList;
     private final JButton graph;
     
     private WSSTYPE WeatherStationList;
@@ -163,7 +163,8 @@ public class UserClient extends JFrame implements ActionListener {
 
     public void updateWSList(User user) throws InterruptedException{
         c.remove(IDList);
-        JComboBox IDList = new JComboBox(user.getIds().toArray());
+        IDList = new JComboBox(user.getIds().toArray());
+        System.out.println("Testing: " + user.getIds());
         IDList.setSelectedIndex(0);
         IDList.addActionListener(this);
         IDList.setSize(100,30);
