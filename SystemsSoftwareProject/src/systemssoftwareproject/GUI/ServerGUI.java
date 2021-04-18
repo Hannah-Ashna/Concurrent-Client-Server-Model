@@ -84,10 +84,8 @@ public class ServerGUI extends JFrame implements ActionListener {
         userDisp.setLineWrap(true);
         userDisp.setEditable(false);
         
-        // userDispData = "User Clients "+ UserCount + "\n";
-        for (UserType current_users : server.users) {
-            userDispData += "User client " + current_users.getUsername() + "\n";
-        }
+         userDispData = "User Clients "+ UserCount + "\n";
+        
         
         userDisp.setText(userDispData);
         c.add(userDisp);

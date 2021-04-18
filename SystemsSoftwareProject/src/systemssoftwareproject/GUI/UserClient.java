@@ -24,8 +24,7 @@ public class UserClient extends JFrame implements ActionListener {
     private final JComboBox IDList;
     private final JButton graph;
     
-    private WSSTYPE WeatherStationList;
-    private User user;
+    private final User user;
     // Other Variables
     String GPSVal, TempVal, HumidityVal;
     String wsIDs[]={"None Connected"};
@@ -146,10 +145,12 @@ public class UserClient extends JFrame implements ActionListener {
         });
     }
     
-    public void actionPerformed (ActionEvent e){        
+    @Override
+    public void actionPerformed (ActionEvent e){  
+        
         JComboBox IDList = (JComboBox)e.getSource();
         String ID = IDList.getSelectedItem().toString();
-        WeatherStationType ws =  WeatherStationList.getByID(ID);
+        WeatherStationType ws =  user.getByID(ID);
         display.setText("\n Selected Weather Station ID: " + ws.getID());
         HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
@@ -157,11 +158,8 @@ public class UserClient extends JFrame implements ActionListener {
         AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
     }
     
-    public void getWSList(WSSTYPE wslist){
-        WeatherStationList = wslist;
-    }
 
-    public void updateWSList(User user) throws InterruptedException{
+    public void updateWSList() throws InterruptedException{
         c.remove(IDList);
         JComboBox IDList = new JComboBox(user.getIds().toArray());
         IDList.setSelectedIndex(0);

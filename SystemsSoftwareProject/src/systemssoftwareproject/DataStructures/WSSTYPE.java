@@ -11,13 +11,6 @@ public class WSSTYPE implements Serializable{
     public int wsCount(){
         return weatherStations.size();
     }
-    public WeatherStationType getByID(String ID){
-        for (WeatherStationType weatherStation : weatherStations) {
-         if(weatherStation.getID().equals(ID)){
-             return weatherStation;
-         }   
-        }
-        return null;
-    }
+    
     
 }

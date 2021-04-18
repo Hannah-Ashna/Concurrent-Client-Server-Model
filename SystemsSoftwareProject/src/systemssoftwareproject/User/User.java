@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,10 +20,11 @@ import systemssoftwareproject.GUI.UserClient;
 import systemssoftwareproject.WeatherStation.WeatherStation;
 
 public class User {
-    public WSSTYPE weatherStationList;
+    public List<WeatherStationType> weatherStations =  Collections.synchronizedList(new ArrayList<>()); 
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
     private UserClient gui;
+    public boolean running = true;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         System.out.println("User - Attempting to Login");
         LoginForm loginForm = new LoginForm();
@@ -53,18 +56,22 @@ public class User {
          gui = new UserClient(this);
          gui.setVisible(true);
          requestStations();
-        while(true){
+        while(running){
             try{
                 if(inFromStation.readInt() == 0){
                     System.out.println("Testing User Client <-> Server Communication:");
                     //updates the list of weaterstations when it recives new data.
-                    weatherStationList = (WSSTYPE)inFromStation.readObject();
-                    //System.out.println(weatherStationList.wsCount());
-                    System.out.println(this.getIds());
-                    gui.updateWSList(this);
-                    gui.getWSList(weatherStationList);
-
-                }  
+                    weatherStations.removeAll(weatherStations);
+                    try{
+                        while(true){
+                    weatherStations.add((WeatherStationType) inFromStation.readObject());
+                    System.out.println(weatherStations.toString());
+                        }
+                    }catch(IOException e){
+                        System.out.println("dwn complete");
+                    gui.updateWSList();
+            }
+                }
             }catch(IOException e){
             }
         }
@@ -74,13 +81,14 @@ public class User {
     }
     public void closeProgram(){
         outToStation.println("CLOSE");
+        running = false;
     }
     
     public List<String> getIds(){
         List<String> weatherStationIDs;
         weatherStationIDs = new LinkedList<>();
         try{
-        weatherStationList.weatherStations.forEach((WeatherStationType _item) -> {
+        weatherStations.forEach((WeatherStationType _item) -> {
             weatherStationIDs.add(_item.getID());
         });
         } catch(Exception e){
@@ -89,6 +97,14 @@ public class User {
             return  weatherStationfail;
         }
         return weatherStationIDs;
+    }
+    public WeatherStationType getByID(String ID){
+        for (WeatherStationType weatherStation : weatherStations) {
+         if(weatherStation.getID().equals(ID)){
+             return weatherStation;
+         }   
+        }
+        return null;
     }
     
     
