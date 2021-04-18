@@ -174,6 +174,16 @@ public class UserClient extends JFrame implements ActionListener {
         c.repaint();
     }
     
+    public void updateDataDisp (){
+        String ID = IDList.getSelectedItem().toString();
+        WeatherStationType ws =  WeatherStationList.getByID(ID);
+        display.setText("\n Selected Weather Station ID: " + ws.getID());
+        HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+        TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
+        AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+    }
+    
     
     public static void drawGraph () throws Exception{
         
