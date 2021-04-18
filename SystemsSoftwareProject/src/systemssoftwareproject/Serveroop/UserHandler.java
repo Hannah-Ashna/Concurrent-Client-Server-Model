@@ -1,11 +1,8 @@
 package systemssoftwareproject.Serveroop;
 import java.net.Socket;
 import java.io.*; 
-import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.UserType;
@@ -58,16 +55,9 @@ public class UserHandler implements Runnable {
         System.out.println(line);
         if(line.startsWith(usercom.REQUESTSTATIONS)){
             out.writeInt(usercom.WSSTYPE);
-            List<WeatherStationType> weatherStations = server.weatherStations;
-            System.out.println(weatherStations.toString());
-            weatherStations.forEach((WeatherStationType _item) -> {
-                try {
-                    out.writeObject(_item);
-                } catch (IOException ex) {
-                    Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            });
+            WSSTYPE wss = new WSSTYPE();
+            wss.weatherStations = server.weatherStations;
+            out.writeObject(wss);
         } else if(line.startsWith("CLOSE")){
             System.out.println("User Disconnected");
             server.users.remove(userType);
