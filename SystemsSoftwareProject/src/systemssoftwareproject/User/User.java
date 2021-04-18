@@ -18,7 +18,9 @@ import systemssoftwareproject.GUI.UserClient;
 import systemssoftwareproject.WeatherStation.WeatherStation;
 
 public class User {
+     public List<String> WSids; 
     public WSSTYPE weatherStationList;
+    public String currentWSID;
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
     private UserClient gui;
@@ -48,30 +50,46 @@ public class User {
         outToStation = new PrintWriter(socket.getOutputStream(), true);
         //Test to request stations at the beginning of the program
         //Runs automatic download of latest data from the server.
-         DataUpdater dataUpdater = new DataUpdater(this);
-         new Thread((Runnable) dataUpdater).start();
+         //DataUpdater dataUpdater = new DataUpdater(this);
+         //new Thread((Runnable) dataUpdater).start();
          gui = new UserClient(this);
          gui.setVisible(true);
-         requestStations();
-        while(true){
+         requestStationIDList();
+         while(true){
             try{
                 if(inFromStation.readInt() == 0){
+                    //Donloads all weatherStations
                     System.out.println("Testing User Client <-> Server Communication:");
                     //updates the list of weaterstations when it recives new data.
                     weatherStationList = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(weatherStationList.wsCount());
-                    //System.out.println(this.weatherStationList.weatherStations.get(0).samples.getLast().getTemp());
                     System.out.println(this.getIds());
                     gui.updateWSList(this);
                     gui.getWSList(weatherStationList);
-                    gui.updateDataDisp();
+
+                } else if (inFromStation.readInt() == usercom.WEATHERSTATION){
+                    
+                    WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
+                    weatherStationList.replaceStation(weatherStation);
+                }else if(inFromStation.readInt() == usercom.WEATHERSTATIONLISTINT){
+                    WSids = (List<String>) inFromStation.readObject(); 
                 }
+                    
             }catch(IOException e){
             }
         }
     }
+    public void updateSelectedStation(String ID){
+        currentWSID = ID;
+    }
     public void requestStations() throws InterruptedException{
        outToStation.println(usercom.REQUESTSTATIONS);
+    }
+     public void requestStation(String ID) throws InterruptedException{
+        outToStation.println(usercom.REQUESTSTATION + ID);
+    }
+    public void requestStationIDList(){
+        outToStation.println(usercom.REQUESTSTATIONLIST);
     }
     public void closeProgram(){
         outToStation.println("CLOSE");

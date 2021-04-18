@@ -17,6 +17,14 @@ public class ServerFunctions {
     public List wsStationsArray(){
         return weatherStations;
     }
+    public WeatherStationType getWSByID(String ID){
+        for (WeatherStationType weatherStation : weatherStations) {
+         if(weatherStation.getID().equals(ID)){
+             return weatherStation;
+         }   
+        }
+        return null;
+    }
     
     public int userCount() {
         return users.size();

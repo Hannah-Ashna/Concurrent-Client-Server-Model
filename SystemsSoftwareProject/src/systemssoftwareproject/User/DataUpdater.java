@@ -23,7 +23,7 @@ public class DataUpdater implements Runnable{
     public void run() {
         try {
             while(true){
-            user.requestStations();
+            user.requestStation(user.currentWSID);
             TimeUnit.SECONDS.sleep(10);
             }
         } catch (InterruptedException ex) {

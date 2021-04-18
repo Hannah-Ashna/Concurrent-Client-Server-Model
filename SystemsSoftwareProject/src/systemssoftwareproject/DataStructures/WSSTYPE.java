@@ -20,5 +20,11 @@ public class WSSTYPE implements Serializable{
         }
         return null;
     }
-    
+    public void replaceStation(WeatherStationType ws){
+        for (WeatherStationType weatherStation : weatherStations) {
+         if(weatherStation.ID.equals(ws.ID)){
+             weatherStation = ws;
+            }
+         }
+    }
 }

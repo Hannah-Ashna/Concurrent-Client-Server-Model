@@ -1,6 +1,7 @@
 package systemssoftwareproject.Serveroop;
 import java.net.Socket;
 import java.io.*; 
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -60,7 +61,22 @@ public class UserHandler implements Runnable {
             out.writeObject(wss);
             out.flush();
             out.reset();
-        } else if(line.startsWith("CLOSE")){
+        }else if(line.startsWith(usercom.REQUESTSTATION)){
+            String wsID = line.substring(usercom.REQUESTSTATION.length()); //Removes command to get the ID
+            System.out.println(wsID);
+            WeatherStationType ws = server.getWSByID(wsID);
+            out.writeInt(usercom.WEATHERSTATION);
+            out.writeObject(ws);
+            out.flush();
+            out.reset();
+        }else if(line.startsWith(usercom.REQUESTSTATIONLIST)){
+            out.writeInt(usercom.WEATHERSTATIONLISTINT);
+            List<String> ids = null;
+            for (WeatherStationType weatherStation : server.weatherStations) {
+                ids.add(weatherStation.getID());
+            }
+            out.writeObject(ids);
+        }else if(line.startsWith(usercom.CLOSE)){
             System.out.println("User Disconnected");
             server.users.remove(userType);
             running = false;
