@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
@@ -25,7 +28,6 @@ public class UserClient extends JFrame implements ActionListener {
     private JComboBox IDList;
     private final JButton graph;
     
-    private WSSTYPE WeatherStationList;
     private User user;
     // Other Variables
     String GPSVal, TempVal, HumidityVal;
@@ -149,20 +151,23 @@ public class UserClient extends JFrame implements ActionListener {
     
     public void actionPerformed (ActionEvent e){        
         JComboBox IDList = (JComboBox)e.getSource();
-        String ID = IDList.getSelectedItem().toString();
-        WeatherStationType ws =  WeatherStationList.getByID(ID);
+        String ID = IDList.getSelectedItem().toString(); 
+            try {
+                user.requestStation(ID);
+            } catch (InterruptedException ex) {
+            }
+        WeatherStationType ws;
+        ws =  user.weatherStationList.getByID(ID);
+        System.out.println(ws + "action");
         display.setText("\n Selected Weather Station ID: " + ws.getID());
         HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
         GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
         AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+    
     }
     
-    public void getWSList(WSSTYPE wslist){
-        WeatherStationList = wslist;
-    }
-
-    public void updateWSList(User user) throws InterruptedException{
+    public void updateWSList() throws InterruptedException{
         c.remove(IDList);
         IDList = new JComboBox(user.getIds().toArray());
         System.out.println("Testing: " + user.getIds());
@@ -175,9 +180,18 @@ public class UserClient extends JFrame implements ActionListener {
         c.repaint();
     }
     
-    public void updateDataDisp (){
+    public void updateDataDisp () throws InterruptedException{
         String ID = IDList.getSelectedItem().toString();
-        WeatherStationType ws =  WeatherStationList.getByID(ID);
+        user.updateSelectedStation(ID);
+        user.requestStation(ID);
+        WeatherStationType ws;
+        try{
+        ws =  user.weatherStationList.getByID(ID);
+        }catch(Exception e) {
+            TimeUnit.SECONDS.sleep(1);
+            ws =  user.weatherStationList.getByID(ID);
+
+        }
         display.setText("\n Selected Weather Station ID: " + ws.getID());
         HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));

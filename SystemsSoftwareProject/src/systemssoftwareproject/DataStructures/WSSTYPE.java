@@ -15,16 +15,22 @@ public class WSSTYPE implements Serializable{
     public WeatherStationType getByID(String ID){
         for (WeatherStationType weatherStation : weatherStations) {
          if(weatherStation.getID().equals(ID)){
+             System.out.println(ID + "Testing");
              return weatherStation;
          }   
         }
-        return null;
+        return new WeatherStationType();
     }
     public void replaceStation(WeatherStationType ws){
+        boolean replaced = false;
         for (WeatherStationType weatherStation : weatherStations) {
          if(weatherStation.ID.equals(ws.ID)){
              weatherStation = ws;
+             replaced = true;
             }
          }
+        if(replaced == false){
+            weatherStations.add(ws);
+        }
     }
 }

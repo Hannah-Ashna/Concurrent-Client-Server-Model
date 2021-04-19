@@ -19,7 +19,7 @@ import systemssoftwareproject.WeatherStation.WeatherStation;
 
 public class User {
     public List<String> WSids = new LinkedList<>(); 
-    public WSSTYPE weatherStationList;
+    public WSSTYPE weatherStationList = new WSSTYPE();
     public String currentWSID = "None";
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
@@ -57,7 +57,6 @@ public class User {
          
          while(true){
             try{
-                System.out.println("check");
                 int inputType = inFromStation.readInt();
                 System.out.println(inputType);
                 if(inputType == 0){
@@ -68,16 +67,16 @@ public class User {
                     weatherStationList = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(weatherStationList.wsCount());
                     System.out.println(this.getIds());
-                    gui.updateWSList(this);
-                    gui.getWSList(weatherStationList);
+                    gui.updateWSList();
 
                 } else if (inputType == usercom.WEATHERSTATION){
                     WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
                     weatherStationList.replaceStation(weatherStation);
+                    System.out.println(weatherStation);
                 }else if(inputType == 2){
                     WSids = (List<String>) inFromStation.readObject(); 
                     System.out.println(WSids);
-                    gui.updateWSList(this);
+                    gui.updateWSList();
                 }
                     
             }catch(IOException e){
