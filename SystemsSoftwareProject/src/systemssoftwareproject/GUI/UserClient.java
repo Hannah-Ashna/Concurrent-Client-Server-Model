@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.DataStructures.UserType;
@@ -26,7 +28,9 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp, AltDisp;
     private JComboBox IDList;
-    private final JButton graph;
+    
+    private List<Integer> xData =  new ArrayList<Integer>(); 
+    private List<Integer> yData =  new ArrayList<Integer>(); 
     
     private User user;
     // Other Variables
@@ -131,14 +135,10 @@ public class UserClient extends JFrame implements ActionListener {
         AltDisp.setText(" ");
         c.add(AltDisp);
         
-        graph = new JButton("Graph"); 
-        graph.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        graph.setSize(100, 20); 
-        graph.setLocation(350, 470); 
-        graph.addActionListener(this); 
-        c.add(graph);
-        
         setVisible(true);
+        
+        xData.add(0);
+        yData.add(0);
         
         addWindowListener(new WindowAdapter() {
             @Override
@@ -160,11 +160,10 @@ public class UserClient extends JFrame implements ActionListener {
         display.setText("\n Selected Weather Station ID: " + ws.getID());
         try{
             HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
-        TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
-        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-        AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
-        } catch (Exception ex) {
-            }
+            TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+            GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
+            AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+        } catch (Exception ex) {}
         
     }
     
@@ -185,59 +184,26 @@ public class UserClient extends JFrame implements ActionListener {
         String ID = IDList.getSelectedItem().toString();
         WeatherStationType ws;
         if(ID != null){
+        
         try{
-        ws =  user.weatherStationList.getByID(ID);
-        }catch(Exception e) {
+            ws =  user.weatherStationList.getByID(ID);
+        } catch(Exception e) {
             TimeUnit.SECONDS.sleep(1);
             ws =  user.weatherStationList.getByID(ID);
-
         }
+        
         display.setText("\n Selected Weather Station ID: " + ws.getID());
         HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
         GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
         AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
-        }
-        
+        } 
     }
     
     
-    public static void drawGraph () throws Exception{
-        
-        double phase = 0;
-        double[][] initdata = getSineData(phase);
-
-        // Create Chart
-        final XYChart chart = QuickChart.getChart("Simple XChart Real-time Demo", "Radians", "Sine", "sine", initdata[0], initdata[1]);
-
-        // Show it
-        final SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
+    public void drawGraph (){
+        XYChart chart = QuickChart.getChart("Temperature Chart", "Seconds", "Temperature", "celcius", xData, yData);
+        SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
         sw.displayChart();
-
-        while (true) {
-
-          phase += 2 * Math.PI * 2 / 20.0;
-
-          Thread.sleep(100);
-
-          final double[][] data = getSineData(phase);
-
-          chart.updateXYSeries("sine", data[0], data[1], null);
-          sw.repaintChart();
-        }
-
-    }
-    
-    
-    private static double[][] getSineData(double phase) {
-
-        double[] xData = new double[100];
-        double[] yData = new double[100];
-        for (int i = 0; i < xData.length; i++) {
-            double radians = phase + (2 * Math.PI / xData.length * i);
-            xData[i] = radians;
-            yData[i] = Math.sin(radians);
-        }
-        return new double[][] { xData, yData };
     }
  }
