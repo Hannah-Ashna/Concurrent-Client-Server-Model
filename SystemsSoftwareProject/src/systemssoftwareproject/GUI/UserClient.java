@@ -149,22 +149,23 @@ public class UserClient extends JFrame implements ActionListener {
         });
     }
     
+    @Override
     public void actionPerformed (ActionEvent e){        
-        JComboBox IDList = (JComboBox)e.getSource();
-        String ID = IDList.getSelectedItem().toString(); 
-            try {
-                user.requestStation(ID);
-            } catch (InterruptedException ex) {
-            }
+        JComboBox IDListe = (JComboBox)e.getSource();
+        String ID = IDListe.getSelectedItem().toString();
+        user.currentWSID = ID;
+        user.requestStation(ID);
         WeatherStationType ws;
         ws =  user.weatherStationList.getByID(ID);
-        System.out.println(ws + "action");
         display.setText("\n Selected Weather Station ID: " + ws.getID());
-        HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+        try{
+            HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
         GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
         AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
-    
+        } catch (Exception ex) {
+            }
+        
     }
     
     public void updateWSList() throws InterruptedException{
@@ -182,9 +183,8 @@ public class UserClient extends JFrame implements ActionListener {
     
     public void updateDataDisp () throws InterruptedException{
         String ID = IDList.getSelectedItem().toString();
-        user.updateSelectedStation(ID);
-        user.requestStation(ID);
         WeatherStationType ws;
+        if(ID != null){
         try{
         ws =  user.weatherStationList.getByID(ID);
         }catch(Exception e) {
@@ -197,6 +197,8 @@ public class UserClient extends JFrame implements ActionListener {
         TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
         GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
         AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+        }
+        
     }
     
     

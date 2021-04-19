@@ -80,8 +80,8 @@ public class UserHandler implements Runnable {
             out.flush();
             out.writeInt(2);
             out.writeObject(ids);
-            //out.flush();
-            //out.reset();
+            out.flush();
+            out.reset();
         }else if(line.startsWith(usercom.CLOSE)){
             System.out.println("User Disconnected");
             server.users.remove(userType);

@@ -25,7 +25,8 @@ public class WSSTYPE implements Serializable{
         boolean replaced = false;
         for (WeatherStationType weatherStation : weatherStations) {
          if(weatherStation.ID.equals(ws.ID)){
-             weatherStation = ws;
+            weatherStations.remove(weatherStation);
+            weatherStations.add(ws);
              replaced = true;
             }
          }

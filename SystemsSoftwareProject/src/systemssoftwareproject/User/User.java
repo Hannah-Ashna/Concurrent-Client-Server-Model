@@ -54,7 +54,7 @@ public class User {
          new Thread((Runnable) dataUpdater).start();
          gui = new UserClient(this);
          gui.setVisible(true);
-         
+         requestStationIDList();
          while(true){
             try{
                 int inputType = inFromStation.readInt();
@@ -73,6 +73,7 @@ public class User {
                     WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
                     weatherStationList.replaceStation(weatherStation);
                     System.out.println(weatherStation);
+                    gui.updateDataDisp();
                 }else if(inputType == 2){
                     WSids = (List<String>) inFromStation.readObject(); 
                     System.out.println(WSids);
@@ -89,11 +90,12 @@ public class User {
     public void requestStations() throws InterruptedException{
        outToStation.println(usercom.REQUESTSTATIONS);
     }
-     public void requestStation(String ID) throws InterruptedException{
+     public void requestStation(String ID){
         outToStation.println(usercom.REQUESTSTATION + ID);
     }
     public void requestStationIDList(){
         outToStation.println(usercom.REQUESTSTATIONLIST);
+        outToStation.flush();
     }
     public void closeProgram(){
         outToStation.println("CLOSE");
