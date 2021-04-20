@@ -84,6 +84,7 @@ public class LoginForm extends JFrame implements ActionListener {
         // Run login authentication
         if (e.getSource() == login_var){
             String username_input = userInp.getText();
+            login_username = username_input;
             String password_input = passInp.getText();
             status = systemssoftwareproject.Authentication.login.login(username_input, password_input);
             
@@ -104,6 +105,10 @@ public class LoginForm extends JFrame implements ActionListener {
            this.dispose();
            new SignupForm().setVisible(true);
         }
+    }
+    
+    public String getUsername(){
+        return login_username;
     }
     
     public boolean returnStatus(){
