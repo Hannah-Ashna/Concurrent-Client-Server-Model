@@ -5,17 +5,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import systemssoftwareproject.DataStructures.WSSTYPE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.usercom;
 import systemssoftwareproject.GUI.LoginForm;
 import systemssoftwareproject.GUI.UserClient;
-import systemssoftwareproject.WeatherStation.WeatherStation;
 
 public class User {
     public List<String> WSids = new LinkedList<>(); 

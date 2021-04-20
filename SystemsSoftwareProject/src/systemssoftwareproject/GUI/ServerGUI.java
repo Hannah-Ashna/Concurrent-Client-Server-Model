@@ -4,11 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.StringTokenizer;
-import java.util.concurrent.TimeUnit;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.DataStructures.UserType;
 import systemssoftwareproject.DataStructures.WeatherStationType;
@@ -16,16 +11,15 @@ import systemssoftwareproject.Serveroop.Server;
 
 
 public class ServerGUI extends JFrame implements ActionListener {
-   // Components
+   
+    // GUI Components & Variables
     private final Container c;
     private final JLabel users, ws;
     private final JTextArea userDisp, wsDisp;
     
-    // Variables
-    int WSCount = 0;
-    int UserCount = 0;
-    
     public ServerGUI(Server server) {
+        // Setup a basic GUI template for the Server's GUI
+        // This is updated using the other functions
         setTitle("Server");
         setBounds(300, 90, 800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -70,21 +64,20 @@ public class ServerGUI extends JFrame implements ActionListener {
     
     
     public void getClients(Server server) throws InterruptedException{
-        WSCount = server.wsCount();
-        UserCount = server.userCount();
         String wsDispData = "";
         String userDispData = "";
+        
+        // Remove old user Display to be replaced with new ones
         c.remove(wsDisp);
         c.remove(userDisp);
         
-        // Displays users
+        // Update & Display User Clients
         userDisp.setFont(new Font("Arial", Font.PLAIN, 15));
         userDisp.setSize(300, 400);
         userDisp.setLocation(50, 70);
         userDisp.setLineWrap(true);
         userDisp.setEditable(false);
         
-        // userDispData = "User Clients "+ UserCount + "\n";
         for (UserType current_users : server.users) {
             userDispData += "User client " + current_users.getUsername() + "\n";
         }
@@ -92,7 +85,7 @@ public class ServerGUI extends JFrame implements ActionListener {
         userDisp.setText(userDispData);
         c.add(userDisp);
         
-        // Displays weather stations
+        // Update & Display Weather Station Clients
         wsDisp.setFont(new Font("Arial", Font.PLAIN, 15));
         wsDisp.setSize(300, 400);
         wsDisp.setLocation(400, 70);
@@ -105,14 +98,15 @@ public class ServerGUI extends JFrame implements ActionListener {
         
         wsDisp.setText(wsDispData);
         c.add(wsDisp);
-            
+        
+        // Refresh GUI to showcase updates
         c.revalidate();
         c.repaint();
-        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+        //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
+    } 
 }

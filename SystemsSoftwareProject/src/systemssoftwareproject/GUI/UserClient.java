@@ -4,21 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import systemssoftwareproject.DataStructures.UserType;
-import systemssoftwareproject.DataStructures.WSSTYPE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.User.User;
+
 public class UserClient extends JFrame implements ActionListener {
     
-    // Components
+    // GUI Components & Variables
     private final Container c;
     private final JLabel title;
     private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
@@ -32,11 +27,12 @@ public class UserClient extends JFrame implements ActionListener {
     public Graph graphDraw = new Graph();
     private int selectedIndex = 0;
     private User user;
-    // Other Variables
-    String GPSVal, TempVal, HumidityVal;
-    String wsIDs[]={"None Connected"};
+    private String GPSVal, TempVal, HumidityVal;
+    private String wsIDs[]={"None Connected"};
     
     public UserClient(User user) throws InterruptedException {
+        // Setup a basic GUI template for the User Client GUI
+        // This is updated using the other functions
         this.user = user;
         setTitle("User Client");
         setBounds(300, 90, 800, 600);
@@ -143,7 +139,7 @@ public class UserClient extends JFrame implements ActionListener {
         
         setVisible(true);
         
-        
+        // This ensures that the user is removed from other variables when the window is closed
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
@@ -154,11 +150,14 @@ public class UserClient extends JFrame implements ActionListener {
     }
     
     @Override
-    public void actionPerformed (ActionEvent e){        
+    public void actionPerformed (ActionEvent e){
+        // If the user clicks the graph button, trigger the process of drawing a new graph
          if (e.getSource() == graph && currentTempSamples.size() > 0 && currentHumiditySamples.size() > 0){
              graphDraw.refreshGraph(currentTempSamples, currentHumiditySamples, IDList.getSelectedItem().toString());
          }
          
+         // If the user interacts with the combo box
+         // Use its ID to update all the different text areas with new relevant data
          else if ((JComboBox)e.getSource() != null){
             JComboBox IDListe = (JComboBox)e.getSource();
             selectedIndex = IDListe.getSelectedIndex();
@@ -179,6 +178,7 @@ public class UserClient extends JFrame implements ActionListener {
     }
     
     public void updateWSList() throws InterruptedException{
+        // Get the new list of Weather Station IDs whenever there's an update
         c.remove(IDList);
         IDList = new JComboBox(user.getIds().toArray());
         System.out.println("Testing: " + user.getIds());
@@ -192,6 +192,7 @@ public class UserClient extends JFrame implements ActionListener {
     }
     
     public void updateDataDisp () throws InterruptedException{
+        // Updates the data display whenever new data is received
         String ID = IDList.getSelectedItem().toString();
         WeatherStationType ws;
         if(ID != null){
