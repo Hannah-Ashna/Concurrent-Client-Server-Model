@@ -9,11 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.XYChart;
 import java.util.ArrayList;
-import java.util.List;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.DataStructures.UserType;
@@ -28,10 +24,11 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp, AltDisp;
     private JComboBox IDList;
+    private final JButton graph;
     
-    private List<Integer> xData =  new ArrayList<Integer>(); 
-    private List<Integer> yData =  new ArrayList<Integer>(); 
-    
+    private ArrayList<Integer> currentWSSamples =  new ArrayList<Integer>(); 
+    public Graph graphDraw = new Graph();
+    private int selectedIndex = 0;
     private User user;
     // Other Variables
     String GPSVal, TempVal, HumidityVal;
@@ -135,10 +132,15 @@ public class UserClient extends JFrame implements ActionListener {
         AltDisp.setText(" ");
         c.add(AltDisp);
         
+        graph = new JButton("Graph"); 
+        graph.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        graph.setSize(100, 20); 
+        graph.setLocation(350, 470); 
+        graph.addActionListener(this); 
+        c.add(graph);
+        
         setVisible(true);
         
-        xData.add(0);
-        yData.add(0);
         
         addWindowListener(new WindowAdapter() {
             @Override
@@ -151,27 +153,35 @@ public class UserClient extends JFrame implements ActionListener {
     
     @Override
     public void actionPerformed (ActionEvent e){        
-        JComboBox IDListe = (JComboBox)e.getSource();
-        String ID = IDListe.getSelectedItem().toString();
-        user.currentWSID = ID;
-        user.requestStation(ID);
-        WeatherStationType ws;
-        ws =  user.weatherStationList.getByID(ID);
-        display.setText("\n Selected Weather Station ID: " + ws.getID());
-        try{
-            HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
-            TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
-            GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-            AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
-        } catch (Exception ex) {}
-        
+         if (e.getSource() == graph && currentWSSamples.size() > 0){
+             //graphDraw.dispose();
+             //Graph graphDraw = new Graph();
+             graphDraw.refreshGraph(currentWSSamples);
+         }
+         
+         else if ((JComboBox)e.getSource() != null){
+            JComboBox IDListe = (JComboBox)e.getSource();
+            selectedIndex = IDListe.getSelectedIndex();
+            String ID = IDListe.getSelectedItem().toString();
+            user.currentWSID = ID;
+            user.requestStation(ID);
+            WeatherStationType ws;
+            ws =  user.weatherStationList.getByID(ID);
+            display.setText("\n Selected Weather Station ID: " + ws.getID());
+            try{
+                HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+                TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+                GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
+                AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+            } catch (Exception ex) {}
+         }
     }
     
     public void updateWSList() throws InterruptedException{
         c.remove(IDList);
         IDList = new JComboBox(user.getIds().toArray());
         System.out.println("Testing: " + user.getIds());
-        IDList.setSelectedIndex(0);
+        IDList.setSelectedIndex(selectedIndex);
         IDList.addActionListener(this);
         IDList.setSize(100,30);
         IDList.setLocation(650, 20);
@@ -185,25 +195,21 @@ public class UserClient extends JFrame implements ActionListener {
         WeatherStationType ws;
         if(ID != null){
         
-        try{
-            ws =  user.weatherStationList.getByID(ID);
-        } catch(Exception e) {
-            TimeUnit.SECONDS.sleep(1);
-            ws =  user.weatherStationList.getByID(ID);
-        }
-        
-        display.setText("\n Selected Weather Station ID: " + ws.getID());
-        HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
-        TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
-        GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-        AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+            try{
+                ws =  user.weatherStationList.getByID(ID);
+            } catch(Exception e) {
+                TimeUnit.SECONDS.sleep(1);
+                ws =  user.weatherStationList.getByID(ID);
+            }
+
+            display.setText("\n Selected Weather Station ID: " + ws.getID());
+            HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+            TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+            GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
+            AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+            for (int i = 0; i < ws.samples.size(); i++){
+                currentWSSamples.add((int)ws.samples.get(i).getTemp());
+            }
         } 
-    }
-    
-    
-    public void drawGraph (){
-        XYChart chart = QuickChart.getChart("Temperature Chart", "Seconds", "Temperature", "celcius", xData, yData);
-        SwingWrapper<XYChart> sw = new SwingWrapper<XYChart>(chart);
-        sw.displayChart();
     }
  }

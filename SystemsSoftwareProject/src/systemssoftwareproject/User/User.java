@@ -72,7 +72,7 @@ public class User {
                     weatherStationList = (WSSTYPE)inFromStation.readObject();
                     //System.out.println(weatherStationList.wsCount());
                     System.out.println(this.getIds());
-                    gui.updateWSList();
+                    //gui.updateWSList();
 
                 } else if (inputType == usercom.WEATHERSTATION){
                     WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
@@ -113,7 +113,4 @@ public class User {
     public List<String> getIds(){
         return WSids;
     }
-    
-    
- 
 }
