@@ -156,26 +156,25 @@ public class UserClient extends JFrame implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e){        
          if (e.getSource() == graph && currentTempSamples.size() > 0 && currentHumiditySamples.size() > 0){
-             graphDraw.refreshGraph(currentTempSamples, currentHumiditySamples);
+             graphDraw.refreshGraph(currentTempSamples, currentHumiditySamples, IDList.getSelectedItem().toString());
          }
          
          else if ((JComboBox)e.getSource() != null){
             JComboBox IDListe = (JComboBox)e.getSource();
-            if (IDListe.getSelectedIndex() != selectedIndex){
-                selectedIndex = IDListe.getSelectedIndex();
-                String ID = IDListe.getSelectedItem().toString();
-                user.currentWSID = ID;
-                user.requestStation(ID);
-                WeatherStationType ws;
-                ws =  user.weatherStationList.getByID(ID);
-                display.setText("\n Selected Weather Station ID: " + ws.getID());
-                try{
-                    HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
-                    TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
-                    GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-                    AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
-                } catch (Exception ex) {}
-            }
+            selectedIndex = IDListe.getSelectedIndex();
+            String ID = IDListe.getSelectedItem().toString();
+            user.currentWSID = ID;
+            user.requestStation(ID);
+            WeatherStationType ws;
+            ws =  user.weatherStationList.getByID(ID);
+            
+            display.setText("\n Selected Weather Station ID: " + ws.getID());
+            try{
+                HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+                TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+                GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
+                AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+            } catch (Exception ex) {}
          }
     }
     

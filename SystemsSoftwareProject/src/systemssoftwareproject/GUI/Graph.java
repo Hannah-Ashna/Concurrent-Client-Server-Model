@@ -49,7 +49,7 @@ public class Graph extends JFrame implements ActionListener {
         createChart(chart);
     }
     
-    public void refreshGraph(ArrayList NewTempData, ArrayList NewHumidData){
+    public void refreshGraph(ArrayList NewTempData, ArrayList NewHumidData, String Title){
         xData = new LinkedList<Integer>();
         yTempData = new LinkedList<Double>();
         yHumidData = new LinkedList<Double>();
@@ -63,7 +63,7 @@ public class Graph extends JFrame implements ActionListener {
             timeCount += 10;
         }
         
-        createHistogram("Temperature Graph", "Time (seconds)", "Temperature (Celcius)", xData, yTempData, yHumidData);
+        createHistogram("Temperature Graph: " + Title + " WS Client", "Time (seconds)", "Temperature (Celcius)", xData, yTempData, yHumidData);
     }
     
     public void getXData(){
