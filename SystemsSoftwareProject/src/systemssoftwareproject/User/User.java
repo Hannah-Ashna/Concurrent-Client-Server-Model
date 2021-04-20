@@ -23,6 +23,7 @@ public class User {
     public String currentWSID = "None";
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
+    private ObjectOutputStream out;
     private UserClient gui;
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         System.out.println("User - Attempting to Login");
@@ -32,14 +33,15 @@ public class User {
             System.out.println("User - Logging in ...");
         }
         if (loginForm.returnStatus()){
+            String test_username = loginForm.getUsername();
             User user = new User();
-            user.run();
+            user.run(test_username);
             System.out.println("User - Login Successful");
         }
         
     }
     
-    public void run() throws IOException, ClassNotFoundException, InterruptedException {
+    public void run(String test_username) throws IOException, ClassNotFoundException, InterruptedException {
 
         // Make connection and initialize streams
         String serverAddress = "localhost";
@@ -48,6 +50,7 @@ public class User {
         //var scanner = new Scanner(System.in);
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
+        out = new ObjectOutputStream(socket.getOutputStream());
         //Test to request stations at the beginning of the program
         //Runs automatic download of latest data from the server.
          DataUpdater dataUpdater = new DataUpdater(this);
@@ -55,6 +58,8 @@ public class User {
          gui = new UserClient(this);
          gui.setVisible(true);
          requestStationIDList();
+         sendUsernames(test_username);
+         
          while(true){
             try{
                 int inputType = inFromStation.readInt();
@@ -84,6 +89,10 @@ public class User {
             }
         }
     }
+    public void sendUsernames(String test_username) throws InterruptedException, IOException{
+       outToStation.println(usercom.USERNAME + test_username);
+    }
+    
     public void updateSelectedStation(String ID){
         currentWSID = ID;
     }

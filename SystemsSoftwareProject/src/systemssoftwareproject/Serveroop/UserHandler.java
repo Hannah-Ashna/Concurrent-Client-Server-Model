@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import systemssoftwareproject.DataStructures.SampleType;
 import systemssoftwareproject.DataStructures.UserType;
@@ -20,6 +22,7 @@ public class UserHandler implements Runnable {
     private Server server;
     private Scanner in;
     private ObjectOutputStream  out;
+    private ObjectInputStream inFromUser;
     private boolean running = true;
     
     // Constructor 
@@ -34,10 +37,9 @@ public class UserHandler implements Runnable {
     public void run() {
         while(running){
         try {
-            server.users.add(userType);
-            userType.setUsername("test");
             in =  new Scanner(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
+            inFromUser = new ObjectInputStream(clientSocket.getInputStream());
             while(true){
                 while (in.hasNextLine()) {
                     ReceiveRequest();
@@ -46,13 +48,15 @@ public class UserHandler implements Runnable {
         } catch (IOException ex) {
             System.out.println("User Disconnected");
             server.users.remove(userType);
-        }    
+        }   catch (ClassNotFoundException ex) {    
+                Logger.getLogger(UserHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }    
         }
     }
         
         
      
-    private void ReceiveRequest() throws IOException{
+    private void ReceiveRequest() throws IOException, ClassNotFoundException{
         String line = in.nextLine();
         System.out.println(line);
         if(line.startsWith(usercom.REQUESTSTATIONS)){
@@ -86,6 +90,12 @@ public class UserHandler implements Runnable {
             System.out.println("User Disconnected");
             server.users.remove(userType);
             running = false;
+        }else if(line.startsWith(usercom.USERNAME)){
+            System.out.println("Server recieving username");
+            String Username = line.substring(usercom.USERNAME.length()); //Removes command to get the ID
+            System.out.println("Username" + Username);
+            server.users.add(userType);
+            userType.setUsername(Username);
         }
     }
 } 
