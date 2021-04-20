@@ -37,8 +37,6 @@ public class UserHandler implements Runnable {
     public void run() {
         while(running){
         try {
-            server.users.add(userType);
-            userType.setUsername("testing new");
             in =  new Scanner(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
             inFromUser = new ObjectInputStream(clientSocket.getInputStream());
@@ -94,7 +92,7 @@ public class UserHandler implements Runnable {
             running = false;
         }else if(line.startsWith(usercom.USERNAME)){
             System.out.println("Server recieving username");
-            String Username = inFromUser.readUTF();
+            String Username = line.substring(usercom.USERNAME.length()); //Removes command to get the ID
             System.out.println("Username" + Username);
             server.users.add(userType);
             userType.setUsername(Username);

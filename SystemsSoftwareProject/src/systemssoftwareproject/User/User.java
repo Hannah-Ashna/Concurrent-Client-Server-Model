@@ -90,8 +90,7 @@ public class User {
         }
     }
     public void sendUsernames(String test_username) throws InterruptedException, IOException{
-       outToStation.println(usercom.USERNAME);
-       out.writeObject(test_username);
+       outToStation.println(usercom.USERNAME + test_username);
     }
     
     public void updateSelectedStation(String ID){
