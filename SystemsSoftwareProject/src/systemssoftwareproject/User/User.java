@@ -28,7 +28,6 @@ public class User {
         while (loginForm.returnStatus() == false){
             // Waits for user to finish logging in
             Thread.sleep(300);
-            //System.out.println("User - Logging in ...");
         }
         if (loginForm.returnStatus()){
             String test_username = loginForm.getUsername();

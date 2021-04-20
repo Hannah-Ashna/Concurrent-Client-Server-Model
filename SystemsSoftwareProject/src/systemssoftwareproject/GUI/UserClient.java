@@ -130,10 +130,10 @@ public class UserClient extends JFrame implements ActionListener {
         AltDisp.setText(" ");
         c.add(AltDisp);
         
-        graph = new JButton("Graph"); 
+        graph = new JButton("Draw New Graph"); 
         graph.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        graph.setSize(100, 20); 
-        graph.setLocation(350, 470); 
+        graph.setSize(250, 20); 
+        graph.setLocation(350, 480); 
         graph.addActionListener(this); 
         c.add(graph);
         
@@ -209,6 +209,11 @@ public class UserClient extends JFrame implements ActionListener {
             TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
             GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
             AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+            
+            // Reset Lists to add new data
+            currentTempSamples =  new ArrayList<Double>(); 
+            currentHumiditySamples =  new ArrayList<Double>(); 
+            
             for (int i = 0; i < ws.samples.size(); i++){
                 currentTempSamples.add(ws.samples.get(i).getTemp());
                 currentHumiditySamples.add(ws.samples.get(i).getHumid());
