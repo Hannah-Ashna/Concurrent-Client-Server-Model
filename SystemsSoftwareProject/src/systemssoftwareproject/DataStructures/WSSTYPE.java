@@ -22,16 +22,7 @@ public class WSSTYPE implements Serializable{
         return new WeatherStationType();
     }
     public void replaceStation(WeatherStationType ws){
-        boolean replaced = false;
-        for (WeatherStationType weatherStation : weatherStations) {
-         if(weatherStation.ID.equals(ws.ID)){
-            weatherStations.remove(weatherStation);
-            weatherStations.add(ws);
-             replaced = true;
-            }
-         }
-        if(replaced == false){
-            weatherStations.add(ws);
-        }
+        weatherStations.removeAll(weatherStations);
+        weatherStations.add(ws);
     }
 }
