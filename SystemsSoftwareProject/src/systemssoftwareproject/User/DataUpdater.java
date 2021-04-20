@@ -24,13 +24,15 @@ public class DataUpdater implements Runnable{
         try {
             while(true){
                 TimeUnit.SECONDS.sleep(5);
-                if(!user.currentWSID.equals("None")){
+                if("None".equals(user.currentWSID)){
+                } else {
                     user.requestStation(user.currentWSID);
                 }
                 TimeUnit.SECONDS.sleep(5);
                 user.requestStationIDList();
             }
         } catch (InterruptedException ex) {
+            Logger.getLogger(DataUpdater.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 

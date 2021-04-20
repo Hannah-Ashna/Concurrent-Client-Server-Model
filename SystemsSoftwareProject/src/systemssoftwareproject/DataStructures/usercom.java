@@ -5,7 +5,8 @@ public class usercom {
         public static String REQUESTSTATION = "REQUESTSTATION:";
         public static String REQUESTSTATIONLIST = "REQUESTSTATIONLIST";
         public static String CLOSE = "CLOSE";
+        public static int WSSTYPE = 0;
         public static int WEATHERSTATION = 1;
-        public static int WEATHERSTATIONLIST = 2;
+        public static int WEATHERSTATIONLISTINT = 2;
         
 }

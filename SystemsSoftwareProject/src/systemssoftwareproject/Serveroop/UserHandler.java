@@ -55,7 +55,14 @@ public class UserHandler implements Runnable {
     private void ReceiveRequest() throws IOException{
         String line = in.nextLine();
         System.out.println(line);
-        if(line.startsWith(usercom.REQUESTSTATION)){
+        if(line.startsWith(usercom.REQUESTSTATIONS)){
+            out.writeInt(usercom.WSSTYPE);
+            WSSTYPE wss = new WSSTYPE();
+            wss.weatherStations = server.weatherStations;
+            out.writeObject(wss);
+            out.flush();
+            out.reset();
+        }else if(line.startsWith(usercom.REQUESTSTATION)){
             String wsID = line.substring(usercom.REQUESTSTATION.length()); //Removes command to get the ID
             System.out.println(wsID);
             WeatherStationType ws = server.getWSByID(wsID);
