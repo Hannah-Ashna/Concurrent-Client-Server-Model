@@ -15,8 +15,8 @@ public class Graph extends JFrame implements ActionListener {
     private Container c;
     
     private LinkedList<Integer> xData =  new LinkedList<Integer>(); 
-    private LinkedList<Integer> yData =  new LinkedList<Integer>(); 
-    
+    private LinkedList<Double>yTempData =  new LinkedList<Double>(); 
+    private LinkedList<Double> yHumidData =  new LinkedList<Double>();
     
     public Graph() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -39,30 +39,31 @@ public class Graph extends JFrame implements ActionListener {
         c.repaint();
     }
     
-    public void createHistogram(String title, String xTitle, String yTitle, LinkedList<Integer> xDataSet, LinkedList<Integer> yDataSet) {
+    public void createHistogram(String title, String xTitle, String yTitle, LinkedList<Integer> xDataSet, LinkedList<Double> yTempSet, LinkedList<Double> yHumidSet) {
         XYChart chart = new XYChartBuilder().width(800).height(600).title(title).xAxisTitle(xTitle).yAxisTitle(yTitle).build();
        
-        chart.addSeries("Temperature", xDataSet, yDataSet);
-
+        chart.addSeries("Temperature", xDataSet, yTempSet);
+        chart.addSeries("Humidity", xDataSet, yHumidSet);
+        
         setVisible(true);
         createChart(chart);
     }
     
-    public void refreshGraph(ArrayList NewYData){
+    public void refreshGraph(ArrayList NewTempData, ArrayList NewHumidData){
         xData = new LinkedList<Integer>();
-        yData = new LinkedList<Integer>();
+        yTempData = new LinkedList<Double>();
+        yHumidData = new LinkedList<Double>();
         
-        //xData.add(0);
-        //yData.add(0);
         int timeCount = 0;
         
-        for (int i = 0; i < NewYData.size(); i++){
-            yData.add((int)NewYData.get(i));
+        for (int i = 0; i < NewTempData.size(); i++){
+            yTempData.add((double)NewTempData.get(i));
+            yHumidData.add((double)NewHumidData.get(i));
             xData.add(timeCount);
             timeCount += 10;
         }
         
-        createHistogram("Temperature Graph", "Time (seconds)", "Temperature (Celcius)", xData, yData);
+        createHistogram("Temperature Graph", "Time (seconds)", "Temperature (Celcius)", xData, yTempData, yHumidData);
     }
     
     public void getXData(){

@@ -26,7 +26,9 @@ public class UserClient extends JFrame implements ActionListener {
     private JComboBox IDList;
     private final JButton graph;
     
-    private ArrayList<Integer> currentWSSamples =  new ArrayList<Integer>(); 
+    private ArrayList<Double> currentTempSamples =  new ArrayList<Double>();
+    private ArrayList<Double> currentHumiditySamples =  new ArrayList<Double>(); 
+    
     public Graph graphDraw = new Graph();
     private int selectedIndex = 0;
     private User user;
@@ -153,27 +155,27 @@ public class UserClient extends JFrame implements ActionListener {
     
     @Override
     public void actionPerformed (ActionEvent e){        
-         if (e.getSource() == graph && currentWSSamples.size() > 0){
-             //graphDraw.dispose();
-             //Graph graphDraw = new Graph();
-             graphDraw.refreshGraph(currentWSSamples);
+         if (e.getSource() == graph && currentTempSamples.size() > 0 && currentHumiditySamples.size() > 0){
+             graphDraw.refreshGraph(currentTempSamples, currentHumiditySamples);
          }
          
          else if ((JComboBox)e.getSource() != null){
             JComboBox IDListe = (JComboBox)e.getSource();
-            selectedIndex = IDListe.getSelectedIndex();
-            String ID = IDListe.getSelectedItem().toString();
-            user.currentWSID = ID;
-            user.requestStation(ID);
-            WeatherStationType ws;
-            ws =  user.weatherStationList.getByID(ID);
-            display.setText("\n Selected Weather Station ID: " + ws.getID());
-            try{
-                HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
-                TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
-                GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
-                AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
-            } catch (Exception ex) {}
+            if (IDListe.getSelectedIndex() != selectedIndex){
+                selectedIndex = IDListe.getSelectedIndex();
+                String ID = IDListe.getSelectedItem().toString();
+                user.currentWSID = ID;
+                user.requestStation(ID);
+                WeatherStationType ws;
+                ws =  user.weatherStationList.getByID(ID);
+                display.setText("\n Selected Weather Station ID: " + ws.getID());
+                try{
+                    HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
+                    TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
+                    GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
+                    AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
+                } catch (Exception ex) {}
+            }
          }
     }
     
@@ -208,7 +210,8 @@ public class UserClient extends JFrame implements ActionListener {
             GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + " Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
             AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
             for (int i = 0; i < ws.samples.size(); i++){
-                currentWSSamples.add((int)ws.samples.get(i).getTemp());
+                currentTempSamples.add(ws.samples.get(i).getTemp());
+                currentHumiditySamples.add(ws.samples.get(i).getHumid());
             }
         } 
     }
