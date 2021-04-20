@@ -8,7 +8,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class SignupForm extends JFrame implements ActionListener {
     
-    // Components
+    // GUI Components & Variables
     private Container c;
     private final JLabel title;
     private final JLabel user;
@@ -20,11 +20,15 @@ public class SignupForm extends JFrame implements ActionListener {
     private final JButton create;
     private final JButton back;
     
+    private LoginForm loginForm;
+    
     String signup_username = "";
     String signup_password = "";
     
     
     public SignupForm() {
+        // Setup a basic GUI template for the Sign-up Form GUI
+        // This is updated using the other functions
         setTitle("Create Account");
         setBounds(300, 90, 600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -105,8 +109,8 @@ public class SignupForm extends JFrame implements ActionListener {
             
             // If account creation successful - return to Login Form
             if (status){
-                setVisible(false);
-                new LoginForm().setVisible(true);
+                loginForm.setVisible(true);
+                this.dispose();
             }
             
             // Else - display error
@@ -116,8 +120,15 @@ public class SignupForm extends JFrame implements ActionListener {
 
         }
         else if (e.getSource() == back){
+            // For when the user wants to go back to the login form
            setVisible(false);
-           new LoginForm().setVisible(true);
+           loginForm.setVisible(true);
         }
+    }
+    
+    public void getLoginInstance(LoginForm login){
+        // Store the instance of the Login Form to make it visible again
+        // when a user's sign up is successful
+        loginForm = login;
     }
 }

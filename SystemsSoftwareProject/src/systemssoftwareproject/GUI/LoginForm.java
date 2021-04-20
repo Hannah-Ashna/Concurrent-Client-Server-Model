@@ -8,7 +8,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class LoginForm extends JFrame implements ActionListener {
     
-    // Components
+    // GUI Components & Variables
     private final Container c;
     private final JLabel title;
     private final JLabel user;
@@ -23,6 +23,8 @@ public class LoginForm extends JFrame implements ActionListener {
     String login_password = "";
     
     public LoginForm() {
+        // Setup a basic GUI template for the Login Form's GUI
+        // This is updated using the other functions
         setTitle("User Client");
         setBounds(300, 90, 600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -81,17 +83,17 @@ public class LoginForm extends JFrame implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e){
-        // Run login authentication
+        // Run login authentication process
         if (e.getSource() == login_var){
             String username_input = userInp.getText();
             login_username = username_input;
+            
             String password_input = passInp.getText();
             status = systemssoftwareproject.Authentication.login.login(username_input, password_input);
             
             // If credentials are a match - login successfully
             if(status) {
                 setVisible(false);
-                //new UserClient().setVisible(true);
             }
             
             // Else - display error
@@ -102,8 +104,9 @@ public class LoginForm extends JFrame implements ActionListener {
         
         // Send user to SignupForm
         if (e.getSource() == signup){
-           this.dispose();
-           new SignupForm().setVisible(true);
+           setVisible(false);
+           SignupForm signupForm = new SignupForm();
+           signupForm.getLoginInstance(this);
         }
     }
     
@@ -112,6 +115,7 @@ public class LoginForm extends JFrame implements ActionListener {
     }
     
     public boolean returnStatus(){
+        // Returns status of whether user is logged in or not
         return status;
     }
 }
