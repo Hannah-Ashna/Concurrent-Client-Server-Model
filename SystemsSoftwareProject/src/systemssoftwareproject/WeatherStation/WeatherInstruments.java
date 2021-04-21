@@ -19,9 +19,9 @@ public class WeatherInstruments{
 
         double Humidity = climate.getHumidity();
 
-        double gpsLatitude = Location.getGpsLat();
+        double gpsLatitude = Location.getGpsLat(2.3, 2.2, 1);
 
-        double gpsLongitude = Location.getGpsLong();
+        double gpsLongitude = Location.getGpsLong(2.3, 2.2, 1);
 
         double altitude = Location.getGpsAltitude();
 
