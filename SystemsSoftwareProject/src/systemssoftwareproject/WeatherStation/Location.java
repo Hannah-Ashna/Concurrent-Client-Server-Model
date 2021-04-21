@@ -18,10 +18,6 @@ public class Location {
         double x = w * Math.cos(t);
         double y = w * Math.sin(t);
 
-        // Adjust the x-coordinate for the shrinking of the east-west distances
-        double new_x = x / Math.cos(Math.toRadians(y0));
-
-        double foundLongitude = new_x + x0;
         double foundLatitude = y + y0;
         
         return foundLatitude;
@@ -45,17 +41,16 @@ public class Location {
         double new_x = x / Math.cos(Math.toRadians(y0));
 
         double foundLongitude = new_x + x0;
-        double foundLatitude = y + y0;
  
         return foundLongitude;
     }
     
-    // Generate and return an Altitude value
+    // Generate and return an Altitude value between 10-50
     public static double getGpsAltitude(){
-        double start = 10;
-        double end = 50;
-        double random = new Random().nextDouble();
-        double result = start + (random * (end - start));
+        Random r = new Random();
+        int low = 10;
+        int high = 50;
+        int result = r.nextInt(high - low) + low;
         return result;
     }
     
