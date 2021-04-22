@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Location {
     
+    
     // Generate and return a Latitiude value
     public static double getGpsLat(double x0, double y0, int radius){
         Random random = new Random();

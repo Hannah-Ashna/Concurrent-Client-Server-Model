@@ -1,6 +1,7 @@
 package systemssoftwareproject.WeatherStation;
 
 import systemssoftwareproject.DataStructures.SampleType;
+import java.util.Random;
 
 // These functions are syncronus we assume that the data will be immidatly returned.
 import java.time.LocalDateTime;
@@ -14,14 +15,22 @@ public class WeatherInstruments{
      * @return sample
      */
     public SampleType getSample(){
-        
+        //Generate random values between a range for the longitude/latitude value parameters
+        Random r = new Random();
+        double min = 13.0;
+        double max = 100.0;
+        double randomValue = min + (max - min) * r.nextDouble();
+        int lower = 10;
+        int upper = 100;
+        int radius = (int) (Math.random() * (upper - lower)) + lower;
+
         double Temprature = climate.getTemp();
 
         double Humidity = climate.getHumidity();
 
-        double gpsLatitude = Location.getGpsLat(2.3, 2.2, 1);
+        double gpsLatitude = Location.getGpsLat(randomValue, randomValue, radius);
 
-        double gpsLongitude = Location.getGpsLong(2.3, 2.2, 1);
+        double gpsLongitude = Location.getGpsLong(randomValue, randomValue, radius);
 
         double altitude = Location.getGpsAltitude();
 
