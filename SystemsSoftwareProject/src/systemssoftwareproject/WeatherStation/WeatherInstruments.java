@@ -22,15 +22,15 @@ public class WeatherInstruments{
         double randomValue = min + (max - min) * r.nextDouble();
         int lower = 10;
         int upper = 100;
-        int radius = (int) (Math.random() * (upper - lower)) + lower;
+        int rad = (int) (Math.random() * (upper - lower)) + lower;
 
         double Temprature = climate.getTemp();
 
         double Humidity = climate.getHumidity();
 
-        double gpsLatitude = Location.getGpsLat(randomValue, randomValue, radius);
+        double gpsLatitude = Location.getGpsLat(randomValue, randomValue, rad);
 
-        double gpsLongitude = Location.getGpsLong(randomValue, randomValue, radius);
+        double gpsLongitude = Location.getGpsLong(randomValue, randomValue, rad);
 
         double altitude = Location.getGpsAltitude();
 

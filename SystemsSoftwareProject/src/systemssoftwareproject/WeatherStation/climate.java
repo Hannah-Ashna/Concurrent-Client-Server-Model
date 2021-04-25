@@ -24,20 +24,12 @@ public class climate {
     }
     
     public static double getHumidity(){
+        double rangeMin = 17.5;
+        double rangeMax = 19.8;
         //Will request the humidity from the device and return the humidity
-        double hum = (temp - 5);
-        Random h = new Random();
-        if (hum > 35.0){
-            hum = 33.0;
-        } else {
-            //Get random number, decides if value increases or decreases.
-            int val = h.nextInt();
-            if (val < 0) {
-                    hum += 4;
-            } else {
-                    hum -= 4;
-            }
-        }
+        Random r = new Random();
+        double hum = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+        
         return hum;
     }
     

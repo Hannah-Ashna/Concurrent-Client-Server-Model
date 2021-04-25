@@ -3,12 +3,10 @@ package systemssoftwareproject.WeatherStation;
 import java.util.Random;
 
 public class Location {
-    
-    
+
     // Generate and return a Latitiude value
     public static double getGpsLat(double x0, double y0, int radius){
         Random random = new Random();
-
         // Convert radius from meters to degrees
         double radiusInDegrees = radius / 111000f;
 
