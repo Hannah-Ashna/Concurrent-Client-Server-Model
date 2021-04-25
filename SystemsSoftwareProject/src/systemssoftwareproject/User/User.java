@@ -30,15 +30,15 @@ public class User {
             Thread.sleep(300);
         }
         if (loginForm.returnStatus()){
-            String test_username = loginForm.getUsername();
+            String username = loginForm.getUsername();
             User user = new User();
-            user.run(test_username);
+            user.run(username);
             System.out.println("User - Login Successful");
         }
         
     }
     
-    public void run(String test_username) throws IOException, ClassNotFoundException, InterruptedException {
+    public void run(String username) throws IOException, ClassNotFoundException, InterruptedException {
 
         // Make connection and initialize streams
         String serverAddress = "localhost";
@@ -47,7 +47,6 @@ public class User {
         //var scanner = new Scanner(System.in);
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
-        out = new ObjectOutputStream(socket.getOutputStream());
         //Test to request stations at the beginning of the program
         //Runs automatic download of latest data from the server.
          DataUpdater dataUpdater = new DataUpdater(this);
@@ -55,30 +54,19 @@ public class User {
          gui = new UserClient(this);
          gui.setVisible(true);
          requestStationIDList();
-         sendUsernames(test_username);
+         sendUsernames(username);
          
          while(true){
             try{
                 int inputType = inFromStation.readInt();
                 System.out.println(inputType);
-                if(inputType == 0){
-                    //Donloads all weatherStations 
-                    //NOT TO BE USED ANYMORE
-                    System.out.println("Testing User Client <-> Server Communication:");
-                    //updates the list of weaterstations when it recives new data.
-                    weatherStationList = (WSSTYPE)inFromStation.readObject();
-                    //System.out.println(weatherStationList.wsCount());
-                    System.out.println(this.getIds());
-                    //gui.updateWSList();
-
-                } else if (inputType == usercom.WEATHERSTATION){
+                if (inputType == usercom.WEATHERSTATION){
                     WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
                     weatherStationList.replaceStation(weatherStation);
                     System.out.println(weatherStation);
                     gui.updateDataDisp();
-                }else if(inputType == 2){
+                }else if(inputType == usercom.WEATHERSTATIONLIST){
                     WSids = (List<String>) inFromStation.readObject(); 
-                    System.out.println(WSids);
                     gui.updateWSList();
                 }
                     
@@ -86,8 +74,8 @@ public class User {
             }
         }
     }
-    public void sendUsernames(String test_username) throws InterruptedException, IOException{
-       outToStation.println(usercom.USERNAME + test_username);
+    public void sendUsernames(String username) throws InterruptedException, IOException{
+       outToStation.println(usercom.USERNAME + username);
     }
     
     public void updateSelectedStation(String ID){

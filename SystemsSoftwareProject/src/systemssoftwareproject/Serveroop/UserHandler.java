@@ -75,7 +75,6 @@ public class UserHandler implements Runnable {
             out.flush();
             out.reset();
         }else if(line.startsWith(usercom.REQUESTSTATIONLIST)){
-            
             List<String> ids =  new LinkedList<>();
             server.weatherStations.forEach(weatherStation -> {
                 ids.add(weatherStation.getID());
