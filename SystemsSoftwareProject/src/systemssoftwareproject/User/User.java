@@ -47,7 +47,6 @@ public class User {
         //var scanner = new Scanner(System.in);
         inFromStation = new ObjectInputStream(socket.getInputStream());
         outToStation = new PrintWriter(socket.getOutputStream(), true);
-        out = new ObjectOutputStream(socket.getOutputStream());
         //Test to request stations at the beginning of the program
         //Runs automatic download of latest data from the server.
          DataUpdater dataUpdater = new DataUpdater(this);
@@ -61,24 +60,13 @@ public class User {
             try{
                 int inputType = inFromStation.readInt();
                 System.out.println(inputType);
-                if(inputType == 0){
-                    //Donloads all weatherStations 
-                    //NOT TO BE USED ANYMORE
-                    System.out.println("Testing User Client <-> Server Communication:");
-                    //updates the list of weaterstations when it recives new data.
-                    weatherStationList = (WSSTYPE)inFromStation.readObject();
-                    //System.out.println(weatherStationList.wsCount());
-                    System.out.println(this.getIds());
-                    //gui.updateWSList();
-
-                } else if (inputType == usercom.WEATHERSTATION){
+                if (inputType == usercom.WEATHERSTATION){
                     WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
                     weatherStationList.replaceStation(weatherStation);
                     System.out.println(weatherStation);
                     gui.updateDataDisp();
-                }else if(inputType == 2){
+                }else if(inputType == usercom.WEATHERSTATIONLIST){
                     WSids = (List<String>) inFromStation.readObject(); 
-                    System.out.println(WSids);
                     gui.updateWSList();
                 }
                     

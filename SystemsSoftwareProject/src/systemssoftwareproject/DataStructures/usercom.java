@@ -8,6 +8,6 @@ public class usercom {
         public static String USERNAME = "USERNAME";
         public static int WSSTYPE = 0;
         public static int WEATHERSTATION = 1;
-        public static int WEATHERSTATIONLISTINT = 2;
+        public static int WEATHERSTATIONLIST = 2;
         
 }
