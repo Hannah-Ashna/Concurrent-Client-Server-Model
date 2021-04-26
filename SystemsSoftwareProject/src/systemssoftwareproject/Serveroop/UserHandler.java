@@ -39,7 +39,7 @@ public class UserHandler implements Runnable {
         try {
             in =  new Scanner(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
-            inFromUser = new ObjectInputStream(clientSocket.getInputStream());
+            //inFromUser = new ObjectInputStream(clientSocket.getInputStream());
             while(true){
                 while (in.hasNextLine()) {
                     ReceiveRequest();
