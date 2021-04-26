@@ -19,9 +19,4 @@ public class UserType extends ClientType implements Serializable {
         this.username = username;
     }
     
-    @Override
-    public String toString(){
-        return "###";
-    }
-    
 }

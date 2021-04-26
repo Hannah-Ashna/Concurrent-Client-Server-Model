@@ -1,15 +1,11 @@
 package systemssoftwareproject.WeatherStation;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import systemssoftwareproject.DataStructures.SampleType;
-import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.DataStructures.wscom;
 
 public class WeatherStation extends WeatherInstruments {

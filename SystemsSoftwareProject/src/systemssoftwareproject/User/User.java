@@ -19,7 +19,6 @@ public class User {
     public String currentWSID = "None";
     private ObjectInputStream inFromStation;
     private PrintWriter outToStation;
-    private ObjectOutputStream out;
     private UserClient gui;
     
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
@@ -63,7 +62,6 @@ public class User {
                 if (inputType == usercom.WEATHERSTATION){
                     WeatherStationType weatherStation = (WeatherStationType) inFromStation.readObject();
                     weatherStationList.replaceStation(weatherStation);
-                    System.out.println(weatherStation);
                     gui.updateDataDisp();
                 }else if(inputType == usercom.WEATHERSTATIONLIST){
                     WSids = (List<String>) inFromStation.readObject(); 

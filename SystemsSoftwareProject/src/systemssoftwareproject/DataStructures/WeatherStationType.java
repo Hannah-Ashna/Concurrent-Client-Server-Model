@@ -18,11 +18,7 @@ public class WeatherStationType implements Serializable {
     }  
     public WeatherStationType(){
     }
-    
-    @Override
-    public String toString(){
-        return "WeatherStation{ID= " + ID + "I have samples need to be implimented!"+"}";
-    }
+   
     
     public void addSample(SampleType sample){
         if(sampleCount() == 30){
