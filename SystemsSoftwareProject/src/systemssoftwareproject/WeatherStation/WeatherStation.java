@@ -54,7 +54,7 @@ public class WeatherStation extends WeatherInstruments {
             System.out.println("SAMPLE has been sent");
             }else if(line.startsWith(wscom.SAMPLECONFIRM)){
                 System.out.println("Sample was received\n");
-                TimeUnit.SECONDS.sleep(20);
+                TimeUnit.SECONDS.sleep(30);
         }
         else if (line.startsWith(wscom.SENDID)){ //If message from server is to send the ID then....
             SendID(); // Run Send the ID function 
