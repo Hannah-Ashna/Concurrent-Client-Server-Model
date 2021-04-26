@@ -33,12 +33,14 @@ public class WeatherInstruments{
         double gpsLongitude = Location.getGpsLong(randomValue, randomValue, rad);
 
         double altitude = Location.getGpsAltitude();
+        
+        String[] crops = Farming.crops;
 
         LocalDateTime sampleDateTime = LocalDateTime.now();
 
         
         SampleType sample;
-        sample = new SampleType(Temprature,Humidity,gpsLatitude,gpsLongitude,altitude,sampleDateTime);
+        sample = new SampleType(Temprature, Humidity, gpsLatitude, gpsLongitude, altitude, sampleDateTime);
         return sample;
     }
 }
