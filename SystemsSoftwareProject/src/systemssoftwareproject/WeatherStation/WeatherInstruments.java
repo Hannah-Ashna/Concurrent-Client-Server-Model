@@ -41,4 +41,9 @@ public class WeatherInstruments{
         sample = new SampleType(Temprature,Humidity,gpsLatitude,gpsLongitude,altitude,sampleDateTime);
         return sample;
     }
+        public String[] getFarming(){
+        String[] crops = Farming.crops;
+        return crops;
+    }
+     
 }
