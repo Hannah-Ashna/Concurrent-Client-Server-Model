@@ -22,7 +22,6 @@ public class UserHandler implements Runnable {
     private Server server;
     private Scanner in;
     private ObjectOutputStream  out;
-    private ObjectInputStream inFromUser;
     private boolean running = true;
     
     // Constructor 
@@ -39,7 +38,6 @@ public class UserHandler implements Runnable {
         try {
             in =  new Scanner(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
-            //inFromUser = new ObjectInputStream(clientSocket.getInputStream());
             while(true){
                 while (in.hasNextLine()) {
                     ReceiveRequest();
