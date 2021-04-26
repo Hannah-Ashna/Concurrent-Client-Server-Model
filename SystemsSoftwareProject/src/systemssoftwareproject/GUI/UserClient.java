@@ -6,10 +6,12 @@ import java.awt.Color;
 import java.awt.event.*;
 import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import systemssoftwareproject.DataStructures.WeatherStationType;
 import systemssoftwareproject.User.User;
+import static systemssoftwareproject.WeatherStation.Farming.crops;
 
 public class UserClient extends JFrame implements ActionListener {
     
@@ -195,6 +197,7 @@ public class UserClient extends JFrame implements ActionListener {
         // Updates the data display whenever new data is received
         String ID = IDList.getSelectedItem().toString();
         WeatherStationType ws;
+        String[] cropList = crops;
         if(ID != null){
         
             try{
@@ -203,8 +206,8 @@ public class UserClient extends JFrame implements ActionListener {
                 TimeUnit.SECONDS.sleep(1);
                 ws =  user.weatherStationList.getByID(ID);
             }
-            
-            display.setText("\n Selected Weather Station ID: " + ws.getID());
+
+            display.setText("\n Selected Weather Station ID: " + ws.getID() + " " + cropList);
             HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
             TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
             GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + "\n Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
