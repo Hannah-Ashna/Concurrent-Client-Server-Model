@@ -206,8 +206,9 @@ public class UserClient extends JFrame implements ActionListener {
                 TimeUnit.SECONDS.sleep(1);
                 ws =  user.weatherStationList.getByID(ID);
             }
-
-            display.setText("\n Selected Weather Station ID: " + ws.getID() + " " + cropList);
+            Random r = new Random();
+            int randomNum = r.nextInt((cropList.length- 0) + 1) + 0;
+            display.setText("\n Selected Weather Station ID: " + ws.getID() + "\n Crop: " + cropList[2]);
             HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
             TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
             GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getLast().getGPSLat()) + "\n Longitude: " + String.valueOf(ws.samples.getLast().getGPSLong()));
