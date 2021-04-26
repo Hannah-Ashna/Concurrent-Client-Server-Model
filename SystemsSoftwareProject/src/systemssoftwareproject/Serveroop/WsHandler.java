@@ -57,20 +57,18 @@ public class WsHandler implements Runnable {
                 }
                 
                 else if (type ==  1){
-                    boolean ID_exists = false;
-                    boolean append_file = false;
-                   
-                    String weatherstationID = (String)inFromStation.readObject();
+          
+                    String weatherstationID = (String)inFromStation.readObject();// gets data object from the weatherstation and store it (The ID)
 
-                    boolean ID_unique = server.IDUnique(weatherstationID);
+                    boolean ID_unique = server.IDUnique(weatherstationID); //Runs the IDunique function in the serverfunctions.java file
 
                     if (ID_unique == true){ // if the ID does not exist
-                        ID_found = true;
-                        outToStation.println(wscom.IDCONFIRMED);
+                        ID_found = true; // stop telling the weatherstation to send an ID
+                        outToStation.println(wscom.IDCONFIRMED); // Tell weatherstation ID confirmed
                         System.out.println("Inform WS Client -> ID has been added");
                                      
 
-                 
+                 //sets ID of weatherstation in the linked list
                         weatherStation.setID(weatherstationID);
                         try {
                             server.gui.updateGUI();
@@ -80,15 +78,13 @@ public class WsHandler implements Runnable {
                      
                         //toWeatherStation.writeUTF("ID has been added");
                      
-                        ID_found = true;
-
+                     
 
                     }
                     else{
                         // if the id already exists then do this
                          //toWeatherStation.writeUTF("ID already exists");
-                         outToStation.println(wscom.SENDID);
-                         System.out.println("Inform WS Client -> ID already exists");
+                        System.out.println("Inform WS Client -> ID already exists");
                     }
                 }
             }

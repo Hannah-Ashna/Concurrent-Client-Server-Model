@@ -38,10 +38,10 @@ public class WeatherStation extends WeatherInstruments {
     }
     
     private void SendID() throws IOException, InterruptedException{
-        String weatherStationID = UUID.randomUUID().toString(); 
+        String weatherStationID = UUID.randomUUID().toString(); //Generates a unique ID 
         System.out.println("WeatherStationID = " + weatherStationID);
-        out.writeInt(1);
-        out.writeObject(weatherStationID);
+        out.writeInt(1); //Tells server what data to expect from weatherstation
+        out.writeObject(weatherStationID); //Sends ID as string Object stream
         
     }
     
@@ -56,11 +56,11 @@ public class WeatherStation extends WeatherInstruments {
                 System.out.println("Sample was received\n");
                 TimeUnit.SECONDS.sleep(20);
         }
-        else if (line.startsWith(wscom.SENDID)){
-            SendID();
+        else if (line.startsWith(wscom.SENDID)){ //If message from server is to send the ID then....
+            SendID(); // Run Send the ID function 
             System.out.println("Sending ID");
         }
-        else if ((line.startsWith(wscom.IDCONFIRMED))){
+        else if ((line.startsWith(wscom.IDCONFIRMED))){ //Once ID has been confirmed
             System.out.println("ID had been accepted");
         }
 

@@ -37,6 +37,8 @@ public class ServerFunctions {
         String ID_entered = ID;
         int amount_of_weatherstations = weatherStations.size();
         boolean ID_unique = true;
+        
+        //For loop goes through all weatherstation in the linked list, gets the ID and compares it to the inputted ID, returns true if ID is Unique
         for (int i = 0; i < amount_of_weatherstations; i++){
             WeatherStationType ws = weatherStations.get(i);
             String ID_found = ws.getID();
