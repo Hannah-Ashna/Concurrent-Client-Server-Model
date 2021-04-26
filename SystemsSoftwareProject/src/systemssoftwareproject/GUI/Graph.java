@@ -72,7 +72,7 @@ public class Graph extends JFrame implements ActionListener {
             yTempData.add((double)NewTempData.get(i));
             yHumidData.add((double)NewHumidData.get(i));
             xData.add(timeCount);
-            timeCount += 10;
+            timeCount += 30;
         }
         
         createHistogram(Title, "Time (seconds)", "Temp & Humidity Values", xData, yTempData, yHumidData);
