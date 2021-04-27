@@ -14,21 +14,27 @@ public  class SampleType implements Serializable {
     double gpsLongitude;
 
     double altitude;
+    
+    int crops;
 
     LocalDateTime sampleDateTime = LocalDateTime.now();
 
 
-    public SampleType(double temp, double humid, double gpsLat, double gpsLong, double alt, LocalDateTime sampleDT) {
+    public SampleType(double temp, double humid, double gpsLat, double gpsLong, double alt, int cropsID, LocalDateTime sampleDT) {
     temperature = temp;
     humidity = humid;
     gpsLatitude = gpsLat;
     gpsLongitude = gpsLong;
     altitude = alt;
     sampleDateTime = sampleDT;
-
+    crops = cropsID;
     }
 
     public SampleType() {
+    }
+
+    public SampleType(double Temprature, double Humidity, double gpsLatitude, double gpsLongitude, double altitude, LocalDateTime sampleDateTime, int crops) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public double getHumid(){
@@ -37,6 +43,10 @@ public  class SampleType implements Serializable {
     
     public double getTemp(){
         return temperature;
+    }
+    
+    public int cropsID(){
+        return crops;
     }
     
     public double getGPSLat(){

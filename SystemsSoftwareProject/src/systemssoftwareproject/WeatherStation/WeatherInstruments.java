@@ -23,7 +23,12 @@ public class WeatherInstruments{
         int lower = 10;
         int upper = 100;
         int rad = (int) (Math.random() * (upper - lower)) + lower;
-
+        int low = 0;
+        int high = 8;
+        int rand = (int) (Math.random() * (high - low)) + low;
+        
+        int cropsID = rand;
+        
         double Temprature = climate.getTemp();
 
         double Humidity = climate.getHumidity();
@@ -36,15 +41,9 @@ public class WeatherInstruments{
 
         LocalDateTime sampleDateTime = LocalDateTime.now();
 
-         
+        
         SampleType sample;
-        sample = new SampleType(Temprature,Humidity,gpsLatitude,gpsLongitude,altitude,sampleDateTime);
+        sample = new SampleType(Temprature, Humidity, gpsLatitude, gpsLongitude, altitude, sampleDateTime, cropsID);
         return sample;
     }
-    
-        public String[] getFarming(){
-        String[] crops = Farming.crops;
-        return crops;
-    }
-     
 }

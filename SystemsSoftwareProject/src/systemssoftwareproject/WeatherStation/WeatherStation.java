@@ -3,6 +3,7 @@ package systemssoftwareproject.WeatherStation;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -43,15 +44,6 @@ public class WeatherStation extends WeatherInstruments {
         out.writeInt(1); //Tells server what data to expect from weatherstation
         out.writeObject(weatherStationID); //Sends ID as string Object stream
         
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String[] getFarming(){
-        String[] crops = Farming.crops;
-        return crops;
     }
 
     private void ReceiveRequest() throws IOException, InterruptedException{
