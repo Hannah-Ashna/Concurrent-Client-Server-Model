@@ -21,12 +21,12 @@ public class UserClient extends JFrame implements ActionListener {
     private final JLabel WSData, GPSData, TempData, HumidityData, AltData;
     private final JTextArea display, GPSDisp, TempDisp, HumidityDisp, AltDisp;
     private JComboBox IDList;
-    private final JButton graph;
+    //private final JButton graph;
     
     private ArrayList<Double> currentTempSamples =  new ArrayList<Double>();
     private ArrayList<Double> currentHumiditySamples =  new ArrayList<Double>(); 
     
-    public Graph graphDraw = new Graph();
+    // public Graph graphDraw = new Graph();
     private int selectedIndex = 0;
     private User user;
     private String GPSVal, TempVal, HumidityVal;
@@ -132,12 +132,12 @@ public class UserClient extends JFrame implements ActionListener {
         AltDisp.setText(" ");
         c.add(AltDisp);
         
-        graph = new JButton("Draw New Graph"); 
-        graph.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        graph.setSize(250, 20); 
-        graph.setLocation(350, 480); 
-        graph.addActionListener(this); 
-        c.add(graph);
+//        graph = new JButton("Draw New Graph"); 
+//        graph.setFont(new Font("Arial", Font.PLAIN, 15)); 
+//        graph.setSize(250, 20); 
+//        graph.setLocation(350, 480); 
+//        graph.addActionListener(this); 
+//        c.add(graph);
         
         setVisible(true);
         
@@ -154,13 +154,13 @@ public class UserClient extends JFrame implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e){
         // If the user clicks the graph button, trigger the process of drawing a new graph
-         if (e.getSource() == graph && currentTempSamples.size() > 0 && currentHumiditySamples.size() > 0){
-             graphDraw.refreshGraph(currentTempSamples, currentHumiditySamples, IDList.getSelectedItem().toString());
-         }
+//         if (e.getSource() == graph && currentTempSamples.size() > 0 && currentHumiditySamples.size() > 0){
+//             graphDraw.refreshGraph(currentTempSamples, currentHumiditySamples, IDList.getSelectedItem().toString());
+//         }
          
          // If the user interacts with the combo box
          // Use its ID to update all the different text areas with new relevant data
-         else if ((JComboBox)e.getSource() != null){
+         if ((JComboBox)e.getSource() != null){
             JComboBox IDListe = (JComboBox)e.getSource();
             selectedIndex = IDListe.getSelectedIndex();
             String ID = IDListe.getSelectedItem().toString();
@@ -207,20 +207,21 @@ public class UserClient extends JFrame implements ActionListener {
                 ws =  user.weatherStationList.getByID(ID);
             }
   
-            display.setText("\n Selected Weather Station ID: " + ws.getID() + "\n Crop: " + cropList[ws.samples.getLast().cropsID()]);
+            display.setText("\n Selected Weather Station ID: " + ws.getID() + "\n Crop: " + cropList[ws.samples.getFirst().cropsID()]);
             HumidityDisp.setText(" " + String.valueOf(ws.samples.getLast().getHumid()));
             TempDisp.setText(" " + String.valueOf(ws.samples.getLast().getTemp()));
             GPSDisp.setText(" Latitude: " + String.valueOf(ws.samples.getFirst().getGPSLat()) + "\n Longitude: " + String.valueOf(ws.samples.getFirst().getGPSLong()));
             AltDisp.setText(" " + String.valueOf(ws.samples.getLast().getAltitude()));
             
-            // Reset Lists to add new data
-            currentTempSamples =  new ArrayList<Double>(); 
-            currentHumiditySamples =  new ArrayList<Double>(); 
+//            // Reset Lists to add new data
+//            currentTempSamples =  new ArrayList<Double>(); 
+//            currentHumiditySamples =  new ArrayList<Double>(); 
             
-            for (int i = 0; i < ws.samples.size(); i++){
-                currentTempSamples.add(ws.samples.get(i).getTemp());
-                currentHumiditySamples.add(ws.samples.get(i).getHumid());
-            }
+            
+//            for (int i = 0; i < ws.samples.size(); i++){
+//                currentTempSamples.add(ws.samples.get(i).getTemp());
+//                currentHumiditySamples.add(ws.samples.get(i).getHumid());
+//            }
         } 
     }
  }

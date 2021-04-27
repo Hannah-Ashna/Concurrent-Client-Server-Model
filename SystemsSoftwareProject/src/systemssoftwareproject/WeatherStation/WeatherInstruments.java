@@ -43,7 +43,7 @@ public class WeatherInstruments{
 
         
         SampleType sample;
-        sample = new SampleType(Temprature, Humidity, gpsLatitude, gpsLongitude, altitude, sampleDateTime, cropsID);
+        sample = new SampleType(Temprature, Humidity, gpsLatitude, gpsLongitude, altitude, cropsID, sampleDateTime);
         return sample;
     }
 }
