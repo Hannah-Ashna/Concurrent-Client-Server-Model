@@ -36,11 +36,12 @@ public class WeatherInstruments{
 
         LocalDateTime sampleDateTime = LocalDateTime.now();
 
-        
+         
         SampleType sample;
         sample = new SampleType(Temprature,Humidity,gpsLatitude,gpsLongitude,altitude,sampleDateTime);
         return sample;
     }
+    
         public String[] getFarming(){
         String[] crops = Farming.crops;
         return crops;
