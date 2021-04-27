@@ -45,7 +45,11 @@ public class WeatherStation extends WeatherInstruments {
         
     }
 
-    public static String[] getFarming(){
+    /**
+     *
+     * @return
+     */
+    public String[] getFarming(){
         String[] crops = Farming.crops;
         return crops;
     }
