@@ -44,7 +44,15 @@ public class WeatherStation extends WeatherInstruments {
         out.writeObject(weatherStationID); //Sends ID as string Object stream
         
     }
-    
+
+    /**
+     *
+     * @return
+     */
+    public String[] getFarming(){
+        String[] crops = Farming.crops;
+        return crops;
+    }
 
     private void ReceiveRequest() throws IOException, InterruptedException{
         String line = in.nextLine();
