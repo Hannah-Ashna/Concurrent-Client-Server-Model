@@ -9,5 +9,11 @@ A farmer wishes to improve the management of his business through the use of tec
   - Services for new weather stations to connect automatically on powerup and upload its data;
   - Services for new workstations to connect on log in (regulated by a user database), and, after successful connection, obtain an up-to-date description of the field and a list of connected weather stations, and download their respective data on request.
 
-  ### Running the client
-  Firstly you should clone the repository, this should then be followed by loading the project up within you chosen IDE (We have used Apache NetBeans IDE). You should then take the xchart file and load it into your library directory. You can find this in the repo (We do not claim any ownership of this library, it has simply been included for ease of use) inside the xchart folder.
+### Running the project:
+You should first clone the repository:
+`git clone https://github.com/Hannah-Ashna/Systems-Software.git`
+
+Our project makes use of an external library to draw our charts. Hence, you'll need to setup XCharts using the jar file available in this repo.
+Once everything is setup within your IDE (We've used NetBeans), you'll need to run Server.java followed by as many instances of the WeatherStations.java and User.java.
+
+
