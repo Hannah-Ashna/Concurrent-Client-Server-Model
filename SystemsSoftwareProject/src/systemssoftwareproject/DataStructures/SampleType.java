@@ -62,17 +62,17 @@ public  class SampleType implements Serializable {
         return "Sample{" + "temprature=" + temperature + ", humidity=" + humidity + ", gpsLatitude=" + gpsLatitude + ", gpsLongitdue:" + gpsLongitude + ", altitude:" + altitude + ", sampleDateTime:"+ sampleDateTime + "}";
     }
     
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.temperature) ^ (Double.doubleToLongBits(this.temperature) >>> 32));
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.humidity) ^ (Double.doubleToLongBits(this.humidity) >>> 32));
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.gpsLatitude) ^ (Double.doubleToLongBits(this.gpsLatitude) >>> 32));
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.gpsLongitude) ^ (Double.doubleToLongBits(this.gpsLongitude) >>> 32));
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.altitude) ^ (Double.doubleToLongBits(this.altitude) >>> 32));
-
-        return hash;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 7;
+//        hash = 71 * hash + (int) (Double.doubleToLongBits(this.temperature) ^ (Double.doubleToLongBits(this.temperature) >>> 32));
+//        hash = 71 * hash + (int) (Double.doubleToLongBits(this.humidity) ^ (Double.doubleToLongBits(this.humidity) >>> 32));
+//        hash = 71 * hash + (int) (Double.doubleToLongBits(this.gpsLatitude) ^ (Double.doubleToLongBits(this.gpsLatitude) >>> 32));
+//        hash = 71 * hash + (int) (Double.doubleToLongBits(this.gpsLongitude) ^ (Double.doubleToLongBits(this.gpsLongitude) >>> 32));
+//        hash = 71 * hash + (int) (Double.doubleToLongBits(this.altitude) ^ (Double.doubleToLongBits(this.altitude) >>> 32));
+//
+//        return hash;
+//    }
     
     @Override
     public boolean equals(Object obj) {
