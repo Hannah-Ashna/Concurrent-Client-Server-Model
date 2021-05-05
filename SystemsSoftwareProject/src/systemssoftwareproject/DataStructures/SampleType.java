@@ -74,34 +74,34 @@ public  class SampleType implements Serializable {
 //        return hash;
 //    }
     
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final SampleType other = (SampleType) obj;
-        if (Double.doubleToLongBits(this.temperature) != Double.doubleToLongBits(other.temperature)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.humidity) != Double.doubleToLongBits(other.humidity)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.gpsLatitude) != Double.doubleToLongBits(other.gpsLatitude)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.gpsLongitude) != Double.doubleToLongBits(other.gpsLongitude)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.altitude) != Double.doubleToLongBits(other.altitude)) {
-            return false;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final SampleType other = (SampleType) obj;
+//        if (Double.doubleToLongBits(this.temperature) != Double.doubleToLongBits(other.temperature)) {
+//            return false;
+//        }
+//        if (Double.doubleToLongBits(this.humidity) != Double.doubleToLongBits(other.humidity)) {
+//            return false;
+//        }
+//        if (Double.doubleToLongBits(this.gpsLatitude) != Double.doubleToLongBits(other.gpsLatitude)) {
+//            return false;
+//        }
+//        if (Double.doubleToLongBits(this.gpsLongitude) != Double.doubleToLongBits(other.gpsLongitude)) {
+//            return false;
+//        }
+//        if (Double.doubleToLongBits(this.altitude) != Double.doubleToLongBits(other.altitude)) {
+//            return false;
+//        }
+//        return true;
+//    }
 
 }
